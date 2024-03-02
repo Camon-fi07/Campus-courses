@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { UserService } from 'core/services/user.service';
+import { convertTuiDate } from 'shared/utils/converDate';
 import { matchPasswordsValidator, passwordValidator } from 'shared/utils/validators';
 
 @Component({
@@ -37,10 +38,11 @@ export class RegistrationComponent {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;
-      const inputDate: TuiDay = this.formGroup.controls['birthDate'].value;
-      const date = new Date(inputDate.year, inputDate.month, inputDate.day);
       this.userService
-        .registration({ ...this.formGroup.value, birthDate: date.toISOString() })
+        .registration({
+          ...this.formGroup.value,
+          birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
+        })
         .subscribe({
           next: () => {
             this.router.navigate(['']);
