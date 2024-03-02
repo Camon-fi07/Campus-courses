@@ -1,0 +1,18 @@
+<div>
+  <form [formGroup]="formGroup" class="form">
+    <h3 class="tui-form__header tui-form__header_margin-top_none tui-text_h3 title">Авторизация</h3>
+    <tui-input formControlName="email">
+      Email
+      <input type="email" tuiTextfield />
+    </tui-input>
+    <tui-input formControlName="password">
+      Пароль
+      <input type="password" tuiTextfield />
+    </tui-input>
+    <button tuiButton><span class="tui-text_body-xl buttonText">Войти</span></button>
+  </form>
+</div>
+<p class="tui-text_body-m-2">
+  Нет аккаунта?
+  <a routerLink="/registration" tuiLink>Зарегистрироваться</a>
+</p>
