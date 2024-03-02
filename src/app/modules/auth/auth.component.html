@@ -20,8 +20,9 @@
       <span class="tui-text_body-xl buttonText">Войти</span>
     </button>
   </form>
+  <tui-error [error]="error" class="tui-text_body-m-2"></tui-error>
+  <p class="tui-text_body-m-2">
+    Нет аккаунта?
+    <a routerLink="/registration" tuiLink>Зарегистрироваться</a>
+  </p>
 </div>
-<p class="tui-text_body-m-2">
-  Нет аккаунта?
-  <a routerLink="/registration" tuiLink>Зарегистрироваться</a>
-</p>

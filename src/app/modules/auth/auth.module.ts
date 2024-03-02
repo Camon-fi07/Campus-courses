@@ -19,6 +19,7 @@ import { AuthComponent } from './auth.component';
     TuiErrorModule,
     TuiFieldErrorPipeModule,
     TuiLabelModule,
+    TuiErrorModule,
   ],
   exports: [AuthComponent],
   providers: [

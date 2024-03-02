@@ -11,6 +11,7 @@ import { UserService } from 'core/services/user.service';
 export class AuthComponent {
   formGroup!: FormGroup;
   isLoading = false;
+  error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -27,8 +28,13 @@ export class AuthComponent {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;
-      this.userService.login(this.formGroup.value).subscribe(() => {
-        this.router.navigate(['/']);
+      this.userService.login(this.formGroup.value).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (e) => {
+          this.error = e;
+        },
       });
     }
   }
