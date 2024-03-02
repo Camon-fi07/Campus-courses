@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TuiDay } from '@taiga-ui/cdk';
 import { UserService } from 'core/services/user.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class RegistrationComponent {
   formGroup!: FormGroup;
   isLoading = false;
   error: string | null = null;
+  dateNow = new Date();
+  maxDate = new TuiDay(this.dateNow.getFullYear(), this.dateNow.getMonth(), this.dateNow.getDate());
 
   constructor(
     private fb: FormBuilder,
@@ -23,11 +26,12 @@ export class RegistrationComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       passwordRepeat: new FormControl('', Validators.required),
-      birthDate: new FormControl('', Validators.required),
+      birthDate: new FormControl(null, Validators.required),
     });
   }
 
   handleSubmit() {
+    console.log(this.formGroup.value);
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;

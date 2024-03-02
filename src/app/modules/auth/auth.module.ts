@@ -2,8 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { TuiButtonModule, TuiErrorModule, TuiLabelModule, TuiLinkModule } from '@taiga-ui/core';
-import { TUI_VALIDATION_ERRORS, TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
+import {
+  TuiButtonModule,
+  TuiErrorModule,
+  TuiLabelModule,
+  TuiLinkModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
+import {
+  TUI_VALIDATION_ERRORS,
+  TuiFieldErrorPipeModule,
+  TuiInputDateModule,
+  TuiInputModule,
+} from '@taiga-ui/kit';
 import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -21,6 +32,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     TuiFieldErrorPipeModule,
     TuiLabelModule,
     TuiErrorModule,
+    TuiTextfieldControllerModule,
+    TuiInputDateModule,
   ],
   exports: [RegistrationComponent, LoginComponent],
   providers: [
