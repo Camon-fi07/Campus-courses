@@ -50,11 +50,6 @@ describe('RegistrationComponent', () => {
     expect(component.formGroup.controls['password'].valid).toEqual(false);
   });
 
-  it('should validate required birthDate', () => {
-    component.formGroup.controls['birthDate'].setValue(null);
-    expect(component.formGroup.controls['birthDate'].valid).toEqual(false);
-  });
-
   it('should validate any digit password', () => {
     component.formGroup.controls['password'].setValue('string');
     expect(component.formGroup.controls['password'].valid).toEqual(false);
@@ -68,6 +63,11 @@ describe('RegistrationComponent', () => {
   it('should be right password', () => {
     component.formGroup.controls['password'].setValue('hellow24');
     expect(component.formGroup.controls['password'].valid).toEqual(true);
+  });
+
+  it('should validate required birthDate', () => {
+    component.formGroup.controls['birthDate'].setValue(null);
+    expect(component.formGroup.controls['birthDate'].valid).toEqual(false);
   });
 
   it('should validate matching passwords', () => {

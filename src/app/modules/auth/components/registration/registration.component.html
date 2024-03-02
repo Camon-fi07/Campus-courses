@@ -1,8 +1,6 @@
 <div>
   <form [formGroup]="formGroup" class="form" (ngSubmit)="handleSubmit()">
-    <h3 class="tui-form__header tui-form__header_margin-top_none">
-      Регистрация нового пользователя
-    </h3>
+    <h3 class="tui-form__header tui-form__header_margin-top_none">Регистрация</h3>
     <label tuiLabel="ФИО">
       <tui-input formControlName="fullName" [tuiTextfieldLabelOutside]="true" tuiTextfieldSize="m">
         <input tuiTextfield />

@@ -49,6 +49,16 @@ describe('AuthComponent', () => {
     expect(component.formGroup.controls['password'].valid).toEqual(false);
   });
 
+  it('should validate any digit password', () => {
+    component.formGroup.controls['password'].setValue('string');
+    expect(component.formGroup.controls['password'].valid).toEqual(false);
+  });
+
+  it('should validate length of password', () => {
+    component.formGroup.controls['password'].setValue('24');
+    expect(component.formGroup.controls['password'].valid).toEqual(false);
+  });
+
   it('should be right password', () => {
     component.formGroup.controls['password'].setValue('fwaf24');
     expect(component.formGroup.controls['password'].valid).toEqual(true);
