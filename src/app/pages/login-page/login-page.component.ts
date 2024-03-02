@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthModule } from '../../modules/auth/auth.module';
 
 @Component({
-  selector: 'auth-page',
+  selector: 'login-page',
   standalone: true,
   imports: [AuthModule],
   templateUrl: './login-page.component.html',

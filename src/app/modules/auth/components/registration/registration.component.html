@@ -1,1 +1,40 @@
-<p>registration works!</p>
+<div>
+  <form [formGroup]="formGroup" class="form" (ngSubmit)="handleSubmit()">
+    <h3 class="tui-form__header tui-form__header_margin-top_none tui-text_h3">
+      Регистрация нового пользователя
+    </h3>
+    <label>
+      <tui-input formControlName="fullName">
+        ФИО
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="fullName" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+    <label>
+      <tui-input formControlName="email">
+        Email
+        <input type="email" tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+    <label>
+      <tui-input formControlName="password">
+        Пароль
+        <input type="password" tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+    <label>
+      <tui-input formControlName="passwordRepeat">
+        Пароль
+        <input type="passwordRepeat" tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="passwordRepeat" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+
+    <button [showLoader]="isLoading" tuiButton>
+      <span class="tui-text_body-xl buttonText">Зарегистрироваться</span>
+    </button>
+  </form>
+  <tui-error [error]="error" class="tui-text_body-m-2"></tui-error>
+</div>

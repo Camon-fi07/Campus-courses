@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.buttonText {
+  font-weight: bold;
+}
+
+tui-error {
+  font: var(--tui-font-text-m);
+}
