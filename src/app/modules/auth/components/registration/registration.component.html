@@ -3,47 +3,44 @@
     <h3 class="tui-form__header tui-form__header_margin-top_none">
       Регистрация нового пользователя
     </h3>
-    <label>
-      <tui-input formControlName="fullName" tuiTextfieldSize="m">
-        ФИО
+    <label tuiLabel="ФИО">
+      <tui-input formControlName="fullName" [tuiTextfieldLabelOutside]="true" tuiTextfieldSize="m">
         <input tuiTextfield />
       </tui-input>
       <tui-error formControlName="fullName" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
-    <label>
-      <tui-input formControlName="email" tuiTextfieldSize="m">
-        Email
+    <label tuiLabel="Email">
+      <tui-input formControlName="email" [tuiTextfieldLabelOutside]="true" tuiTextfieldSize="m">
         <input type="email" tuiTextfield />
       </tui-input>
       <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
-    <label>
+    <label tuiLabel="Дата рождения">
       <tui-input-date
         formControlName="birthDate"
         tuiTextfieldSize="m"
-        class="tui-space_vertical-4"
         [tuiTextfieldLabelOutside]="true"
         [max]="maxDate">
         <input tuiTextfield />
       </tui-input-date>
       <tui-error formControlName="birthDate" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
-
-    <label>
-      <tui-input formControlName="password" tuiTextfieldSize="m">
-        Пароль
+    <label tuiLabel="Пароль">
+      <tui-input formControlName="password" tuiTextfieldSize="m" [tuiTextfieldLabelOutside]="true">
         <input type="password" tuiTextfield />
       </tui-input>
       <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
-    <label>
-      <tui-input formControlName="passwordRepeat" tuiTextfieldSize="m">
-        Повторите пароль
-        <input type="passwordRepeat" tuiTextfield />
+    <label tuiLabel="Повторите пароль">
+      <tui-input
+        formControlName="passwordRepeat"
+        tuiTextfieldSize="m"
+        [tuiTextfieldLabelOutside]="true">
+        <input type="password" tuiTextfield />
       </tui-input>
       <tui-error formControlName="passwordRepeat" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
-
+    <tui-error [error]="[] | tuiFieldError | async"></tui-error>
     <button size="m" [showLoader]="isLoading" tuiButton>Зарегистрироваться</button>
   </form>
   <tui-error [error]="error" class="tui-text_body-m-2"></tui-error>

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { UserService } from 'core/services/user.service';
+import { confirmPassword } from 'shared/utils/validators';
 
 @Component({
   selector: 'registration',
@@ -31,7 +32,9 @@ export class RegistrationComponent {
   }
 
   handleSubmit() {
-    console.log(this.formGroup.value);
+    console.log(this.formGroup.value, this.formGroup.errors);
+    this.formGroup.setValidators(confirmPassword);
+    this.formGroup.updateValueAndValidity();
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;

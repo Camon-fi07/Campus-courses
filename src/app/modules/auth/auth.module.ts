@@ -15,7 +15,7 @@ import {
   TuiInputDateModule,
   TuiInputModule,
 } from '@taiga-ui/kit';
-import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
+import { EMAIL_ERROR, PASSWORD_MATCH_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
@@ -42,6 +42,7 @@ import { RegistrationComponent } from './components/registration/registration.co
       useValue: {
         email: EMAIL_ERROR,
         required: REQUIRED_ERROR,
+        passwordMatch: PASSWORD_MATCH_ERROR,
       },
     },
   ],
