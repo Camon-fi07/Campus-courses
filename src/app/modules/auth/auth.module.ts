@@ -5,10 +5,11 @@ import { RouterLink } from '@angular/router';
 import { TuiButtonModule, TuiErrorModule, TuiLabelModule, TuiLinkModule } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS, TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
 import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
-import { AuthComponent } from './auth.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [RegistrationComponent, LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,7 +22,7 @@ import { AuthComponent } from './auth.component';
     TuiLabelModule,
     TuiErrorModule,
   ],
-  exports: [AuthComponent],
+  exports: [RegistrationComponent, LoginComponent],
   providers: [
     {
       provide: TUI_VALIDATION_ERRORS,

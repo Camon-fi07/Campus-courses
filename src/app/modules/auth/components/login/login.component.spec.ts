@@ -1,12 +1,12 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { AuthComponent } from './auth.component';
-import { AuthModule } from './auth.module';
+import { AuthModule } from 'modules/auth/auth.module';
+import { LoginComponent } from './login.component';
 
 describe('AuthComponent', () => {
-  let component: AuthComponent;
-  let fixture: ComponentFixture<AuthComponent>;
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,7 +20,7 @@ describe('AuthComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AuthComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

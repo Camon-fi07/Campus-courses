@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { UserService } from 'core/services/user.service';
 
 @Component({
-  selector: 'auth',
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class AuthComponent {
+export class LoginComponent {
   formGroup!: FormGroup;
   isLoading = false;
   error: string | null = null;
