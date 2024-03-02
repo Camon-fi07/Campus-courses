@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { AuthModule } from '../../modules/auth/auth.module';
 
 @Component({
-  selector: 'auth-page',
+  selector: 'login-page',
   standalone: true,
   imports: [AuthModule],
-  templateUrl: './auth-page.component.html',
-  styleUrl: './auth-page.component.scss',
+  templateUrl: './login-page.component.html',
+  styleUrl: './login-page.component.scss',
 })
-export class AuthPageComponent {}
+export class LoginPageComponent {}

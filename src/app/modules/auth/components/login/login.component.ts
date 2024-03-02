@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'core/services/user.service';
+import { passwordValidator } from 'shared/utils/validators';
 
 @Component({
-  selector: 'auth',
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
-export class AuthComponent {
+export class LoginComponent {
   formGroup!: FormGroup;
   isLoading = false;
   error: string | null = null;
@@ -20,7 +21,7 @@ export class AuthComponent {
   ) {
     this.formGroup = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, passwordValidator]),
     });
   }
 
