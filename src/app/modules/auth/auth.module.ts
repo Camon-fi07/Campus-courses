@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
+  TuiAlertModule,
   TuiButtonModule,
   TuiErrorModule,
   TuiLabelModule,
@@ -34,6 +35,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     TuiErrorModule,
     TuiTextfieldControllerModule,
     TuiInputDateModule,
+    TuiAlertModule,
   ],
   exports: [RegistrationComponent, LoginComponent],
   providers: [
