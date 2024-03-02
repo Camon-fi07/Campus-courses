@@ -1,0 +1,3 @@
+export const EMAIL_ERROR = 'Неверный формат';
+export const REQUIRED_ERROR = 'Ожидалось значение';
+export const MIN_LENGTH_ERROR = (length: number) => `Минимальное количество символов: ${length}`;

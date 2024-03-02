@@ -1,14 +1,21 @@
 <div>
-  <form [formGroup]="formGroup" class="form">
+  <form [formGroup]="formGroup" class="form" (ngSubmit)="handleSubmit()">
     <h3 class="tui-form__header tui-form__header_margin-top_none tui-text_h3 title">Авторизация</h3>
-    <tui-input formControlName="email">
-      Email
-      <input type="email" tuiTextfield />
-    </tui-input>
-    <tui-input formControlName="password">
-      Пароль
-      <input type="password" tuiTextfield />
-    </tui-input>
+    <label>
+      <tui-input formControlName="email">
+        Email
+        <input type="email" tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+    <label>
+      <tui-input formControlName="password">
+        Пароль
+        <input type="password" tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+
     <button tuiButton><span class="tui-text_body-xl buttonText">Войти</span></button>
   </form>
 </div>
