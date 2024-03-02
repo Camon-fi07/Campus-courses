@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TuiAlertService } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
 import { passwordValidator } from 'shared/utils/validators';
 
@@ -12,12 +13,12 @@ import { passwordValidator } from 'shared/utils/validators';
 export class LoginComponent {
   formGroup!: FormGroup;
   isLoading = false;
-  error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
   ) {
     this.formGroup = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -34,7 +35,7 @@ export class LoginComponent {
           this.router.navigate(['/']);
         },
         error: (e) => {
-          this.error = e;
+          this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
           this.isLoading = false;
         },
       });

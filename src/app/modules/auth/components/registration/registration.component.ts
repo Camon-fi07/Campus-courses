@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
+import { TuiAlertService } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
 import { convertTuiDate } from 'shared/utils/converDate';
 import { matchPasswordsValidator, passwordValidator } from 'shared/utils/validators';
@@ -14,7 +15,6 @@ import { matchPasswordsValidator, passwordValidator } from 'shared/utils/validat
 export class RegistrationComponent {
   formGroup!: FormGroup;
   isLoading = false;
-  error: string | null = null;
   dateNow = new Date();
   maxDate = new TuiDay(this.dateNow.getFullYear(), this.dateNow.getMonth(), this.dateNow.getDate());
 
@@ -22,6 +22,7 @@ export class RegistrationComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
   ) {
     this.formGroup = this.fb.group({
       fullName: new FormControl('', Validators.required),
@@ -49,7 +50,7 @@ export class RegistrationComponent {
           },
           error: (e) => {
             this.isLoading = false;
-            this.error = e;
+            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
           },
         });
     }
