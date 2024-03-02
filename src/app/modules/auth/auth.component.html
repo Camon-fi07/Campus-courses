@@ -16,7 +16,9 @@
       <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
 
-    <button tuiButton><span class="tui-text_body-xl buttonText">Войти</span></button>
+    <button [showLoader]="isLoading" tuiButton>
+      <span class="tui-text_body-xl buttonText">Войти</span>
+    </button>
   </form>
 </div>
 <p class="tui-text_body-m-2">
