@@ -3,15 +3,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map } from 'rxjs';
 import { LOGIN } from 'shared/constants/apiPaths';
 import { TokenResponse, UserLoginModel } from 'shared/types/user';
-import { setCookieValue } from 'shared/utils/cookie';
+import { getCookieValue, setCookieValue } from 'shared/utils/cookie';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private isAuth = new BehaviorSubject(false);
+  private token?: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.token = getCookieValue('token');
+    if (this.token) this.isAuth.next(true);
+  }
 
   login(data: UserLoginModel) {
     return this.http.post<TokenResponse>(LOGIN, data).pipe(
@@ -25,5 +29,9 @@ export class UserService {
         throw err;
       }),
     );
+  }
+
+  getIsAuth() {
+    return this.isAuth;
   }
 }
