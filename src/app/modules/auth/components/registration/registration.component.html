@@ -33,12 +33,12 @@
     </label>
     <label tuiLabel="Повторите пароль">
       <tui-input
-        formControlName="passwordRepeat"
+        formControlName="confirmPassword"
         tuiTextfieldSize="m"
         [tuiTextfieldLabelOutside]="true">
         <input type="password" tuiTextfield />
       </tui-input>
-      <tui-error formControlName="passwordRepeat" [error]="[] | tuiFieldError | async"></tui-error>
+      <tui-error formControlName="confirmPassword" [error]="[] | tuiFieldError | async"></tui-error>
     </label>
     <tui-error [error]="[] | tuiFieldError | async"></tui-error>
     <button size="m" [showLoader]="isLoading" tuiButton>Зарегистрироваться</button>

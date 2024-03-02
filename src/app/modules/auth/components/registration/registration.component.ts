@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { UserService } from 'core/services/user.service';
-import { confirmPassword } from 'shared/utils/validators';
+import { matchPasswordsValidator, passwordValidator } from 'shared/utils/validators';
 
 @Component({
   selector: 'registration',
@@ -25,20 +25,31 @@ export class RegistrationComponent {
     this.formGroup = this.fb.group({
       fullName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      passwordRepeat: new FormControl('', Validators.required),
-      birthDate: new FormControl(null, Validators.required),
+      password: new FormControl('', [Validators.required, passwordValidator]),
+      confirmPassword: new FormControl('', [Validators.required, passwordValidator]),
+      birthDate: new FormControl<TuiDay | null>(null, Validators.required),
     });
   }
 
   handleSubmit() {
-    console.log(this.formGroup.value, this.formGroup.errors);
-    this.formGroup.setValidators(confirmPassword);
+    this.formGroup.setValidators(matchPasswordsValidator);
     this.formGroup.updateValueAndValidity();
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;
-      console.log(this.formGroup.value);
+      const inputDate: TuiDay = this.formGroup.controls['birthDate'].value;
+      const date = new Date(inputDate.year, inputDate.month, inputDate.day);
+      this.userService
+        .registration({ ...this.formGroup.value, birthDate: date.toISOString() })
+        .subscribe({
+          next: () => {
+            this.router.navigate(['']);
+          },
+          error: (e) => {
+            this.isLoading = false;
+            this.error = e;
+          },
+        });
     }
   }
 }
