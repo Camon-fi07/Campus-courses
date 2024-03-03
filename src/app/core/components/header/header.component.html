@@ -1,0 +1,17 @@
+<header>
+  <h2 class="tui-text_h4">Кампусные курсы</h2>
+  @if (isAuth) {
+    <button appearance="flat" tuiButton>Группы курсов</button>
+    <button *ngIf="isStudent" appearance="flat" tuiButton>Мои курсы</button>
+    <button *ngIf="isTeacher" appearance="flat" tuiButton>Преподаваемые курсы</button>
+  }
+  <div class="userInfo">
+    @if (isAuth) {
+      <button appearance="flat" tuiButton>email</button>
+      <button appearance="flat" tuiButton>Выход</button>
+    } @else {
+      <button appearance="flat" tuiButton>Регистрация</button>
+      <button appearance="flat" tuiButton>Вход</button>
+    }
+  </div>
+</header>

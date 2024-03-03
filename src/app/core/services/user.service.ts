@@ -45,7 +45,11 @@ export class UserService {
     );
   }
 
-  getIsAuth() {
+  get getIsAuth() {
     return this.isAuth;
+  }
+
+  get getToken() {
+    return this.token;
   }
 }
