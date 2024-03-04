@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map } from 'rxjs';
-import { LOGIN, REGISTRATION } from 'shared/constants/apiPaths';
-import { TokenResponse, UserLoginModel, UserRegisterModel } from 'shared/types/user';
+import { LOGIN, REGISTRATION, ROLES } from 'shared/constants/apiPaths';
+import { TokenResponse, UserLoginModel, UserRegisterModel, UserRoles } from 'shared/types/user';
 import { getCookieValue, setCookieValue } from 'shared/utils/cookie';
 
 @Injectable({
@@ -11,10 +11,21 @@ import { getCookieValue, setCookieValue } from 'shared/utils/cookie';
 export class UserService {
   private isAuth = new BehaviorSubject(false);
   private token?: string;
+  private userRoles = new BehaviorSubject({
+    isAdmin: false,
+    isStudent: false,
+    isTeacher: false,
+  });
 
   constructor(private http: HttpClient) {
     this.token = getCookieValue('token');
     if (this.token) this.isAuth.next(true);
+
+    this.isAuth.subscribe({
+      next: (res) => {
+        if (res) this.requestUserRoles();
+      },
+    });
   }
 
   login(data: UserLoginModel) {
@@ -45,11 +56,25 @@ export class UserService {
     );
   }
 
+  requestUserRoles() {
+    this.http
+      .get<UserRoles>(ROLES, { headers: { Authorization: `Bearer ${this.token}` } })
+      .subscribe({
+        next: (res) => {
+          this.userRoles.next(res);
+        },
+      });
+  }
+
   get getIsAuth() {
     return this.isAuth;
   }
 
   get getToken() {
     return this.token;
+  }
+
+  get getUserRoles() {
+    return this.userRoles;
   }
 }

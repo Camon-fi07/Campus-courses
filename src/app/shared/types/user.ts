@@ -14,3 +14,9 @@ export interface UserRegisterModel {
 export interface TokenResponse {
   token: string;
 }
+
+export interface UserRoles {
+  isTeacher: boolean;
+  isStudent: boolean;
+  isAdmin: boolean;
+}

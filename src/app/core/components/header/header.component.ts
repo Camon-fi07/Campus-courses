@@ -1,43 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
-import { MY_COURSES, TEACHING_COURSES } from 'shared/constants/apiPaths';
-import { CourseModel } from 'shared/types/courses';
+import { UserRoles } from 'shared/types/user';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, TuiButtonModule],
+  imports: [CommonModule, TuiButtonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   isAuth!: boolean;
-  isStudent = false;
-  isTeacher = false;
+  userRoles!: UserRoles;
 
-  constructor(
-    private userService: UserService,
-    private http: HttpClient,
-  ) {
+  constructor(private userService: UserService) {
     this.userService.getIsAuth.subscribe({
       next: (res) => {
         this.isAuth = res;
       },
     });
-    const headers = { Authorization: `Bearer ${userService.getToken}` };
-
-    this.http.get<CourseModel[]>(MY_COURSES, { headers: headers }).subscribe({
+    this.userService.getUserRoles.subscribe({
       next: (res) => {
-        this.isStudent = res.length > 0;
-      },
-    });
-
-    this.http.get<CourseModel[]>(TEACHING_COURSES, { headers: headers }).subscribe({
-      next: (res) => {
-        this.isTeacher = res.length > 0;
+        this.userRoles = res;
       },
     });
   }

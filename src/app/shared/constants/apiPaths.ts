@@ -6,3 +6,4 @@ export const PROFILE = `${ROOT}/profile`;
 export const COURSES = `${ROOT}/courses`;
 export const MY_COURSES = `${COURSES}/my`;
 export const TEACHING_COURSES = `${COURSES}/teaching`;
+export const ROLES = `${ROOT}/roles`;
