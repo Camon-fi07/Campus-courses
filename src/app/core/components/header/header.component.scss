@@ -3,7 +3,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 20px;
+  padding-inline: 30px;
   padding-block: 10px;
   gap: 40px;
 
@@ -16,14 +16,18 @@ header {
 .courses,
 .userInfo {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   align-items: center;
+}
 
-  & * {
-    font: var(--tui-font-text-l);
-  }
+.userInfo * {
+  font: var(--tui-font-text-xl);
 }
 
 .courses {
   margin-inline-end: auto;
+
+  & * {
+    font: var(--tui-font-text-l);
+  }
 }

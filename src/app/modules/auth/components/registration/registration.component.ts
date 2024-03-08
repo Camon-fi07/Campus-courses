@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
-import { convertTuiDate } from 'shared/utils/converDate';
-import { matchPasswordsValidator, passwordValidator } from 'shared/utils/validators';
+import { convertTuiDate, matchPasswordsValidator, passwordValidator } from 'shared/utils';
 
 @Component({
   selector: 'registration',

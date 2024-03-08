@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
-import { passwordValidator } from 'shared/utils/validators';
+import { passwordValidator } from 'shared/utils';
 
 @Component({
   selector: 'login',

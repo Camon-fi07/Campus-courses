@@ -16,3 +16,7 @@ export const getCookieValue = (name: string) => {
 
   return cookie?.split('=')[1];
 };
+
+export const deleteCookieValue = (name: string) => {
+  document.cookie = `${name}=; Max-Age=-1`;
+};

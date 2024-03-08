@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { LOGIN, PROFILE, REGISTRATION, ROLES } from 'shared/constants/apiPaths';
+import { LOGIN, LOGOUT, PROFILE, REGISTRATION, ROLES } from 'shared/constants/apiPaths';
 import {
   TokenResponse,
   UserLoginModel,
@@ -9,7 +9,7 @@ import {
   UserRegisterModel,
   UserRoles,
 } from 'shared/types/user';
-import { getCookieValue, setCookieValue } from 'shared/utils/cookie';
+import { deleteCookieValue, getCookieValue, setCookieValue } from 'shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +17,7 @@ import { getCookieValue, setCookieValue } from 'shared/utils/cookie';
 export class UserService {
   private isAuth = new BehaviorSubject(false);
   private token?: string;
-  private userRoles = new BehaviorSubject<UserRoles>({
-    isAdmin: false,
-    isStudent: false,
-    isTeacher: false,
-  });
+  private userRoles = new BehaviorSubject<UserRoles | null>(null);
   private userProfile = new BehaviorSubject<UserProfile | null>(null);
 
   constructor(private http: HttpClient) {
@@ -30,9 +26,13 @@ export class UserService {
 
     this.isAuth.subscribe({
       next: (res) => {
+        this.token = getCookieValue('token');
         if (res) {
           this.requestUserRoles();
           this.requestProfile().subscribe();
+        } else {
+          this.userProfile.next(null);
+          this.userRoles.next(null);
         }
       },
     });
@@ -64,6 +64,17 @@ export class UserService {
       map((res) => {
         setCookieValue('token', res.token, new Date(Date.now() + 3600 * 1000), true);
         this.isAuth.next(true);
+        return res;
+      }),
+    );
+  }
+
+  logout() {
+    return this.http.post(LOGOUT, {}, { headers: { Authorization: `Bearer ${this.token}` } }).pipe(
+      map((res) => {
+        console.log('f');
+        deleteCookieValue('token');
+        this.isAuth.next(false);
         return res;
       }),
     );

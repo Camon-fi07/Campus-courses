@@ -14,7 +14,7 @@ import { UserProfile, UserRoles } from 'shared/types/user';
 })
 export class HeaderComponent {
   isAuth!: boolean;
-  userRoles!: UserRoles;
+  userRoles?: UserRoles | null;
   userProfile?: UserProfile | null;
 
   constructor(private userService: UserService) {
@@ -33,5 +33,9 @@ export class HeaderComponent {
         this.userProfile = res;
       },
     });
+  }
+
+  handleLogout() {
+    this.userService.logout().subscribe();
   }
 }
