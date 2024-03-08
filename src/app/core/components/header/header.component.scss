@@ -4,8 +4,26 @@ header {
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
+  padding-block: 10px;
+  gap: 40px;
 
   & * {
     color: var(--tui-text-01-night);
+    text-decoration: none;
   }
+}
+
+.courses,
+.userInfo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  & * {
+    font: var(--tui-font-text-l);
+  }
+}
+
+.courses {
+  margin-inline-end: auto;
 }

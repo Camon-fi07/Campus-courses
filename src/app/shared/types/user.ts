@@ -20,3 +20,9 @@ export interface UserRoles {
   isStudent: boolean;
   isAdmin: boolean;
 }
+
+export interface UserProfile {
+  fullName: string;
+  email: string;
+  birthDate: string;
+}
