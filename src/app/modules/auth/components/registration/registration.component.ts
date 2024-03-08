@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
@@ -21,7 +21,7 @@ export class RegistrationComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
+    private alerts: TuiAlertService,
   ) {
     this.formGroup = this.fb.group({
       fullName: new FormControl('', Validators.required),

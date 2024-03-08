@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiAlertService, TuiButtonModule } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
 import { UserProfile, UserRoles } from 'shared/types/user';
 
@@ -17,7 +17,10 @@ export class HeaderComponent {
   userRoles?: UserRoles | null;
   userProfile?: UserProfile | null;
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private alerts: TuiAlertService,
+  ) {
     this.userService.getIsAuth.subscribe({
       next: (res) => {
         this.isAuth = res;
@@ -36,6 +39,10 @@ export class HeaderComponent {
   }
 
   handleLogout() {
-    this.userService.logout().subscribe();
+    this.userService.logout().subscribe({
+      error: (e) => {
+        this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
+      },
+    });
   }
 }
