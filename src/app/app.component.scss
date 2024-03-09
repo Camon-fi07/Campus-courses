@@ -8,3 +8,7 @@ main {
   flex: 1 1 auto;
   display: grid;
 }
+
+router-outlet {
+  display: none;
+}

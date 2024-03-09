@@ -14,8 +14,8 @@ import { UserProfile, UserRoles } from 'shared/types/user';
 })
 export class HeaderComponent {
   isAuth!: boolean;
-  userRoles?: UserRoles | null;
-  userProfile?: UserProfile | null;
+  userRoles!: UserRoles | null;
+  userProfile!: UserProfile | null;
   isOpen = false;
   isLogoutLoading = false;
 
