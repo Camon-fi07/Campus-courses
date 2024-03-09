@@ -49,14 +49,12 @@ export class UserService {
   }
 
   requestProfile() {
-    return this.http
-      .get<UserProfile>(PROFILE, { headers: { Authorization: `Bearer ${this.token}` } })
-      .pipe(
-        map((res) => {
-          this.userProfile.next(res);
-          return res;
-        }),
-      );
+    return this.http.get<UserProfile>(PROFILE).pipe(
+      map((res) => {
+        this.userProfile.next(res);
+        return res;
+      }),
+    );
   }
 
   registration(data: UserRegisterModel) {
@@ -70,7 +68,7 @@ export class UserService {
   }
 
   logout() {
-    return this.http.post(LOGOUT, {}, { headers: { Authorization: `Bearer ${this.token}` } }).pipe(
+    return this.http.post(LOGOUT, {}).pipe(
       map((res) => {
         deleteCookieValue('token');
         this.isAuth.next(false);
@@ -80,13 +78,11 @@ export class UserService {
   }
 
   requestUserRoles() {
-    this.http
-      .get<UserRoles>(ROLES, { headers: { Authorization: `Bearer ${this.token}` } })
-      .subscribe({
-        next: (res) => {
-          this.userRoles.next(res);
-        },
-      });
+    this.http.get<UserRoles>(ROLES).subscribe({
+      next: (res) => {
+        this.userRoles.next(res);
+      },
+    });
   }
 
   get getIsAuth() {
