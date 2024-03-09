@@ -1,9 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 import { UserService } from 'core/services/user.service';
-import { passwordValidator } from 'shared/utils/validators';
+import { passwordValidator } from 'shared/utils';
 
 @Component({
   selector: 'login',
@@ -18,7 +18,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
+    private alerts: TuiAlertService,
   ) {
     this.formGroup = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),

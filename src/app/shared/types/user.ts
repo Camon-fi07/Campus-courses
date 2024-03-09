@@ -14,3 +14,15 @@ export interface UserRegisterModel {
 export interface TokenResponse {
   token: string;
 }
+
+export interface UserRoles {
+  isTeacher: boolean;
+  isStudent: boolean;
+  isAdmin: boolean;
+}
+
+export interface UserProfile {
+  fullName: string;
+  email: string;
+  birthDate: string;
+}

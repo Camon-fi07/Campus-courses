@@ -1,0 +1,121 @@
+@mixin burgerMenu {
+  .burgerMenu {
+    display: block;
+  }
+
+  nav {
+    position: absolute;
+    display: none;
+    top: 100%;
+    padding-inline: 20px;
+    align-items: center;
+    flex-direction: column;
+    left: 0;
+    background-color: var(--tui-primary);
+    width: 100%;
+    gap: 0;
+  }
+
+  .openNav {
+    display: flex;
+  }
+
+  .courses {
+    width: 100%;
+    border-bottom: 1px solid;
+  }
+
+  .courses,
+  .userInfo {
+    justify-content: space-around;
+    padding-block: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    & * {
+      font: var(--tui-font-text-xl);
+    }
+  }
+
+  .userInfo {
+    margin: 0;
+    gap: 50px;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  & * {
+    margin: 0;
+    font: var(--tui-font-heading-5);
+  }
+
+  & img {
+    height: 30px;
+  }
+}
+
+header {
+  background-color: var(--tui-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 30px;
+  padding-block: 10px;
+  gap: 40px;
+  width: 100%;
+  position: relative;
+
+  & * {
+    color: var(--tui-text-01-night);
+    text-decoration: none;
+  }
+}
+
+nav {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  flex: 1 1 auto;
+}
+
+.courses,
+.userInfo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.userInfo {
+  margin-inline-start: auto;
+  gap: 40px;
+
+  & * {
+    font: var(--tui-font-text-xl);
+  }
+}
+
+.courses * {
+  font: var(--tui-font-text-l);
+}
+
+.burgerMenu {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .authNav {
+    @include burgerMenu;
+  }
+}
+
+@media (max-width: 768px) {
+  @include burgerMenu;
+
+  .title * {
+    font: var(--tui-font-heading-6);
+  }
+}
