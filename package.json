@@ -7,17 +7,20 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prepare": "husky",
+    "prettier-format": "prettier src --write"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged --relative",
+      "pre-commit": "lint-staged",
       "pre-push": "npm run test"
     }
   },
   "lint-staged": {
     "*.{ts,html}": [
-      "eslint --fix"
+      "npm run lint",
+      "npm run prettier-format"
     ]
   },
   "private": true,
