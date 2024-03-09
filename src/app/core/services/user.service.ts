@@ -72,7 +72,6 @@ export class UserService {
   logout() {
     return this.http.post(LOGOUT, {}, { headers: { Authorization: `Bearer ${this.token}` } }).pipe(
       map((res) => {
-        console.log('f');
         deleteCookieValue('token');
         this.isAuth.next(false);
         return res;
