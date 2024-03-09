@@ -43,6 +43,21 @@
   }
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  & * {
+    margin: 0;
+    font: var(--tui-font-heading-5);
+  }
+
+  & img {
+    height: 30px;
+  }
+}
+
 header {
   background-color: var(--tui-primary);
   display: flex;
@@ -70,12 +85,13 @@ nav {
 .courses,
 .userInfo {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
 }
 
 .userInfo {
   margin-inline-start: auto;
+  gap: 40px;
 
   & * {
     font: var(--tui-font-text-xl);
@@ -90,7 +106,7 @@ nav {
   display: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .authNav {
     @include burgerMenu;
   }
@@ -98,4 +114,8 @@ nav {
 
 @media (max-width: 768px) {
   @include burgerMenu;
+
+  .title * {
+    font: var(--tui-font-heading-6);
+  }
 }
