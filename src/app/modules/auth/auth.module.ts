@@ -19,6 +19,7 @@ import {
 import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [RegistrationComponent, LoginComponent],
@@ -46,6 +47,7 @@ import { RegistrationComponent } from './components/registration/registration.co
         required: REQUIRED_ERROR,
       },
     },
+    AuthService,
   ],
 })
 export class AuthModule {}

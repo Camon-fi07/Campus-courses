@@ -11,18 +11,6 @@
     "prepare": "husky",
     "prettier-format": "prettier src --write"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,html}": [
-      "npm run lint",
-      "npm run prettier-format"
-    ]
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.0",

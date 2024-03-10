@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TuiAlertService, TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
-import { UserService } from 'core/services/user.service';
+import { ProfileService } from 'core/services/profile/profile.service';
+import { UserService } from 'core/services/user/user.service';
 import { UserProfile, UserRoles } from 'shared/types/user';
 
 @Component({
@@ -32,20 +33,21 @@ export class HeaderComponent {
 
   constructor(
     private userService: UserService,
+    private profileService: ProfileService,
     private alerts: TuiAlertService,
     private eRef: ElementRef,
   ) {
-    this.userService.getIsAuth.subscribe({
+    this.userService.isAuth.subscribe({
       next: (res) => {
         this.isAuth = res;
       },
     });
-    this.userService.getUserRoles.subscribe({
+    this.userService.userRoles.subscribe({
       next: (res) => {
         this.userRoles = res;
       },
     });
-    this.userService.getUserProfile.subscribe({
+    this.userService.userProfile.subscribe({
       next: (res) => {
         this.userProfile = res;
       },
@@ -54,7 +56,7 @@ export class HeaderComponent {
 
   handleLogout() {
     this.isLogoutLoading = true;
-    this.userService.logout().subscribe({
+    this.profileService.logout().subscribe({
       next: () => {
         this.toggleIsOpen();
         this.isLogoutLoading = false;

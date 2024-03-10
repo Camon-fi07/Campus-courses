@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
-import { UserService } from 'core/services/user.service';
+import { AuthService } from 'modules/auth/services/auth.service';
 import { passwordValidator } from 'shared/utils';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private alerts: TuiAlertService,
   ) {
@@ -30,7 +30,7 @@ export class LoginComponent {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;
-      this.userService.login(this.formGroup.value).subscribe({
+      this.authService.login(this.formGroup.value).subscribe({
         next: () => {
           this.router.navigate(['/']);
         },

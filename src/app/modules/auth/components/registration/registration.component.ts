@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
-import { UserService } from 'core/services/user.service';
+import { AuthService } from 'modules/auth/services/auth.service';
 import { convertTuiDate, matchPasswordsValidator, passwordValidator } from 'shared/utils';
 
 @Component({
@@ -19,7 +19,7 @@ export class RegistrationComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private alerts: TuiAlertService,
   ) {
@@ -38,7 +38,7 @@ export class RegistrationComponent {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;
-      this.userService
+      this.authService
         .registration({
           ...this.formGroup.value,
           birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
