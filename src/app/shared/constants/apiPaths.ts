@@ -1,9 +1,10 @@
-export const ROOT = `https://camp-courses.api.kreosoft.space`;
-export const LOGIN = `${ROOT}/login`;
-export const REGISTRATION = `${ROOT}/registration`;
-export const LOGOUT = `${ROOT}/logout`;
-export const PROFILE = `${ROOT}/profile`;
-export const COURSES = `${ROOT}/courses`;
-export const MY_COURSES = `${COURSES}/my`;
-export const TEACHING_COURSES = `${COURSES}/teaching`;
-export const ROLES = `${ROOT}/roles`;
+export const API_PATHS = {
+  ROOT: 'https://camp-courses.api.kreosoft.space',
+  LOGIN: 'login',
+  REGISTRATION: 'registration',
+  LOGOUT: 'logout',
+  PROFILE: 'profile',
+  MY_COURSES: 'courses/my',
+  TEACHING_COURSES: 'courses/teaching',
+  ROLES: 'roles',
+};

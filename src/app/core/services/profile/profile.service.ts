@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { LOGOUT, PROFILE, ROLES } from 'shared/constants/apiPaths';
+import { API_PATHS } from 'shared/constants/apiPaths';
 import { UserProfile, UserRoles } from 'shared/types/user';
 import { UserService } from '../user/user.service';
 
@@ -21,7 +21,7 @@ export class ProfileService {
   }
 
   requestProfile() {
-    return this.http.get<UserProfile>(PROFILE).pipe(
+    return this.http.get<UserProfile>(API_PATHS.PROFILE).pipe(
       tap((res) => {
         this.userService.userProfile = res;
       }),
@@ -29,7 +29,7 @@ export class ProfileService {
   }
 
   requestUserRoles() {
-    return this.http.get<UserRoles>(ROLES).pipe(
+    return this.http.get<UserRoles>(API_PATHS.ROLES).pipe(
       tap((res) => {
         this.userService.userRoles = res;
       }),
@@ -42,7 +42,7 @@ export class ProfileService {
   }
 
   logout() {
-    return this.http.post(LOGOUT, {}).pipe(
+    return this.http.post(API_PATHS.LOGOUT, {}).pipe(
       tap(() => {
         this.userService.deleteUser();
       }),
