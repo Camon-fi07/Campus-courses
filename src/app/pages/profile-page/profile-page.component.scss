@@ -1,0 +1,9 @@
+.wrapper {
+  padding-block-start: 30px;
+  display: flex;
+  justify-content: center;
+
+  & > * {
+    flex: 0 0 80%;
+  }
+}
