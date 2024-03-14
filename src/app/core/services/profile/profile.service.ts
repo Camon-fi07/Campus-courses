@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { UserProfile, UserRoles } from 'shared/types/user';
+import { EditUserProfileModel, UserProfile, UserRoles } from 'shared/types/user';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -15,12 +15,12 @@ export class ProfileService {
   ) {
     userService.isAuth.subscribe({
       next: (res) => {
-        if (res) this.requestUser();
+        if (res) this.getUser();
       },
     });
   }
 
-  requestProfile() {
+  getProfile() {
     return this.http.get<UserProfile>(API_PATHS.PROFILE).pipe(
       tap((res) => {
         this.userService.userProfile = res;
@@ -28,7 +28,7 @@ export class ProfileService {
     );
   }
 
-  requestUserRoles() {
+  getUserRoles() {
     return this.http.get<UserRoles>(API_PATHS.ROLES).pipe(
       tap((res) => {
         this.userService.userRoles = res;
@@ -36,9 +36,17 @@ export class ProfileService {
     );
   }
 
-  requestUser() {
-    this.requestProfile().subscribe();
-    this.requestUserRoles().subscribe();
+  editProfile(data: EditUserProfileModel) {
+    return this.http.put<UserProfile>(API_PATHS.PROFILE, data).pipe(
+      tap((res) => {
+        this.userService.userProfile = res;
+      }),
+    );
+  }
+
+  getUser() {
+    this.getProfile().subscribe();
+    this.getUserRoles().subscribe();
   }
 
   logout() {

@@ -33,7 +33,6 @@ import { AuthService } from './services/auth.service';
     TuiErrorModule,
     TuiFieldErrorPipeModule,
     TuiLabelModule,
-    TuiErrorModule,
     TuiTextfieldControllerModule,
     TuiInputDateModule,
     TuiAlertModule,

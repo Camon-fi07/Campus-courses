@@ -26,3 +26,5 @@ export interface UserProfile {
   email: string;
   birthDate: string;
 }
+
+export type EditUserProfileModel = Omit<UserProfile, 'email'>;

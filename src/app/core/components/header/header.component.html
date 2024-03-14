@@ -16,7 +16,7 @@
     </div>
     <div class="userInfo">
       @if (isAuth) {
-        <a (click)="toggleIsOpen()" routerLink="/">{{ userProfile?.email }}</a>
+        <a (click)="toggleIsOpen()" routerLink="/profile">{{ userProfile?.email }}</a>
         <button
           [showLoader]="isLogoutLoading"
           (click)="handleLogout()"
