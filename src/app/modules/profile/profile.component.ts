@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
+import { TuiAlertService } from '@taiga-ui/core';
+import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
 import { UserProfile } from 'shared/types/user';
-import { convertDateToTui } from 'shared/utils';
+import { convertDateToTui, convertTuiDate } from 'shared/utils';
 
 @Component({
   selector: 'profile',
@@ -20,6 +22,8 @@ export class ProfileComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private profileService: ProfileService,
+    private alerts: TuiAlertService,
   ) {
     this.formGroup = fb.group({
       fullName: new FormControl(this.userProfile?.fullName, Validators.required),
@@ -32,7 +36,6 @@ export class ProfileComponent {
         this.formGroup.controls['fullName'].setValue(res?.fullName);
         this.formGroup.controls['birthDate'].setValue(convertDateToTui(new Date(res!.birthDate)));
         this.isLoading = false;
-        console.log(res);
         this.userProfile = res;
       },
     });
@@ -41,7 +44,21 @@ export class ProfileComponent {
   handleSubmit() {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
-      console.log(this.formGroup.value);
+      this.isLoading = true;
+      this.profileService
+        .editProfile({
+          ...this.formGroup.value,
+          birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
+        })
+        .subscribe({
+          next: () => {
+            this.isLoading = false;
+          },
+          error: (e) => {
+            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
+            this.isLoading = false;
+          },
+        });
     }
   }
 }
