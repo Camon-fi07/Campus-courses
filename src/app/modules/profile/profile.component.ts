@@ -52,6 +52,11 @@ export class ProfileComponent {
         })
         .subscribe({
           next: () => {
+            this.alerts
+              .open('Профиль успешно обновлён', {
+                status: 'success',
+              })
+              .subscribe();
             this.isLoading = false;
           },
           error: (e) => {
