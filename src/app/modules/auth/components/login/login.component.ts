@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'modules/auth/services/auth.service';
+import { ROUTES } from 'shared/constants/routes';
 import { passwordValidator } from 'shared/utils';
 
 @Component({
@@ -13,6 +14,7 @@ import { passwordValidator } from 'shared/utils';
 export class LoginComponent {
   formGroup!: FormGroup;
   isLoading = false;
+  ROUTES = ROUTES;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +34,7 @@ export class LoginComponent {
       this.isLoading = true;
       this.authService.login(this.formGroup.value).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.router.navigate([ROUTES.HOME]);
         },
         error: (e) => {
           this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();

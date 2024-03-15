@@ -7,4 +7,6 @@ export const API_PATHS = {
   MY_COURSES: 'courses/my',
   TEACHING_COURSES: 'courses/teaching',
   ROLES: 'roles',
+  GROUPS: 'groups',
+  CONCRETE_GROUP: (id: string) => `groups/${id}`,
 };

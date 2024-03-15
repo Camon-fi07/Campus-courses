@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TuiAlertService, TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
 import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
+import { finalize } from 'rxjs';
+import { ROUTES } from 'shared/constants/routes';
 import { UserProfile, UserRoles } from 'shared/types/user';
 
 @Component({
@@ -19,6 +21,7 @@ export class HeaderComponent {
   userProfile!: UserProfile | null;
   isOpen = false;
   isLogoutLoading = false;
+  ROUTES = ROUTES;
 
   @HostListener('document:click', ['$event'])
   clickout(event: MouseEvent) {
@@ -36,6 +39,7 @@ export class HeaderComponent {
     private profileService: ProfileService,
     private alerts: TuiAlertService,
     private eRef: ElementRef,
+    private router: Router,
   ) {
     this.userService.isAuth.subscribe({
       next: (res) => {
@@ -56,16 +60,22 @@ export class HeaderComponent {
 
   handleLogout() {
     this.isLogoutLoading = true;
-    this.profileService.logout().subscribe({
-      next: () => {
-        this.toggleIsOpen();
-        this.isLogoutLoading = false;
-      },
-      error: (e) => {
-        this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
-        this.isLogoutLoading = false;
-      },
-    });
+    this.profileService
+      .logout()
+      .pipe(
+        finalize(() => {
+          this.isLogoutLoading = false;
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.toggleIsOpen();
+          this.router.navigate([ROUTES.LOGIN]);
+        },
+        error: (e) => {
+          this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
+        },
+      });
   }
 
   toggleIsOpen() {
