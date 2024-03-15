@@ -8,10 +8,10 @@ import { GroupDto } from 'shared/types/groups';
   styleUrl: './groups-list.component.scss',
 })
 export class GroupsListComponent {
-  groups?: GroupDto[];
+  groups!: GroupDto[] | null;
 
   constructor(private groupService: GroupService) {
-    groupService.getGroupsList().subscribe({
+    groupService.groups.subscribe({
       next: (res) => {
         this.groups = res;
       },

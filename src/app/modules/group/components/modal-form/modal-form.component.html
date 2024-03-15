@@ -1,0 +1,10 @@
+<form class="form" [formGroup]="formGroup" (submit)="handleSubmit()">
+  <h2 class="tui-text_h5">{{ title }}</h2>
+  <label tuiLabel="Название группы">
+    <tui-input [tuiTextfieldLabelOutside]="true" formControlName="name">
+      <input tuiTextfield />
+    </tui-input>
+    <tui-error formControlName="name" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <button [showLoader]="isLoading" tuiButton>Сохранить</button>
+</form>

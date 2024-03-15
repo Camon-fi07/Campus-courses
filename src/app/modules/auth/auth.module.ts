@@ -10,13 +10,7 @@ import {
   TuiLinkModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import {
-  TUI_VALIDATION_ERRORS,
-  TuiFieldErrorPipeModule,
-  TuiInputDateModule,
-  TuiInputModule,
-} from '@taiga-ui/kit';
-import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
+import { TuiFieldErrorPipeModule, TuiInputDateModule, TuiInputModule } from '@taiga-ui/kit';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AuthService } from './services/auth.service';
@@ -38,15 +32,6 @@ import { AuthService } from './services/auth.service';
     TuiAlertModule,
   ],
   exports: [RegistrationComponent, LoginComponent],
-  providers: [
-    {
-      provide: TUI_VALIDATION_ERRORS,
-      useValue: {
-        email: EMAIL_ERROR,
-        required: REQUIRED_ERROR,
-      },
-    },
-    AuthService,
-  ],
+  providers: [AuthService],
 })
 export class AuthModule {}
