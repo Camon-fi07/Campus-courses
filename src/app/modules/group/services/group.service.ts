@@ -29,7 +29,15 @@ export class GroupService {
   }
 
   editGroup(id: string, data: EditCampusGroupModel) {
-    return this.http.put(API_PATHS.EDIT_GROUPS(id), data).pipe(
+    return this.http.put(API_PATHS.CONCRETE_GROUP(id), data).pipe(
+      tap(() => {
+        this.getGroupsList().subscribe();
+      }),
+    );
+  }
+
+  deleteGroup(id: string) {
+    return this.http.delete(API_PATHS.CONCRETE_GROUP(id)).pipe(
       tap(() => {
         this.getGroupsList().subscribe();
       }),

@@ -3,7 +3,14 @@
     <h2 class="tui-text_h6">{{ group.name }}</h2>
   </a>
   <div class="panel" *ngIf="isAdmin">
-    <button appearance="edit" size="m" tuiButton>Редактировать</button>
-    <button appearance="error" size="m" tuiButton>Удалить</button>
+    <button (click)="handleEdit()" appearance="edit" size="m" tuiButton>Редактировать</button>
+    <button
+      [showLoader]="isDeleteLoading"
+      (click)="handleDelete()"
+      appearance="error"
+      size="m"
+      tuiButton>
+      Удалить
+    </button>
   </div>
 </div>

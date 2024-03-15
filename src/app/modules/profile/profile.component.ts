@@ -4,6 +4,7 @@ import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
 import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
+import { finalize } from 'rxjs';
 import { UserProfile } from 'shared/types/user';
 import { convertDateToTui, convertTuiDate } from 'shared/utils';
 
@@ -50,6 +51,11 @@ export class ProfileComponent {
           ...this.formGroup.value,
           birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
         })
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          }),
+        )
         .subscribe({
           next: () => {
             this.alerts
@@ -57,11 +63,9 @@ export class ProfileComponent {
                 status: 'success',
               })
               .subscribe();
-            this.isLoading = false;
           },
           error: (e) => {
             this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
-            this.isLoading = false;
           },
         });
     }
