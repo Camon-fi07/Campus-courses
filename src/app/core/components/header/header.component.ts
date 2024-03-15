@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { TuiAlertService, TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
 import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
+import { ROUTES } from 'shared/constants/routes';
 import { UserProfile, UserRoles } from 'shared/types/user';
 
 @Component({
@@ -19,6 +20,7 @@ export class HeaderComponent {
   userProfile!: UserProfile | null;
   isOpen = false;
   isLogoutLoading = false;
+  ROUTES = ROUTES;
 
   @HostListener('document:click', ['$event'])
   clickout(event: MouseEvent) {

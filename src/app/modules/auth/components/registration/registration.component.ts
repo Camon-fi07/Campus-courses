@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'modules/auth/services/auth.service';
+import { ROUTES } from 'shared/constants/routes';
 import { convertTuiDate, matchPasswordsValidator, passwordValidator } from 'shared/utils';
 
 @Component({
@@ -16,6 +17,7 @@ export class RegistrationComponent {
   isLoading = false;
   dateNow = new Date();
   maxDate = new TuiDay(this.dateNow.getFullYear(), this.dateNow.getMonth(), this.dateNow.getDate());
+  ROUTES = ROUTES;
 
   constructor(
     private fb: FormBuilder,
@@ -45,7 +47,7 @@ export class RegistrationComponent {
         })
         .subscribe({
           next: () => {
-            this.router.navigate(['']);
+            this.router.navigate([ROUTES.HOME]);
           },
           error: (e) => {
             this.isLoading = false;
