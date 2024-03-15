@@ -3,6 +3,10 @@
     display: block;
   }
 
+  header {
+    padding-inline: 20px;
+  }
+
   nav {
     position: absolute;
     display: none;
@@ -55,7 +59,7 @@
   }
 
   & img {
-    height: 30px;
+    height: 40px;
   }
 }
 
