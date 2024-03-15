@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { GroupModule } from 'modules/group/group.module';
@@ -9,12 +10,13 @@ describe('GroupCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroupModule],
+      imports: [GroupModule, HttpClientModule],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {},
         },
+        HttpClient,
       ],
     }).compileComponents();
 
