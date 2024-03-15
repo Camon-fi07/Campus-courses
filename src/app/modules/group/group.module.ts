@@ -7,6 +7,7 @@ import {
   TuiDialogModule,
   TuiErrorModule,
   TuiLabelModule,
+  TuiLoaderModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
@@ -29,6 +30,7 @@ import { GroupService } from './services/group.service';
     TuiFieldErrorPipeModule,
     TuiDialogModule,
     TuiTextfieldControllerModule,
+    TuiLoaderModule,
   ],
   exports: [GroupComponent],
   providers: [GroupService],
