@@ -61,7 +61,7 @@ export class GroupCardComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         error: (e) => {
-          this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
+          this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
         },
       });
   }

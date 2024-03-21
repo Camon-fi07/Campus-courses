@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, take, tap } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
 import { CreateCampusGroupModel, EditCampusGroupModel, GroupDto } from 'shared/types/groups';
 
@@ -23,7 +23,7 @@ export class GroupService {
   addGroup(data: CreateCampusGroupModel) {
     return this.http.post(API_PATHS.GROUPS, data).pipe(
       tap(() => {
-        this.getGroupsList().subscribe();
+        this.getGroupsList().pipe(take(1)).subscribe();
       }),
     );
   }
@@ -31,7 +31,7 @@ export class GroupService {
   editGroup(id: string, data: EditCampusGroupModel) {
     return this.http.put(API_PATHS.CONCRETE_GROUP(id), data).pipe(
       tap(() => {
-        this.getGroupsList().subscribe();
+        this.getGroupsList().pipe(take(1)).subscribe();
       }),
     );
   }
@@ -39,7 +39,7 @@ export class GroupService {
   deleteGroup(id: string) {
     return this.http.delete(API_PATHS.CONCRETE_GROUP(id)).pipe(
       tap(() => {
-        this.getGroupsList().subscribe();
+        this.getGroupsList().pipe(take(1)).subscribe();
       }),
     );
   }
