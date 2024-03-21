@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GroupService } from 'modules/group/services/group.service';
+import { Subject, takeUntil } from 'rxjs';
 import { GroupDto } from 'shared/types/groups';
 
 @Component({
@@ -7,14 +8,22 @@ import { GroupDto } from 'shared/types/groups';
   templateUrl: './groups-list.component.html',
   styleUrl: './groups-list.component.scss',
 })
-export class GroupsListComponent {
+export class GroupsListComponent implements OnInit, OnDestroy {
   groups!: GroupDto[] | null;
+  private unsubscribe = new Subject<void>();
 
-  constructor(private groupService: GroupService) {
-    groupService.groups.subscribe({
+  constructor(private groupService: GroupService) {}
+
+  ngOnInit() {
+    this.groupService.groups.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.groups = res;
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

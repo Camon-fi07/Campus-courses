@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'modules/auth/services/auth.service';
+import { take } from 'rxjs';
 import { ROUTES } from 'shared/constants/routes';
 import { convertTuiDate, matchPasswordsValidator, passwordValidator } from 'shared/utils';
 
@@ -45,13 +46,12 @@ export class RegistrationComponent {
           ...this.formGroup.value,
           birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
         })
+        .pipe(take(1))
         .subscribe({
-          next: () => {
-            this.router.navigate([ROUTES.HOME]);
-          },
+          next: () => this.router.navigate([ROUTES.HOME]),
           error: (e) => {
             this.isLoading = false;
-            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
+            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
           },
         });
     }

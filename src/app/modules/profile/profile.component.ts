@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
 import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
-import { finalize } from 'rxjs';
+import { Subject, finalize, take, takeUntil } from 'rxjs';
 import { UserProfile } from 'shared/types/user';
 import { convertDateToTui, convertTuiDate } from 'shared/utils';
 
@@ -13,10 +13,11 @@ import { convertDateToTui, convertTuiDate } from 'shared/utils';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit, OnDestroy {
   formGroup!: FormGroup;
   userProfile!: UserProfile | null;
   private dateNow = new Date();
+  private unsubscribe = new Subject<void>();
   maxDate = new TuiDay(this.dateNow.getFullYear(), this.dateNow.getMonth(), this.dateNow.getDate());
   isLoading = false;
 
@@ -30,8 +31,10 @@ export class ProfileComponent {
       fullName: new FormControl(this.userProfile?.fullName, Validators.required),
       birthDate: new FormControl<TuiDay | null>(null, Validators.required),
     });
+  }
 
-    userService.userProfile.subscribe({
+  ngOnInit() {
+    this.userService.userProfile.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.isLoading = true;
         this.formGroup.controls['fullName'].setValue(res?.fullName);
@@ -40,6 +43,11 @@ export class ProfileComponent {
         this.userProfile = res;
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   handleSubmit() {
@@ -52,20 +60,17 @@ export class ProfileComponent {
           birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
         })
         .pipe(
+          take(1),
           finalize(() => {
             this.isLoading = false;
           }),
         )
         .subscribe({
           next: () => {
-            this.alerts
-              .open('Профиль успешно обновлён', {
-                status: 'success',
-              })
-              .subscribe();
+            this.alerts.open('Профиль успешно обновлён', { status: 'success' }).pipe(take(1)).subscribe();
           },
           error: (e) => {
-            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
+            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
           },
         });
     }
