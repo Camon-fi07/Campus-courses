@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
 import { EditUserProfileModel, UserProfile, UserRoles } from 'shared/types/user';
 import { UserService } from '../user/user.service';
@@ -45,8 +45,8 @@ export class ProfileService {
   }
 
   getUser() {
-    this.getProfile().subscribe();
-    this.getUserRoles().subscribe();
+    this.getProfile().pipe(take(1)).subscribe();
+    this.getUserRoles().pipe(take(1)).subscribe();
   }
 
   logout() {

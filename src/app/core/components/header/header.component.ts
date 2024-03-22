@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TuiAlertService, TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
 import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
-import { finalize } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
 import { ROUTES } from 'shared/constants/routes';
 import { UserProfile, UserRoles } from 'shared/types/user';
 
@@ -15,13 +15,14 @@ import { UserProfile, UserRoles } from 'shared/types/user';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   isAuth!: boolean;
   userRoles!: UserRoles | null;
   userProfile!: UserProfile | null;
   isOpen = false;
   isLogoutLoading = false;
   ROUTES = ROUTES;
+  private unsubscribe = new Subject<void>();
 
   @HostListener('document:click', ['$event'])
   clickout(event: MouseEvent) {
@@ -40,22 +41,29 @@ export class HeaderComponent {
     private alerts: TuiAlertService,
     private eRef: ElementRef,
     private router: Router,
-  ) {
-    this.userService.isAuth.subscribe({
+  ) {}
+
+  ngOnInit() {
+    this.userService.isAuth.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.isAuth = res;
       },
     });
-    this.userService.userRoles.subscribe({
+    this.userService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.userRoles = res;
       },
     });
-    this.userService.userProfile.subscribe({
+    this.userService.userProfile.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.userProfile = res;
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   handleLogout() {

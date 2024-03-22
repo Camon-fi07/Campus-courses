@@ -9,14 +9,7 @@ import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    TuiRootModule,
-    TuiDialogModule,
-    TuiAlertModule,
-    HeaderComponent,
-  ],
+  imports: [CommonModule, RouterOutlet, TuiRootModule, TuiDialogModule, TuiAlertModule, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [

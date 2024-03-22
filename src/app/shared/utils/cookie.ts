@@ -1,9 +1,4 @@
-export const setCookieValue = (
-  name: string,
-  value: string,
-  expiresDate?: Date,
-  samesite: boolean = false,
-) => {
+export const setCookieValue = (name: string, value: string, expiresDate?: Date, samesite: boolean = false) => {
   document.cookie = `${name}=${value}; ${samesite ? 'samesite=lax;' : ''} ${expiresDate ? `expires=${expiresDate.toUTCString()}` : ''}`;
 };
 
