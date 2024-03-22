@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CoursesModule } from 'modules/courses/courses.module';
 import { CourseStatuses, Semesters } from 'shared/types/courses';
-import { CoursesModule } from '../courses.module';
 import { CoursesListItemComponent } from './courses-list-item.component';
 
 describe('CoursesListItemComponent', () => {
