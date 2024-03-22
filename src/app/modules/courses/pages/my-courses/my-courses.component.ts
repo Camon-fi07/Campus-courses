@@ -10,6 +10,7 @@ import { CourseModel } from 'shared/types/courses';
 })
 export class MyCoursesComponent implements OnInit {
   courses!: CourseModel[];
+  isLoading = true;
 
   constructor(private coursesService: CoursesService) {}
 
@@ -19,6 +20,7 @@ export class MyCoursesComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (res) => {
+          this.isLoading = false;
           this.courses = res;
         },
       });

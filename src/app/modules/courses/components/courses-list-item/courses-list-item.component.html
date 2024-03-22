@@ -1,10 +1,12 @@
-<div>
-  <div>
+<div class="card">
+  <div class="title">
     <h3>{{ courseInfo.name }}</h3>
-    <span>{{ status }}</span>
+    <span [style]="{ color: statusColor }">{{ status }}</span>
   </div>
-  <span>Учебный год - {{ courseInfo.startYear }}</span>
-  <span>Семестр - {{ semester }}</span>
-  <span>Мест всего - {{ courseInfo.maximumStudentsCount }}</span>
-  <span>Мест свободно - {{ courseInfo.remainingSlotsCount }}</span>
+  <div class="content">
+    <span>Учебный год - {{ courseInfo.startYear }}</span>
+    <span>Семестр - {{ semester }}</span>
+    <span>Мест всего - {{ courseInfo.maximumStudentsCount }}</span>
+    <span>Мест свободно - {{ courseInfo.remainingSlotsCount }}</span>
+  </div>
 </div>

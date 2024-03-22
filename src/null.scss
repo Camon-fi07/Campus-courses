@@ -10,3 +10,10 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+a,
+a:hover,
+a:active {
+  color: unset;
+  text-decoration: none;
+}

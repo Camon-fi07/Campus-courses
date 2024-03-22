@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { RouterLink, RouterOutlet, provideRouter } from '@angular/router';
+import { TuiLoaderModule } from '@taiga-ui/core';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
 import { CoursesListItemComponent } from './components/courses-list-item/courses-list-item.component';
 import { CoursesComponent } from './courses.component';
@@ -10,7 +11,7 @@ import { CoursesService } from './services/courses.service';
 
 @NgModule({
   declarations: [CoursesComponent, CoursesListComponent, CoursesListItemComponent, MyCoursesComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, TuiLoaderModule, RouterLink],
   providers: [provideRouter(coursesRoutes), CoursesService],
   exports: [CoursesListComponent, CoursesComponent],
 })
