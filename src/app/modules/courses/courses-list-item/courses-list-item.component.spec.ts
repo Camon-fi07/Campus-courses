@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CourseStatuses, Semesters } from 'shared/types/courses';
 import { CoursesModule } from '../courses.module';
 import { CoursesListItemComponent } from './courses-list-item.component';
 
@@ -13,6 +14,15 @@ describe('CoursesListItemComponent', () => {
 
     fixture = TestBed.createComponent(CoursesListItemComponent);
     component = fixture.componentInstance;
+    component.courseInfo = {
+      id: '123',
+      maximumStudentsCount: 2,
+      name: 'test',
+      remainingSlotsCount: 5,
+      semester: Semesters.Autumn,
+      startYear: 5,
+      status: CourseStatuses.Created,
+    };
     fixture.detectChanges();
   });
 
