@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CoursesModule } from 'modules/courses/courses.module';
 import { CoursesListComponent } from './courses-list.component';
 
 describe('CoursesListComponent', () => {
@@ -8,7 +8,7 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CoursesModule],
+      imports: [CoursesListComponent, CommonModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CoursesListComponent);
