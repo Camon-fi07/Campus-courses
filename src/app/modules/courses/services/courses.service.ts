@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { CourseModel } from 'shared/types/courses';
+import { CourseDetails, CourseModel } from 'shared/types/courses';
 
 @Injectable()
 export class CoursesService {
@@ -13,5 +13,9 @@ export class CoursesService {
 
   getTeachingCourses() {
     return this.http.get<CourseModel[]>(API_PATHS.TEACHING_COURSES);
+  }
+
+  getCourseDetails(id: string) {
+    return this.http.get<CourseDetails>(API_PATHS.COURSES_DETAILS(id));
   }
 }

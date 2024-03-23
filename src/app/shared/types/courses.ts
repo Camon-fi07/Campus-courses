@@ -1,3 +1,5 @@
+import { StudentShort, TeacherShort } from './user';
+
 export enum Semesters {
   Autumn = 'Autumn',
   Spring = 'Spring',
@@ -18,4 +20,25 @@ export interface CourseModel {
   remainingSlotsCount: number;
   status: CourseStatuses;
   semester: Semesters;
+}
+
+export interface Notification {
+  text: string;
+  isImportant: boolean;
+}
+
+export interface CourseDetails {
+  id: string;
+  name: string;
+  startYear: number;
+  maximumStudentsCount: number;
+  studentsEnrolledCount: number;
+  studentsInQueueCount: number;
+  requirements: string;
+  annotations: string;
+  status: CourseStatuses;
+  semester: Semesters;
+  students: StudentShort[];
+  teachers: TeacherShort[];
+  notifications: Notification[];
 }
