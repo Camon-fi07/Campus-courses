@@ -22,7 +22,7 @@ export interface CourseModel {
   semester: Semesters;
 }
 
-export interface Notification {
+export interface NotificationModel {
   text: string;
   isImportant: boolean;
 }
@@ -40,5 +40,5 @@ export interface CourseDetails {
   semester: Semesters;
   students: StudentShort[];
   teachers: TeacherShort[];
-  notifications: Notification[];
+  notifications: NotificationModel[];
 }

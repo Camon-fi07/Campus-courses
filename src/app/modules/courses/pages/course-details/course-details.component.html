@@ -35,6 +35,10 @@
       <span>{{ courseDetails.studentsInQueueCount }}</span>
     </div>
   </div>
+  <course-short-info
+    [annotations]="courseDetails.annotations"
+    [requirements]="courseDetails.requirements"
+    [notifications]="courseDetails.notifications"></course-short-info>
 } @else {
   <tui-loader size="xl" class="loader"></tui-loader>
 }
