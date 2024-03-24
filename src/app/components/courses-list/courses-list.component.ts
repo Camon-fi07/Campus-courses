@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ROUTES } from 'shared/constants/routes';
-import { CourseModel, CourseStatuses } from 'shared/types/courses';
-import { translateCourseStatus, translateSemester } from 'shared/utils/translate';
+import { CourseModel } from 'shared/types/courses';
+import { translateCourseStatus, translateSemester, getStatusColor } from 'shared/utils';
 
 @Component({
   selector: 'courses-list',
@@ -18,19 +18,5 @@ export class CoursesListComponent {
 
   translateSemester = translateSemester;
   translateCourseStatus = translateCourseStatus;
-
-  getStatusColor(status: CourseStatuses) {
-    switch (status) {
-      case CourseStatuses.Created:
-        return 'var(--tui-neutral-fill)';
-      case CourseStatuses.Finished:
-        return 'var(--tui-negative)';
-      case CourseStatuses.OpenForAssigning:
-        return 'var(--tui-positive)';
-      case CourseStatuses.Started:
-        return 'var(--tui-link)';
-      default:
-        return 'unset';
-    }
-  }
+  getStatusColor = getStatusColor;
 }

@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
 import { TuiAlertService, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { UserService } from 'core/services/user/user.service';
@@ -12,7 +12,6 @@ import { ModalFormComponent } from '../modal-form/modal-form.component';
   selector: 'group-card',
   templateUrl: './group-card.component.html',
   styleUrl: './group-card.component.scss',
-  encapsulation: ViewEncapsulation.None,
 })
 export class GroupCardComponent implements OnInit, OnDestroy {
   @Input() group!: GroupDto;
