@@ -15,23 +15,26 @@ export class CourseDetailsComponent implements OnInit {
   translateCourseStatus = translateCourseStatus;
   translateSemester = translateSemester;
   getStatusColor = getStatusColor;
+  id!: string;
 
   constructor(
     private coursesService: CoursesService,
     private activatedRoute: ActivatedRoute,
   ) {}
 
-  ngOnInit() {
-    let id = '';
-    this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
-      id = params['id'];
-    });
-
+  fetchDetails() {
     this.coursesService
-      .getCourseDetails(id)
+      .getCourseDetails(this.id)
       .pipe(take(1))
       .subscribe((res) => {
         this.courseDetails = res;
       });
+  }
+
+  ngOnInit() {
+    this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
+      this.id = params['id'];
+    });
+    this.fetchDetails();
   }
 }

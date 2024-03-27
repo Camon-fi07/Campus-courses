@@ -1,11 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet, provideRouter } from '@angular/router';
-import { TuiButtonModule, TuiDataListModule, TuiLoaderModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiSelectModule, TuiTabsModule } from '@taiga-ui/kit';
+import {
+  TuiButtonModule,
+  TuiDataListModule,
+  TuiDialogModule,
+  TuiLabelModule,
+  TuiLoaderModule,
+  TuiSvgModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
+import { TuiSelectModule, TuiTabsModule, TuiTextareaModule, TuiToggleModule } from '@taiga-ui/kit';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
 import { CourseShortInfoComponent } from './components/course-short-info/course-short-info.component';
+import { CreatingNotificationComponent } from './components/creating-notification/creating-notification.component';
 import { CoursesComponent } from './courses.component';
 import { coursesRoutes } from './courses.routes';
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
@@ -20,6 +29,7 @@ import { CoursesService } from './services/courses.service';
     MyCoursesComponent,
     TeachingCoursesComponent,
     CourseDetailsComponent,
+    CreatingNotificationComponent,
   ],
   imports: [
     TuiTextfieldControllerModule,
@@ -34,6 +44,12 @@ import { CoursesService } from './services/courses.service';
     RouterLink,
     CoursesListComponent,
     TuiButtonModule,
+    TuiTextareaModule,
+    TuiDialogModule,
+    ReactiveFormsModule,
+    TuiToggleModule,
+    TuiLabelModule,
+    TuiSvgModule,
   ],
   providers: [provideRouter(coursesRoutes), CoursesService],
   exports: [CoursesComponent],

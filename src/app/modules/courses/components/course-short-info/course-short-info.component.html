@@ -1,4 +1,4 @@
-<section>
+<section class="wrapper">
   <tui-tabs [(activeItemIndex)]="valueIndex" class="tabs">
     <button tuiTab *ngFor="let tab of tabVariants">
       {{ tab.text }}
@@ -23,10 +23,15 @@
       <div [innerHTML]="safeRequirements"></div>
     }
     @case (ContentType.Notifications) {
+      <button (click)="handleCreateNotification()" size="m" tuiButton>Создать уведомление</button>
       <ul>
-        <li *ngFor="let item of notifications" [ngClass]="{ 'important-notification': item.isImportant }">
-          {{ item.text }}
-        </li>
+        @for (notification of notifications; track $index) {
+          <li class="notification">
+            <tui-svg class="icon" *ngIf="notification.isImportant" src="tuiIconAlertCircle"></tui-svg>
+            <span>{{ notification.text }}</span>
+          </li>
+          <hr />
+        }
       </ul>
     }
   }

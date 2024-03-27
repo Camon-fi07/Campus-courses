@@ -1,5 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .main-data {
   display: grid;
+  box-shadow: var(--tui-shadow);
   grid-template-columns: 1fr;
   border: 1px solid var(--tui-base-07);
 

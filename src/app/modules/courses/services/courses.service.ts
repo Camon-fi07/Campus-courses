@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { CourseDetails, CourseModel } from 'shared/types/courses';
+import { AddCampusCourseNotificationModel, CourseDetails, CourseModel } from 'shared/types/courses';
 
 @Injectable()
 export class CoursesService {
@@ -17,5 +17,9 @@ export class CoursesService {
 
   getCourseDetails(id: string) {
     return this.http.get<CourseDetails>(API_PATHS.COURSES_DETAILS(id));
+  }
+
+  createNotification(courseId: string, data: AddCampusCourseNotificationModel) {
+    return this.http.post<void>(API_PATHS.COURSES_NOTIFICATIONS(courseId), data);
   }
 }

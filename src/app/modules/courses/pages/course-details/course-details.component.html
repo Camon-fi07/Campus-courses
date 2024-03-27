@@ -1,44 +1,48 @@
-@if (courseDetails) {
-  <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
-  <div>
-    <span>Основные данные курса</span>
-    <button tuiButton size="m" appearance="edit">Редактировать</button>
-  </div>
-  <div class="main-data">
+<div class="wrapper">
+  @if (courseDetails) {
+    <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
     <div>
-      <p class="description">
-        <span>Cтатус курса</span>
-        <span [style]="{ color: getStatusColor(courseDetails.status) }">
-          {{ translateCourseStatus(courseDetails.status) }}
-        </span>
-      </p>
-      <button size="m" tuiButton appearance="edit">Изменить</button>
+      <span>Основные данные курса</span>
+      <button tuiButton size="m" appearance="edit">Редактировать</button>
     </div>
-    <div class="description">
-      <span>Учебный год</span>
-      <span>{{ courseDetails.startYear }}</span>
+    <div class="main-data">
+      <div>
+        <p class="description">
+          <span>Cтатус курса</span>
+          <span [style]="{ color: getStatusColor(courseDetails.status) }">
+            {{ translateCourseStatus(courseDetails.status) }}
+          </span>
+        </p>
+        <button size="m" tuiButton appearance="edit">Изменить</button>
+      </div>
+      <div class="description">
+        <span>Учебный год</span>
+        <span>{{ courseDetails.startYear }}</span>
+      </div>
+      <div class="description">
+        <span>Cеместр</span>
+        <span>{{ translateSemester(courseDetails.semester) }}</span>
+      </div>
+      <div class="description">
+        <span>Всего мест</span>
+        <span>{{ courseDetails.maximumStudentsCount }}</span>
+      </div>
+      <div class="description">
+        <span>Cтудентов зачислено</span>
+        <span>{{ courseDetails.studentsEnrolledCount }}</span>
+      </div>
+      <div class="description">
+        <span>Заявки на рассмотрение</span>
+        <span>{{ courseDetails.studentsInQueueCount }}</span>
+      </div>
     </div>
-    <div class="description">
-      <span>Cеместр</span>
-      <span>{{ translateSemester(courseDetails.semester) }}</span>
-    </div>
-    <div class="description">
-      <span>Всего мест</span>
-      <span>{{ courseDetails.maximumStudentsCount }}</span>
-    </div>
-    <div class="description">
-      <span>Cтудентов зачислено</span>
-      <span>{{ courseDetails.studentsEnrolledCount }}</span>
-    </div>
-    <div class="description">
-      <span>Заявки на рассмотрение</span>
-      <span>{{ courseDetails.studentsInQueueCount }}</span>
-    </div>
-  </div>
-  <course-short-info
-    [annotations]="courseDetails.annotations"
-    [requirements]="courseDetails.requirements"
-    [notifications]="courseDetails.notifications"></course-short-info>
-} @else {
-  <tui-loader size="xl" class="loader"></tui-loader>
-}
+    <course-short-info
+      [annotations]="courseDetails.annotations"
+      [requirements]="courseDetails.requirements"
+      [notifications]="courseDetails.notifications"
+      (refetchDetails)="fetchDetails()"
+      [id]="courseDetails.id"></course-short-info>
+  } @else {
+    <tui-loader size="xl" class="loader"></tui-loader>
+  }
+</div>

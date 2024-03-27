@@ -1,0 +1,7 @@
+<form class="form" [formGroup]="formGroup" (submit)="handleSubmit()">
+  <tui-textarea formControlName="text" [rows]="2">Текст уведомления</tui-textarea>
+  <label class="label" tuiLabel="Важное уведомление" for="isImportant">
+    <tui-toggle formControlName="isImportant"></tui-toggle>
+  </label>
+  <button [showLoader]="isLoading" tuiButton>Создать</button>
+</form>

@@ -27,6 +27,11 @@ export interface NotificationModel {
   isImportant: boolean;
 }
 
+export interface AddCampusCourseNotificationModel {
+  text: string;
+  isImportant: boolean;
+}
+
 export interface CourseDetails {
   id: string;
   name: string;
