@@ -28,4 +28,9 @@ describe('CreatingNotificationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('notification text required', () => {
+    component.formGroup.controls['text'].setValue('');
+    expect(component.formGroup.controls['text'].valid).toBeFalsy();
+  });
 });
