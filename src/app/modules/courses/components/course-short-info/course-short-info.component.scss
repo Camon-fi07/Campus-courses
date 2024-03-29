@@ -37,6 +37,11 @@ button {
   border-radius: 5px;
 }
 
+.content {
+  overflow: auto;
+  max-height: 350px;
+}
+
 @media (min-width: 768px) {
   .tabs {
     display: flex;
