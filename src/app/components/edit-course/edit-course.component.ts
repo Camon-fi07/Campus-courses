@@ -1,20 +1,28 @@
 import { CommonModule, NgForOfContext } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiDataListModule, TuiGroupModule, TuiLabelModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  TuiButtonModule,
+  TuiDataListModule,
+  TuiErrorModule,
+  TuiGroupModule,
+  TuiLabelModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
 import {
   TuiComboBoxModule,
   TuiDataListWrapperModule,
+  TuiFieldErrorPipeModule,
   TuiInputModule,
   TuiInputNumberModule,
   TuiInputYearModule,
   TuiRadioBlockModule,
 } from '@taiga-ui/kit';
 import { QuillModule } from 'ngx-quill';
-import { Observable, Subject, of, startWith, switchMap } from 'rxjs';
+import { Observable, Subject, of, startWith, switchMap, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { Semesters } from 'shared/types/courses';
+import { EditCourseDto, Semesters } from 'shared/types/courses';
 import { UserShortDto } from 'shared/types/user';
 import { translateSemester } from 'shared/utils';
 
@@ -36,6 +44,9 @@ import { translateSemester } from 'shared/utils';
     ReactiveFormsModule,
     FormsModule,
     TuiTextfieldControllerModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
+    TuiButtonModule,
   ],
   templateUrl: './edit-course.component.html',
   styleUrl: './edit-course.component.scss',
@@ -45,6 +56,8 @@ export class EditCourseComponent implements OnInit {
   formGroup!: FormGroup;
   readonly search = new Subject<string | null>();
   originUsers: UserShortDto[] = [];
+  @Input() initValues?: EditCourseDto;
+  @Output() emitSubmit = new EventEmitter<EditCourseDto>();
 
   users!: Observable<UserShortDto[] | null>;
 
@@ -60,28 +73,36 @@ export class EditCourseComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-  ) {
-    this.getUsers().subscribe({
-      next: (res) => {
-        this.originUsers = res.filter((_, index) => index < 20);
-        this.users = this.search.pipe(
-          switchMap((search) => of(this.filterUsers(search))),
-          startWith(this.originUsers),
-        );
-      },
-    });
-  }
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.formGroup = this.fb.group({
-      name: new FormControl(''),
-      startYear: new FormControl<number>(2024),
-      maximumStudentsCount: new FormControl<number>(10),
+      name: new FormControl('', Validators.required),
+      startYear: new FormControl<number>(2024, Validators.required),
+      maximumStudentsCount: new FormControl<number>(10, Validators.required),
       semester: new FormControl<Semesters>(Semesters.Autumn),
-      requirements: new FormControl(''),
-      annotations: new FormControl(''),
-      mainTeacherId: new FormControl<UserShortDto | null>(null),
+      requirements: new FormControl('', Validators.required),
+      annotations: new FormControl('', Validators.required),
+      mainTeacher: new FormControl<UserShortDto | null>(null, Validators.required),
     });
+
+    this.getUsers()
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.originUsers = res;
+          this.users = this.search.pipe(
+            switchMap((search) => of(this.filterUsers(search))),
+            startWith(this.originUsers.filter((_, index) => index < 50)),
+          );
+
+          if (this.initValues) {
+            const { mainTeacherId, ...initValuesWithoutTeacher } = this.initValues;
+            const mainTeacher = this.originUsers.find((user) => user.id === mainTeacherId) || null;
+            this.formGroup.setValue({ ...initValuesWithoutTeacher, mainTeacher });
+          }
+        },
+      });
   }
 
   handleSearchUserInput(value: string | null) {
@@ -89,10 +110,20 @@ export class EditCourseComponent implements OnInit {
   }
 
   filterUsers(searchQuery: string | null) {
-    return this.originUsers.filter((user) => user.fullName.toLowerCase().includes(searchQuery?.toLowerCase() || ''));
+    return this.originUsers.filter(
+      (user, index) => user.fullName.toLowerCase().includes(searchQuery?.toLowerCase() || '') && index < 50,
+    );
   }
 
   getUsers() {
     return this.http.get<UserShortDto[]>(API_PATHS.USERS);
+  }
+
+  handleSubmit() {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.valid) {
+      const mainTeacherId = this.formGroup.value.mainTeacher.id;
+      this.emitSubmit.emit({ ...this.formGroup.value, mainTeacherId });
+    }
   }
 }

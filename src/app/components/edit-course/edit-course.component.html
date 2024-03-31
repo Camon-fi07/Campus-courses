@@ -1,21 +1,24 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" (submit)="handleSubmit()">
   <label>
     <tui-input formControlName="name">
       Название курса
       <input tuiTextfield />
     </tui-input>
+    <tui-error formControlName="name" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
   <label>
     <tui-input-year formControlName="startYear">
       Год начала курса
       <input tuiTextfield />
     </tui-input-year>
+    <tui-error formControlName="startYear" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
   <label>
     <tui-input-number formControlName="maximumStudentsCount">
       Общее количество мест
       <input tuiTextfield inputmode="numeric" />
     </tui-input-number>
+    <tui-error formControlName="maximumStudentsCount" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
   <label for="semester" tuiLabel="Семестер">
     <div tuiGroup [collapsed]="true">
@@ -34,6 +37,7 @@
       formControlName="requirements"
       placeholder="Требования"
       [styles]="{ minHeight: '100px' }"></quill-editor>
+    <tui-error formControlName="requirements" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
   <label tuiLabel="Аннотации" for="annotations">
     <quill-editor
@@ -41,10 +45,11 @@
       placeholder="Аннотации"
       class="test"
       [styles]="{ minHeight: '100px' }"></quill-editor>
+    <tui-error formControlName="annotations" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
-  <label for="mainTeacherId" tuiLabel="Основной преподаватель курса">
+  <label for="mainTeacher" tuiLabel="Основной преподаватель курса">
     <tui-combo-box
-      formControlName="mainTeacherId"
+      formControlName="mainTeacher"
       (searchChange)="handleSearchUserInput($event)"
       [stringify]="convertUser"
       [tuiTextfieldLabelOutside]="true">
@@ -54,5 +59,7 @@
         [itemContent]="convertAsyncUser"
         [items]="users | async"></tui-data-list-wrapper>
     </tui-combo-box>
+    <tui-error formControlName="mainTeacher" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
+  <button tuiButton>Сохранить</button>
 </form>
