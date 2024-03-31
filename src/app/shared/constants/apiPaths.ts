@@ -11,4 +11,5 @@ export const API_PATHS = {
   ROLES: 'roles',
   GROUPS: 'groups',
   CONCRETE_GROUP: (id: string) => `groups/${id}`,
+  USERS: 'users',
 };

@@ -1,0 +1,65 @@
+<form [formGroup]="formGroup" (submit)="handleSubmit()">
+  <label>
+    <tui-input formControlName="name">
+      Название курса
+      <input tuiTextfield />
+    </tui-input>
+    <tui-error formControlName="name" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <label>
+    <tui-input-year formControlName="startYear">
+      Год начала курса
+      <input tuiTextfield />
+    </tui-input-year>
+    <tui-error formControlName="startYear" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <label>
+    <tui-input-number formControlName="maximumStudentsCount">
+      Общее количество мест
+      <input tuiTextfield inputmode="numeric" />
+    </tui-input-number>
+    <tui-error formControlName="maximumStudentsCount" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <label for="semester" tuiLabel="Семестер">
+    <div tuiGroup [collapsed]="true">
+      <tui-radio-block
+        *ngFor="let semester of semesters | keyvalue"
+        contentAlign="right"
+        [hideRadio]="true"
+        formControlName="semester"
+        [item]="semester.key">
+        {{ semester.value }}
+      </tui-radio-block>
+    </div>
+  </label>
+  <label tuiLabel="Требования" for="requirements">
+    <quill-editor
+      formControlName="requirements"
+      placeholder="Требования"
+      [styles]="{ minHeight: '100px' }"></quill-editor>
+    <tui-error formControlName="requirements" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <label tuiLabel="Аннотации" for="annotations">
+    <quill-editor
+      formControlName="annotations"
+      placeholder="Аннотации"
+      class="test"
+      [styles]="{ minHeight: '100px' }"></quill-editor>
+    <tui-error formControlName="annotations" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <label for="mainTeacher" tuiLabel="Основной преподаватель курса">
+    <tui-combo-box
+      formControlName="mainTeacher"
+      (searchChange)="handleSearchUserInput($event)"
+      [stringify]="convertUser"
+      [tuiTextfieldLabelOutside]="true">
+      <input tuiTextfield />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [itemContent]="convertAsyncUser"
+        [items]="users | async"></tui-data-list-wrapper>
+    </tui-combo-box>
+    <tui-error formControlName="mainTeacher" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <button tuiButton>Сохранить</button>
+</form>

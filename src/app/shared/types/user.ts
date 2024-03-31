@@ -33,6 +33,11 @@ export interface UserRoles {
   isAdmin: boolean;
 }
 
+export interface UserShortDto {
+  fullName: string;
+  id: string;
+}
+
 export interface UserProfile {
   fullName: string;
   email: string;
