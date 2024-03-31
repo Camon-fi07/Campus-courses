@@ -1,6 +1,7 @@
 <div>
   <form [formGroup]="formGroup" class="form" (ngSubmit)="handleSubmit()">
     <h3 class="tui-form__header tui-form__header_margin-top_none">Профиль</h3>
+    <edit-course></edit-course>
     <label tuiLabel="ФИО">
       <tui-input formControlName="fullName" [tuiTextfieldLabelOutside]="true" tuiTextfieldSize="m">
         <input tuiTextfield />

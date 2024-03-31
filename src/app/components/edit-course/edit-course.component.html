@@ -1,0 +1,50 @@
+<form [formGroup]="formGroup">
+  <label>
+    <tui-input>
+      Название курса
+      <input tuiTextfield />
+    </tui-input>
+  </label>
+  <label>
+    <tui-input-year>
+      Год начала курса
+      <input tuiTextfield />
+    </tui-input-year>
+  </label>
+  <label>
+    <tui-input-number>
+      Общее количество мест
+      <input tuiTextfield inputmode="numeric" />
+    </tui-input-number>
+  </label>
+  <label for="semester" tuiLabel="Семестер">
+    <div tuiGroup [collapsed]="true">
+      <tui-radio-block
+        *ngFor="let semester of semesters | keyvalue"
+        contentAlign="right"
+        [hideRadio]="true"
+        [item]="semester.key">
+        {{ semester.value }}
+      </tui-radio-block>
+    </div>
+  </label>
+  <label tuiLabel="Требования" for="requirements">
+    <quill-editor placeholder="Требования" [styles]="{ minHeight: '100px' }"></quill-editor>
+  </label>
+  <label tuiLabel="Аннотации" for="annotations">
+    <quill-editor placeholder="Аннотации" class="test" [styles]="{ minHeight: '100px' }"></quill-editor>
+  </label>
+  <label for="mainTeacherId" tuiLabel="Основной преподаватель курса">
+    <tui-combo-box
+      formControlName="mainTeacherId"
+      (searchChange)="handleSearchUserInput($event)"
+      [stringify]="convertUser"
+      [tuiTextfieldLabelOutside]="true">
+      <input tuiTextfield />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [itemContent]="convertAsyncUser"
+        [items]="users | async"></tui-data-list-wrapper>
+    </tui-combo-box>
+  </label>
+</form>
