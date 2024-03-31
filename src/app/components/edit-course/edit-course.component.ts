@@ -1,6 +1,6 @@
 import { CommonModule, NgForOfContext } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiDataListModule, TuiGroupModule, TuiLabelModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import {
@@ -39,6 +39,7 @@ import { translateSemester } from 'shared/utils';
   ],
   templateUrl: './edit-course.component.html',
   styleUrl: './edit-course.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditCourseComponent implements OnInit {
   formGroup!: FormGroup;
@@ -55,22 +56,23 @@ export class EditCourseComponent implements OnInit {
   convertUser = (user: UserShortDto) => user?.fullName || '';
 
   convertAsyncUser = (data: NgForOfContext<UserShortDto>) => this.convertUser(data.$implicit);
+
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.getUsers().subscribe({
       next: (res) => {
-        this.originUsers = res;
+        this.originUsers = res.filter((_, index) => index < 20);
         this.users = this.search.pipe(
           switchMap((search) => of(this.filterUsers(search))),
           startWith(this.originUsers),
         );
       },
     });
+  }
 
+  ngOnInit(): void {
     this.formGroup = this.fb.group({
       name: new FormControl(''),
       startYear: new FormControl<number>(2024),

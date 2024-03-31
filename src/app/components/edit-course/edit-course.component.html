@@ -1,18 +1,18 @@
 <form [formGroup]="formGroup">
   <label>
-    <tui-input>
+    <tui-input formControlName="name">
       Название курса
       <input tuiTextfield />
     </tui-input>
   </label>
   <label>
-    <tui-input-year>
+    <tui-input-year formControlName="startYear">
       Год начала курса
       <input tuiTextfield />
     </tui-input-year>
   </label>
   <label>
-    <tui-input-number>
+    <tui-input-number formControlName="maximumStudentsCount">
       Общее количество мест
       <input tuiTextfield inputmode="numeric" />
     </tui-input-number>
@@ -23,16 +23,24 @@
         *ngFor="let semester of semesters | keyvalue"
         contentAlign="right"
         [hideRadio]="true"
+        formControlName="semester"
         [item]="semester.key">
         {{ semester.value }}
       </tui-radio-block>
     </div>
   </label>
   <label tuiLabel="Требования" for="requirements">
-    <quill-editor placeholder="Требования" [styles]="{ minHeight: '100px' }"></quill-editor>
+    <quill-editor
+      formControlName="requirements"
+      placeholder="Требования"
+      [styles]="{ minHeight: '100px' }"></quill-editor>
   </label>
   <label tuiLabel="Аннотации" for="annotations">
-    <quill-editor placeholder="Аннотации" class="test" [styles]="{ minHeight: '100px' }"></quill-editor>
+    <quill-editor
+      formControlName="annotations"
+      placeholder="Аннотации"
+      class="test"
+      [styles]="{ minHeight: '100px' }"></quill-editor>
   </label>
   <label for="mainTeacherId" tuiLabel="Основной преподаватель курса">
     <tui-combo-box

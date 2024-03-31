@@ -9,7 +9,6 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiFieldErrorPipeModule, TuiInputDateModule, TuiInputModule } from '@taiga-ui/kit';
-import { EditCourseComponent } from 'components/edit-course/edit-course.component';
 import { ProfileComponent } from './profile.component';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { ProfileComponent } from './profile.component';
     TuiInputDateModule,
     TuiAlertModule,
     TuiLabelModule,
-    EditCourseComponent,
   ],
   exports: [ProfileComponent],
 })
