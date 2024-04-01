@@ -25,9 +25,8 @@ import { API_PATHS } from 'shared/constants/apiPaths';
 import { EditCourseDto, Semesters } from 'shared/types/courses';
 import { UserShortDto } from 'shared/types/user';
 import { translateSemester } from 'shared/utils';
-
 @Component({
-  selector: 'edit-course',
+  selector: 'course-details-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -48,11 +47,11 @@ import { translateSemester } from 'shared/utils';
     TuiFieldErrorPipeModule,
     TuiButtonModule,
   ],
-  templateUrl: './edit-course.component.html',
-  styleUrl: './edit-course.component.scss',
+  templateUrl: './course-details-form.component.html',
+  styleUrl: './course-details-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditCourseComponent implements OnInit {
+export class CourseDetailsFormComponent implements OnInit {
   formGroup!: FormGroup;
   readonly search = new Subject<string | null>();
   originUsers: UserShortDto[] = [];

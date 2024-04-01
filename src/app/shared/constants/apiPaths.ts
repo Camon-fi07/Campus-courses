@@ -6,6 +6,7 @@ export const API_PATHS = {
   PROFILE: 'profile',
   MY_COURSES: 'courses/my',
   COURSES_DETAILS: (id: string) => `courses/${id}/details`,
+  EDIT_COURSE: (id: string) => `courses/${id}`,
   COURSES_NOTIFICATIONS: (id: string) => `courses/${id}/notifications`,
   TEACHING_COURSES: 'courses/teaching',
   ROLES: 'roles',
