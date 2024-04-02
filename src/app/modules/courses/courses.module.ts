@@ -6,17 +6,26 @@ import {
   TuiButtonModule,
   TuiDataListModule,
   TuiDialogModule,
+  TuiErrorModule,
   TuiLabelModule,
   TuiLoaderModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import { TuiSelectModule, TuiTabsModule, TuiTextareaModule, TuiToggleModule } from '@taiga-ui/kit';
+import {
+  TuiSelectModule,
+  TuiTabsModule,
+  TuiTextareaModule,
+  TuiToggleModule,
+  TuiFieldErrorPipeModule,
+} from '@taiga-ui/kit';
 import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
+import { QuillModule } from 'ngx-quill';
 import { CourseShortInfoComponent } from './components/course-short-info/course-short-info.component';
 import { CreatingNotificationComponent } from './components/creating-notification/creating-notification.component';
 import { EditingCourseComponent } from './components/editing-course/editing-course.component';
+import { RequireAndAnnotationEditComponent } from './components/require-and-annotation-edit/require-and-annotation-edit.component';
 import { CoursesComponent } from './courses.component';
 import { coursesRoutes } from './courses.routes';
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
@@ -33,6 +42,7 @@ import { CoursesService } from './services/courses.service';
     CourseDetailsComponent,
     CreatingNotificationComponent,
     EditingCourseComponent,
+    RequireAndAnnotationEditComponent,
   ],
   imports: [
     TuiTextfieldControllerModule,
@@ -54,6 +64,9 @@ import { CoursesService } from './services/courses.service';
     TuiLabelModule,
     TuiSvgModule,
     CourseDetailsFormComponent,
+    QuillModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
   ],
   providers: [provideRouter(coursesRoutes), CoursesService],
   exports: [CoursesComponent],

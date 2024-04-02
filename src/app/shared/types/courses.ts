@@ -22,6 +22,11 @@ export interface EditCourseDto {
   mainTeacherId: string;
 }
 
+export interface EditCampusCourseRequirementsAndAnnotationsModel {
+  requirements: string;
+  annotations: string;
+}
+
 export interface CourseModel {
   id: string;
   name: string;

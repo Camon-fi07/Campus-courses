@@ -1,7 +1,7 @@
 <div class="wrapper">
-  @if (courseDetails) {
+  @if (!isLoading) {
     <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
-    <div>
+    <div class="title">
       <span>Основные данные курса</span>
       <button tuiButton size="m" appearance="edit" (click)="handleEditCourse()">Редактировать</button>
     </div>

@@ -4,6 +4,13 @@
   gap: 20px;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: -10px;
+}
+
 .main-data {
   display: grid;
   box-shadow: var(--tui-shadow);

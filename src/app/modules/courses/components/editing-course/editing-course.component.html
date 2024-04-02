@@ -1,5 +1,12 @@
-<div>
-  <h2>Редактирование курса</h2>
+<div class="wrapper">
+  <h2 class="tui-text_h4">Редактирование курса</h2>
   <hr />
-  <course-details-form [initValues]="initValues" (emitSubmit)="handleSubmit($event)"></course-details-form>
+  @if (userRole === CourseUserRoles.Admin) {
+    <course-details-form [initValues]="initValues" (emitSubmit)="handleEditCourse($event)"></course-details-form>
+  } @else if (userRole === CourseUserRoles.Teacher || userRole === CourseUserRoles.MainTeacher) {
+    <require-and-annotation-edit
+      [requirement]="initValues.requirements"
+      [annotation]="initValues.annotations"
+      (emitSubmit)="handleEditRequirementAndAnnotation($event)"></require-and-annotation-edit>
+  }
 </div>

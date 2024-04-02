@@ -2,9 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { CoursesService } from 'modules/courses/services/courses.service';
+import { CourseUserRoles } from 'modules/courses/types/CourseUserRoles';
 import { EditCourseContextData } from 'modules/courses/types/EditCourseContextData';
 import { take } from 'rxjs';
-import { EditCourseDto } from 'shared/types/courses';
+import { EditCampusCourseRequirementsAndAnnotationsModel, EditCourseDto } from 'shared/types/courses';
 
 @Component({
   selector: 'editing-course',
@@ -13,6 +14,8 @@ import { EditCourseDto } from 'shared/types/courses';
 })
 export class EditingCourseComponent {
   initValues!: EditCourseDto;
+  CourseUserRoles = CourseUserRoles;
+  userRole: CourseUserRoles | null = null;
   courseId!: string;
 
   constructor(
@@ -20,12 +23,13 @@ export class EditingCourseComponent {
     private readonly context: TuiDialogContext<void, EditCourseContextData>,
     private readonly coursesService: CoursesService,
   ) {
-    const { id, ...initValues } = context.data;
+    const { id, userRole, ...initValues } = context.data;
     this.initValues = initValues;
     this.courseId = id;
+    this.userRole = userRole;
   }
 
-  handleSubmit(data: EditCourseDto) {
+  handleEditCourse(data: EditCourseDto) {
     this.coursesService
       .editCourse(this.courseId, data)
       .pipe(take(1))
@@ -34,5 +38,9 @@ export class EditingCourseComponent {
           this.context.completeWith();
         },
       });
+  }
+
+  handleEditRequirementAndAnnotation(data: EditCampusCourseRequirementsAndAnnotationsModel) {
+    console.log(data);
   }
 }
