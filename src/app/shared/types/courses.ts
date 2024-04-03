@@ -62,3 +62,7 @@ export interface CourseDetails {
   teachers: TeacherShort[];
   notifications: NotificationModel[];
 }
+
+export interface EditCourseStatusModel {
+  status: CourseStatuses;
+}

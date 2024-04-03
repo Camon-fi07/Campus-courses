@@ -13,7 +13,7 @@
             {{ translateCourseStatus(courseDetails.status) }}
           </span>
         </p>
-        <button size="m" tuiButton appearance="edit">Изменить</button>
+        <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
       </div>
       <div class="description">
         <span>Учебный год</span>

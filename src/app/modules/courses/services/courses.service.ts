@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { AddCampusCourseNotificationModel, CourseDetails, CourseModel, EditCourseDto } from 'shared/types/courses';
+import {
+  AddCampusCourseNotificationModel,
+  CourseDetails,
+  CourseModel,
+  EditCourseDto,
+  EditCourseStatusModel,
+} from 'shared/types/courses';
 
 @Injectable()
 export class CoursesService {
@@ -25,5 +31,9 @@ export class CoursesService {
 
   editCourse(courseId: string, data: EditCourseDto) {
     return this.http.put(API_PATHS.EDIT_COURSE(courseId), data);
+  }
+
+  editCourseStatus(courseId: string, data: EditCourseStatusModel) {
+    return this.http.post(API_PATHS.EDIT_COURSE_STATUS(courseId), data);
   }
 }

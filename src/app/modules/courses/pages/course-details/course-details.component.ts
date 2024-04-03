@@ -4,10 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { UserService } from 'core/services/user/user.service';
+import { EditStatusComponent } from 'modules/courses/components/edit-status/edit-status.component';
 import { EditingCourseComponent } from 'modules/courses/components/editing-course/editing-course.component';
 import { CoursesService } from 'modules/courses/services/courses.service';
 import { CourseUserRoles } from 'modules/courses/types/CourseUserRoles';
 import { EditCourseContextData } from 'modules/courses/types/EditCourseContextData';
+import { EditCourseStatusContextData } from 'modules/courses/types/EditCourseStatusContextData';
 import { Observable, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
 import { CourseDetails } from 'shared/types/courses';
@@ -27,7 +29,8 @@ export class CourseDetailsComponent implements OnInit {
   getStatusColor = getStatusColor;
   id!: string;
   courseUserRole: CourseUserRoles | null = null;
-  private dialog!: Observable<EditCourseContextData>;
+  private editCourseDialog!: Observable<EditCourseContextData>;
+  private editCourseStatusDialog!: Observable<EditCourseStatusContextData>;
 
   constructor(
     private coursesService: CoursesService,
@@ -45,8 +48,14 @@ export class CourseDetailsComponent implements OnInit {
       .pipe(take(1))
       .subscribe(async (res) => {
         this.courseDetails = res;
+        this.editCourseStatusDialog = this.dialogs.open<EditCourseStatusContextData>(
+          new PolymorpheusComponent(EditStatusComponent, this.injector),
+          {
+            data: { id: this.courseDetails.id, status: this.courseDetails.status },
+          },
+        );
         this.courseUserRole = this.getUserRole();
-        this.dialog = this.dialogs.open<EditCourseContextData>(
+        this.editCourseDialog = this.dialogs.open<EditCourseContextData>(
           new PolymorpheusComponent(EditingCourseComponent, this.injector),
           {
             data: await this.convertCourseDetails(),
@@ -61,7 +70,6 @@ export class CourseDetailsComponent implements OnInit {
       this.id = params['id'];
     });
     this.fetchDetails();
-    console.log('cancel');
   }
 
   getUserRole() {
@@ -115,7 +123,13 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   handleEditCourse() {
-    this.dialog.pipe(take(1)).subscribe({
+    this.editCourseDialog.pipe(take(1)).subscribe({
+      next: () => this.fetchDetails(),
+    });
+  }
+
+  handleEditStatusCourse() {
+    this.editCourseStatusDialog.pipe(take(1)).subscribe({
       next: () => this.fetchDetails(),
     });
   }

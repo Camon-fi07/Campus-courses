@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <h2 class="tui-text_h4">Изменение статуса курса</h2>
+  <hr />
+  <form [formGroup]="formGroup" (submit)="handleSubmit()">
+    <tui-radio-list formControlName="status" [items]="variants" orientation="horizontal" [itemContent]="itemContent">
+      <ng-template #itemContent tuiRadioList let-status>
+        {{ translateCourseStatus(status) }}
+      </ng-template>
+    </tui-radio-list>
+
+    <button [showLoader]="isLoading" tuiButton>Сохранить</button>
+  </form>
+</div>

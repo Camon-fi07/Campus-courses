@@ -34,9 +34,7 @@ export class EditingCourseComponent {
       .editCourse(this.courseId, data)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.context.completeWith();
-        },
+        next: () => this.context.completeWith(),
       });
   }
 
