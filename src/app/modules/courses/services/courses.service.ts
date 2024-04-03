@@ -36,4 +36,8 @@ export class CoursesService {
   editCourseStatus(courseId: string, data: EditCourseStatusModel) {
     return this.http.post(API_PATHS.EDIT_COURSE_STATUS(courseId), data);
   }
+
+  signUpForCourse(courseId: string) {
+    return this.http.post(API_PATHS.COURSES_SIGNUP(courseId), {});
+  }
 }

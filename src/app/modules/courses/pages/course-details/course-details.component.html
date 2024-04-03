@@ -3,7 +3,9 @@
     <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
     <div class="title">
       <span>Основные данные курса</span>
-      <button tuiButton size="m" appearance="edit" (click)="handleEditCourse()">Редактировать</button>
+      <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+        Редактировать
+      </button>
     </div>
     <div class="main-data">
       <div>
@@ -13,7 +15,11 @@
             {{ translateCourseStatus(courseDetails.status) }}
           </span>
         </p>
-        <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
+        @if (isUserCanEdit) {
+          <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
+        } @else if (courseDetails.status === CourseStatuses.OpenForAssigning && !isUserSignUp) {
+          <button size="m" tuiButton (click)="handleSignUpForCourse()">Записаться на курс</button>
+        }
       </div>
       <div class="description">
         <span>Учебный год</span>

@@ -12,7 +12,7 @@ import { EditCourseContextData } from 'modules/courses/types/EditCourseContextDa
 import { EditCourseStatusContextData } from 'modules/courses/types/EditCourseStatusContextData';
 import { Observable, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { CourseDetails } from 'shared/types/courses';
+import { CourseDetails, CourseStatuses } from 'shared/types/courses';
 import { UserShortDto } from 'shared/types/user';
 import { translateSemester, translateCourseStatus, getStatusColor } from 'shared/utils';
 
@@ -28,7 +28,11 @@ export class CourseDetailsComponent implements OnInit {
   translateSemester = translateSemester;
   getStatusColor = getStatusColor;
   id!: string;
+  CourseUserRoles = CourseUserRoles;
+  CourseStatuses = CourseStatuses;
   courseUserRole: CourseUserRoles | null = null;
+  isUserCanEdit = false;
+  isUserSignUp = true;
   private editCourseDialog!: Observable<EditCourseContextData>;
   private editCourseStatusDialog!: Observable<EditCourseStatusContextData>;
 
@@ -48,28 +52,43 @@ export class CourseDetailsComponent implements OnInit {
       .pipe(take(1))
       .subscribe(async (res) => {
         this.courseDetails = res;
-        this.editCourseStatusDialog = this.dialogs.open<EditCourseStatusContextData>(
-          new PolymorpheusComponent(EditStatusComponent, this.injector),
-          {
-            data: { id: this.courseDetails.id, status: this.courseDetails.status },
-          },
-        );
         this.courseUserRole = this.getUserRole();
-        this.editCourseDialog = this.dialogs.open<EditCourseContextData>(
-          new PolymorpheusComponent(EditingCourseComponent, this.injector),
-          {
-            data: await this.convertCourseDetails(),
-          },
-        );
+        this.isUserCanEdit = !!this.courseUserRole && this.courseUserRole !== CourseUserRoles.Student;
+        if (this.isUserCanEdit) {
+          this.editCourseStatusDialog = this.dialogs.open<EditCourseStatusContextData>(
+            new PolymorpheusComponent(EditStatusComponent, this.injector),
+            {
+              data: { id: this.courseDetails.id, status: this.courseDetails.status },
+            },
+          );
+
+          this.editCourseDialog = this.dialogs.open<EditCourseContextData>(
+            new PolymorpheusComponent(EditingCourseComponent, this.injector),
+            {
+              data: await this.convertCourseDetails(),
+            },
+          );
+        } else this.checkIsUserSignUp();
         this.isLoading = false;
       });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
       this.id = params['id'];
     });
     this.fetchDetails();
+  }
+
+  checkIsUserSignUp() {
+    this.coursesService
+      .getMyCourses()
+      .pipe(take(1))
+      .subscribe({
+        next: (courses) => {
+          this.isUserSignUp = courses.some((course) => course.id === this.courseDetails.id);
+        },
+      });
   }
 
   getUserRole() {
@@ -132,5 +151,14 @@ export class CourseDetailsComponent implements OnInit {
     this.editCourseStatusDialog.pipe(take(1)).subscribe({
       next: () => this.fetchDetails(),
     });
+  }
+
+  handleSignUpForCourse() {
+    this.coursesService
+      .signUpForCourse(this.courseDetails.id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.fetchDetails(),
+      });
   }
 }
