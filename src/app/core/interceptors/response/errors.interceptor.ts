@@ -8,8 +8,9 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     tap({
-      error: (err: HttpErrorResponse) =>
-        alerts.open(err.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe(),
+      error: (err: HttpErrorResponse) => {
+        alerts.open(err.error.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
+      },
     }),
   );
 };
