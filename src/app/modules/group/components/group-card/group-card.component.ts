@@ -1,5 +1,5 @@
 import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
-import { TuiAlertService, TuiDialogService } from '@taiga-ui/core';
+import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { UserService } from 'core/services/user/user.service';
 import { GroupService } from 'modules/group/services/group.service';
@@ -23,7 +23,6 @@ export class GroupCardComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private groupService: GroupService,
-    private alerts: TuiAlertService,
     private readonly dialogs: TuiDialogService,
     private readonly injector: Injector,
   ) {}
@@ -58,11 +57,7 @@ export class GroupCardComponent implements OnInit, OnDestroy {
         }),
         take(1),
       )
-      .subscribe({
-        error: (e) => {
-          this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
-        },
-      });
+      .subscribe();
   }
 
   handleEdit() {

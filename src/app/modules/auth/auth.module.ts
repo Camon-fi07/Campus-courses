@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
-  TuiAlertModule,
   TuiButtonModule,
   TuiErrorModule,
   TuiLabelModule,
@@ -29,7 +28,6 @@ import { AuthService } from './services/auth.service';
     TuiLabelModule,
     TuiTextfieldControllerModule,
     TuiInputDateModule,
-    TuiAlertModule,
   ],
   exports: [RegistrationComponent, LoginComponent],
   providers: [AuthService],

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { TuiAlertService, TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
 import { ProfileService } from 'core/services/profile/profile.service';
 import { UserService } from 'core/services/user/user.service';
 import { Subject, finalize, takeUntil } from 'rxjs';
@@ -38,7 +38,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private profileService: ProfileService,
-    private alerts: TuiAlertService,
     private eRef: ElementRef,
     private router: Router,
   ) {}
@@ -79,9 +78,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         next: () => {
           this.toggleIsOpen();
           this.router.navigate([ROUTES.LOGIN]);
-        },
-        error: (e) => {
-          this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).subscribe();
         },
       });
   }
