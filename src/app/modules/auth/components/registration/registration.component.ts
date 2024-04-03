@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TuiDay } from '@taiga-ui/cdk';
-import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'modules/auth/services/auth.service';
 import { take } from 'rxjs';
 import { ROUTES } from 'shared/constants/routes';
@@ -24,7 +23,6 @@ export class RegistrationComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private alerts: TuiAlertService,
   ) {
     this.formGroup = this.fb.group({
       fullName: new FormControl('', Validators.required),
@@ -49,9 +47,8 @@ export class RegistrationComponent {
         .pipe(take(1))
         .subscribe({
           next: () => this.router.navigate([ROUTES.HOME]),
-          error: (e) => {
+          error: () => {
             this.isLoading = false;
-            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
           },
         });
     }

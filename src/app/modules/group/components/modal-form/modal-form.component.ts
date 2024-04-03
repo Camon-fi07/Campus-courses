@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TuiAlertService, TuiDialogContext } from '@taiga-ui/core';
+import { TuiDialogContext } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { GroupService } from 'modules/group/services/group.service';
 import { ModalFormContextData, OPERATION_TYPE } from 'modules/group/types/operationType';
@@ -21,7 +21,6 @@ export class ModalFormComponent {
     @Inject(POLYMORPHEUS_CONTEXT)
     private readonly context: TuiDialogContext<void, ModalFormContextData>,
     private groupService: GroupService,
-    private alerts: TuiAlertService,
   ) {
     const defaultName = context.data.type === OPERATION_TYPE.EDIT_GROUP ? context.data.defaultName : null;
     this.formGroup = fb.group({ name: new FormControl(defaultName, Validators.required) });
@@ -39,9 +38,8 @@ export class ModalFormComponent {
           .pipe(take(1))
           .subscribe({
             next: () => this.context.completeWith(),
-            error: (e) => {
+            error: () => {
               this.isLoading = false;
-              this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
             },
           });
       } else {
@@ -50,9 +48,8 @@ export class ModalFormComponent {
           .pipe(take(1))
           .subscribe({
             next: () => this.context.completeWith(),
-            error: (e) => {
+            error: () => {
               this.isLoading = false;
-              this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
             },
           });
       }

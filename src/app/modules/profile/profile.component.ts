@@ -69,9 +69,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
           next: () => {
             this.alerts.open('Профиль успешно обновлён', { status: 'success' }).pipe(take(1)).subscribe();
           },
-          error: (e) => {
-            this.alerts.open(e.message, { label: 'Произошла ошибка', status: 'error' }).pipe(take(1)).subscribe();
-          },
         });
     }
   }
