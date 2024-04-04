@@ -19,6 +19,7 @@ import {
   TuiToggleModule,
   TuiFieldErrorPipeModule,
   TuiRadioListModule,
+  TuiBadgeModule,
 } from '@taiga-ui/kit';
 import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
@@ -28,6 +29,7 @@ import { CreatingNotificationComponent } from './components/creating-notificatio
 import { EditStatusComponent } from './components/edit-status/edit-status.component';
 import { EditingCourseComponent } from './components/editing-course/editing-course.component';
 import { RequireAndAnnotationEditComponent } from './components/require-and-annotation-edit/require-and-annotation-edit.component';
+import { UsersComponent } from './components/users/users.component';
 import { CoursesComponent } from './courses.component';
 import { coursesRoutes } from './courses.routes';
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
@@ -46,6 +48,7 @@ import { CoursesService } from './services/courses.service';
     EditingCourseComponent,
     EditStatusComponent,
     RequireAndAnnotationEditComponent,
+    UsersComponent,
   ],
   imports: [
     TuiTextfieldControllerModule,
@@ -71,6 +74,7 @@ import { CoursesService } from './services/courses.service';
     QuillModule,
     TuiErrorModule,
     TuiFieldErrorPipeModule,
+    TuiBadgeModule,
   ],
   providers: [provideRouter(coursesRoutes), CoursesService],
   exports: [CoursesComponent],

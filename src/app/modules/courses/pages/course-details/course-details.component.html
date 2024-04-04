@@ -49,6 +49,11 @@
       (refetchDetails)="fetchDetails()"
       [isUserCanEdit]="isUserCanEdit"
       [id]="courseDetails.id"></course-short-info>
+    <users
+      [id]="id"
+      [isUserCanEdit]="isUserCanEdit"
+      [teachers]="courseDetails.teachers"
+      [students]="courseDetails.students"></users>
   } @else {
     <tui-loader size="xl" class="loader"></tui-loader>
   }
