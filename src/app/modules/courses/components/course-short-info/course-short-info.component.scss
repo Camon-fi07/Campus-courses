@@ -9,19 +9,6 @@
   overflow: hidden;
 }
 
-.tabs {
-  display: none;
-  justify-content: space-around;
-}
-
-button {
-  width: fit-content;
-}
-
-button[tuiOption] {
-  width: 100%;
-}
-
 .notification {
   display: flex;
   align-items: center;
@@ -48,14 +35,4 @@ button[tuiOption] {
   max-height: 350px;
   word-break: break-all;
   overflow-wrap: break-word;
-}
-
-@media (min-width: 768px) {
-  .tabs {
-    display: flex;
-  }
-
-  .select {
-    display: none;
-  }
 }

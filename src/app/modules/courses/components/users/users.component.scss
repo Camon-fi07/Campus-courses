@@ -9,11 +9,6 @@
   overflow: hidden;
 }
 
-.tabs {
-  display: none;
-  justify-content: space-around;
-}
-
 .content {
   overflow: auto;
   max-height: 350px;
@@ -39,18 +34,4 @@ ul {
 
 .teacherSecondary {
   color: var(--tui-text-02);
-}
-
-button[tuiOption] {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .tabs {
-    display: flex;
-  }
-
-  .select {
-    display: none;
-  }
 }

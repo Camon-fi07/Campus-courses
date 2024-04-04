@@ -13,14 +13,13 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
-  TuiSelectModule,
-  TuiTabsModule,
   TuiTextareaModule,
   TuiToggleModule,
   TuiFieldErrorPipeModule,
   TuiRadioListModule,
   TuiBadgeModule,
 } from '@taiga-ui/kit';
+import { AdaptiveTabsComponent } from 'components/adaptive-tabs/adaptive-tabs.component';
 import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
 import { QuillModule } from 'ngx-quill';
@@ -55,9 +54,6 @@ import { CoursesService } from './services/courses.service';
     FormsModule,
     CommonModule,
     TuiDataListModule,
-    TuiSelectModule,
-    TuiTabsModule,
-    CommonModule,
     RouterOutlet,
     TuiLoaderModule,
     RouterLink,
@@ -75,6 +71,7 @@ import { CoursesService } from './services/courses.service';
     TuiErrorModule,
     TuiFieldErrorPipeModule,
     TuiBadgeModule,
+    AdaptiveTabsComponent,
   ],
   providers: [provideRouter(coursesRoutes), CoursesService],
   exports: [CoursesComponent],

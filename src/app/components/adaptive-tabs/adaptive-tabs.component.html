@@ -1,0 +1,17 @@
+<tui-tabs (activeItemIndexChange)="handleChange($event)" [(activeItemIndex)]="valueIndex" class="tabs">
+  <button tuiTab *ngFor="let tab of tabsVariants">
+    {{ tab.text }}
+  </button>
+</tui-tabs>
+<tui-select
+  class="select"
+  [(ngModel)]="newValueIndex"
+  (ngModelChange)="handleChange(newValueIndex)"
+  [tuiTextfieldLabelOutside]="true"
+  [valueContent]="tabsVariants[valueIndex].text">
+  <tui-data-list *tuiDataList>
+    <button *ngFor="let tab of tabsVariants; let index = index" tuiOption [value]="index">
+      {{ tab.text }}
+    </button>
+  </tui-data-list>
+</tui-select>

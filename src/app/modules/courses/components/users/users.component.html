@@ -1,20 +1,5 @@
 <section class="wrapper">
-  <tui-tabs [(activeItemIndex)]="valueIndex" class="tabs">
-    <button tuiTab *ngFor="let tab of tabVariants">
-      {{ tab.text }}
-    </button>
-  </tui-tabs>
-  <tui-select
-    class="select"
-    [tuiTextfieldLabelOutside]="true"
-    [(ngModel)]="valueIndex"
-    [valueContent]="tabVariants[valueIndex].text">
-    <tui-data-list *tuiDataList>
-      <button *ngFor="let tab of tabVariants; let index = index" tuiOption [value]="index">
-        {{ tab.text }}
-      </button>
-    </tui-data-list>
-  </tui-select>
+  <adaptive-tabs [tabsVariants]="tabVariants" [(valueIndex)]="valueIndex"></adaptive-tabs>
 
   <div class="content">
     @switch (tabVariants[valueIndex].key) {
