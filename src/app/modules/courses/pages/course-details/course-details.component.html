@@ -53,7 +53,8 @@
       [id]="id"
       [isUserCanEdit]="isUserCanEdit"
       [teachers]="courseDetails.teachers"
-      [students]="courseDetails.students"></users>
+      [students]="courseDetails.students"
+      (refetchDetails)="fetchDetails()"></users>
   } @else {
     <tui-loader size="xl" class="loader"></tui-loader>
   }

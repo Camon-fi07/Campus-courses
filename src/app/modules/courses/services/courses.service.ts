@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { API_PATHS } from 'shared/constants/apiPaths';
 import {
   AddCampusCourseNotificationModel,
+  AddTeacherToCourseModel,
   CourseDetails,
   CourseModel,
   EditCampusCourseRequirementsAndAnnotationsModel,
@@ -44,5 +45,9 @@ export class CoursesService {
 
   editCourseRequireAndAnnotation(courseId: string, data: EditCampusCourseRequirementsAndAnnotationsModel) {
     return this.http.put(API_PATHS.EDIT_COURSE_REQUIRE_AND_ANNOTATION(courseId), data);
+  }
+
+  addCourseTeacher(courseId: string, data: AddTeacherToCourseModel) {
+    return this.http.post(API_PATHS.ADD_COURSES_TEACHER(courseId), data);
   }
 }

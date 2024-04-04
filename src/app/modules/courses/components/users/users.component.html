@@ -4,7 +4,9 @@
   <div class="content">
     @switch (tabVariants[valueIndex].key) {
       @case (ContentType.Teachers) {
-        <button class="teacherAdding" tuiButton *ngIf="isUserCanEdit">Добавить преподавателя</button>
+        <button class="teacherAdding" tuiButton *ngIf="isUserCanEdit" (click)="handleAddTeacher()">
+          Добавить преподавателя
+        </button>
         <ul>
           <li *ngFor="let teacher of teachers">
             <div class="teacherHead">

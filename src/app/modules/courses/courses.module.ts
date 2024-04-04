@@ -18,11 +18,14 @@ import {
   TuiFieldErrorPipeModule,
   TuiRadioListModule,
   TuiBadgeModule,
+  TuiComboBoxModule,
+  TuiDataListWrapperModule,
 } from '@taiga-ui/kit';
 import { AdaptiveTabsComponent } from 'components/adaptive-tabs/adaptive-tabs.component';
 import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
 import { QuillModule } from 'ngx-quill';
+import { AddingTeacherComponent } from './components/adding-teacher/adding-teacher.component';
 import { CourseShortInfoComponent } from './components/course-short-info/course-short-info.component';
 import { CreatingNotificationComponent } from './components/creating-notification/creating-notification.component';
 import { EditStatusComponent } from './components/edit-status/edit-status.component';
@@ -48,6 +51,7 @@ import { CoursesService } from './services/courses.service';
     EditStatusComponent,
     RequireAndAnnotationEditComponent,
     UsersComponent,
+    AddingTeacherComponent,
   ],
   imports: [
     TuiTextfieldControllerModule,
@@ -72,6 +76,10 @@ import { CoursesService } from './services/courses.service';
     TuiFieldErrorPipeModule,
     TuiBadgeModule,
     AdaptiveTabsComponent,
+    TuiComboBoxModule,
+    TuiDataListWrapperModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
   ],
   providers: [provideRouter(coursesRoutes), CoursesService],
   exports: [CoursesComponent],

@@ -66,3 +66,7 @@ export interface CourseDetails {
 export interface EditCourseStatusModel {
   status: CourseStatuses;
 }
+
+export interface AddTeacherToCourseModel {
+  userId: string;
+}
