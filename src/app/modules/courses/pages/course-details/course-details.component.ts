@@ -73,7 +73,7 @@ export class CourseDetailsComponent implements OnInit {
       });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
       this.id = params['id'];
     });

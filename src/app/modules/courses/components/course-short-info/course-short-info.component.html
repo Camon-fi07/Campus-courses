@@ -24,7 +24,9 @@
         <div [innerHTML]="safeRequirements"></div>
       }
       @case (ContentType.Notifications) {
-        <button (click)="handleCreateNotification()" size="m" tuiButton>Создать уведомление</button>
+        <button *ngIf="isUserCanEdit" (click)="handleCreateNotification()" size="m" tuiButton>
+          Создать уведомление
+        </button>
         <ul>
           @for (notification of notifications; track $index) {
             <li class="notification">

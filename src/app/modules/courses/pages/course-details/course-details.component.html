@@ -47,6 +47,7 @@
       [requirements]="courseDetails.requirements"
       [notifications]="courseDetails.notifications"
       (refetchDetails)="fetchDetails()"
+      [isUserCanEdit]="isUserCanEdit"
       [id]="courseDetails.id"></course-short-info>
   } @else {
     <tui-loader size="xl" class="loader"></tui-loader>

@@ -5,6 +5,7 @@ import {
   AddCampusCourseNotificationModel,
   CourseDetails,
   CourseModel,
+  EditCampusCourseRequirementsAndAnnotationsModel,
   EditCourseDto,
   EditCourseStatusModel,
 } from 'shared/types/courses';
@@ -39,5 +40,9 @@ export class CoursesService {
 
   signUpForCourse(courseId: string) {
     return this.http.post(API_PATHS.COURSES_SIGNUP(courseId), {});
+  }
+
+  editCourseRequireAndAnnotation(courseId: string, data: EditCampusCourseRequirementsAndAnnotationsModel) {
+    return this.http.put(API_PATHS.EDIT_COURSE_REQUIRE_AND_ANNOTATION(courseId), data);
   }
 }

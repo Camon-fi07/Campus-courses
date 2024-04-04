@@ -29,16 +29,21 @@ export class EditingCourseComponent {
     this.userRole = userRole;
   }
 
-  handleEditCourse(data: EditCourseDto) {
-    this.coursesService
-      .editCourse(this.courseId, data)
-      .pipe(take(1))
-      .subscribe({
-        next: () => this.context.completeWith(),
-      });
-  }
-
-  handleEditRequirementAndAnnotation(data: EditCampusCourseRequirementsAndAnnotationsModel) {
-    console.log(data);
+  handleEditCourse(data: EditCourseDto | EditCampusCourseRequirementsAndAnnotationsModel) {
+    if (this.userRole === CourseUserRoles.Admin) {
+      this.coursesService
+        .editCourse(this.courseId, data as EditCourseDto)
+        .pipe(take(1))
+        .subscribe({
+          next: () => this.context.completeWith(),
+        });
+    } else {
+      this.coursesService
+        .editCourseRequireAndAnnotation(this.courseId, data)
+        .pipe(take(1))
+        .subscribe({
+          next: () => this.context.completeWith(),
+        });
+    }
   }
 }

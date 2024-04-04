@@ -18,6 +18,7 @@ export class CourseShortInfoComponent implements OnInit {
   @Input({ required: true }) requirements!: string;
   @Input({ required: true }) notifications!: NotificationModel[];
   @Input({ required: true }) id!: string;
+  @Input({ required: true }) isUserCanEdit!: boolean;
   @Output() refetchDetails = new EventEmitter<void>();
   safeAnnotation?: SafeHtml;
   safeRequirements?: SafeHtml;

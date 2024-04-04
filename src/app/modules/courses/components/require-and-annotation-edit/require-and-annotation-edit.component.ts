@@ -8,9 +8,9 @@ import { EditCampusCourseRequirementsAndAnnotationsModel } from 'shared/types/co
   styleUrl: './require-and-annotation-edit.component.scss',
 })
 export class RequireAndAnnotationEditComponent implements OnInit {
+  @Output() emitSubmit = new EventEmitter<EditCampusCourseRequirementsAndAnnotationsModel>();
   @Input() requirement?: string;
   @Input() annotation?: string;
-  @Output() emitSubmit = new EventEmitter<EditCampusCourseRequirementsAndAnnotationsModel>();
   formGroup!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
