@@ -11,9 +11,10 @@
 
 .content {
   overflow: auto;
-  max-height: 350px;
+  max-height: 450px;
   word-break: break-all;
   overflow-wrap: break-word;
+  padding-inline-end: 20px;
 }
 
 .teacherAdding {
@@ -32,6 +33,25 @@ ul {
   gap: 10px;
 }
 
-.teacherSecondary {
+.secondary {
   color: var(--tui-text-02);
+}
+
+.student {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 20px;
+}
+
+.marks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.applicationPanel {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
 }

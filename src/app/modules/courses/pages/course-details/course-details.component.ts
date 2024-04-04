@@ -14,7 +14,7 @@ import { Observable, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
 import { CourseDetails, CourseStatuses } from 'shared/types/courses';
 import { UserShortDto } from 'shared/types/user';
-import { translateSemester, translateCourseStatus, getStatusColor } from 'shared/utils';
+import { translateSemester, translateCourseStatus, getCourseStatusColor } from 'shared/utils';
 
 @Component({
   selector: 'course-details',
@@ -26,7 +26,7 @@ export class CourseDetailsComponent implements OnInit {
   isLoading = true;
   translateCourseStatus = translateCourseStatus;
   translateSemester = translateSemester;
-  getStatusColor = getStatusColor;
+  getCourseStatusColor = getCourseStatusColor;
   id!: string;
   CourseUserRoles = CourseUserRoles;
   CourseStatuses = CourseStatuses;

@@ -13,12 +13,49 @@
               <h2>{{ teacher.name }}</h2>
               <tui-badge *ngIf="teacher.isMain" status="success" value="основной" size="m"></tui-badge>
             </div>
-            <span class="teacherSecondary">{{ teacher.email }}</span>
+            <p class="secondary">{{ teacher.email }}</p>
           </li>
         </ul>
       }
       @case (ContentType.Students) {
-        <ul></ul>
+        <ul>
+          <li class="student" *ngFor="let student of students">
+            <div>
+              <h2>{{ student.name }}</h2>
+              <p>
+                Статус -
+                <span [style]="{ color: getStudentStatusColor(student.status) }">
+                  {{ translateStudentStatus(student.status) }}
+                </span>
+              </p>
+              <p class="secondary">{{ student.email }}</p>
+            </div>
+            @switch (student.status) {
+              @case (StudentStatuses.Accepted) {
+                <div class="marks">
+                  <div>
+                    <p>Промежуточная аттестация</p>
+                    <tui-badge
+                      [status]="getMarkBadgeStyle(student.midtermResult)"
+                      [value]="translateStudentMark(student.midtermResult)"></tui-badge>
+                  </div>
+                  <div>
+                    <p>Финальная аттестация</p>
+                    <tui-badge
+                      [status]="getMarkBadgeStyle(student.finalResult)"
+                      [value]="translateStudentMark(student.finalResult)"></tui-badge>
+                  </div>
+                </div>
+              }
+              @case (StudentStatuses.InQueue) {
+                <div class="applicationPanel">
+                  <button size="m" tuiButton>Принять</button>
+                  <button size="m" appearance="error" tuiButton>Отклонить заявку</button>
+                </div>
+              }
+            }
+          </li>
+        </ul>
       }
     }
   </div>

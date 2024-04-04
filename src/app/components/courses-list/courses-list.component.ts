@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ROUTES } from 'shared/constants/routes';
 import { CourseModel } from 'shared/types/courses';
-import { translateCourseStatus, translateSemester, getStatusColor } from 'shared/utils';
+import { translateCourseStatus, translateSemester, getCourseStatusColor } from 'shared/utils';
 
 @Component({
   selector: 'courses-list',
@@ -18,5 +18,5 @@ export class CoursesListComponent {
 
   translateSemester = translateSemester;
   translateCourseStatus = translateCourseStatus;
-  getStatusColor = getStatusColor;
+  getCourseStatusColor = getCourseStatusColor;
 }

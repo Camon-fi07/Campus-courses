@@ -11,7 +11,7 @@
       <div>
         <p class="description">
           <span>Cтатус курса</span>
-          <span [style]="{ color: getStatusColor(courseDetails.status) }">
+          <span [style]="{ color: getCourseStatusColor(courseDetails.status) }">
             {{ translateCourseStatus(courseDetails.status) }}
           </span>
         </p>
