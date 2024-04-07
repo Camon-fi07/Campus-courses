@@ -9,16 +9,16 @@ import { EditCampusCourseRequirementsAndAnnotationsModel } from 'shared/types/co
 })
 export class RequireAndAnnotationEditComponent implements OnInit {
   @Output() emitSubmit = new EventEmitter<EditCampusCourseRequirementsAndAnnotationsModel>();
-  @Input() requirement?: string;
-  @Input() annotation?: string;
+  @Input() requirements?: string;
+  @Input() annotations?: string;
   formGroup!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.formGroup = this.fb.group({
-      requirement: new FormControl(this.requirement, Validators.required),
-      annotation: new FormControl(this.annotation, Validators.required),
+      requirements: new FormControl(this.requirements, Validators.required),
+      annotations: new FormControl(this.annotations, Validators.required),
     });
   }
 

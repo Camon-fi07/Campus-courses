@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { CoursesService } from 'modules/courses/services/courses.service';
 import { AddingTeacherContextData } from 'modules/courses/types/AddingTeacherContextData';
 import { Observable, take } from 'rxjs';
 import { StudentShort, TeacherShort } from 'shared/types/user';
@@ -31,7 +30,6 @@ export class UsersComponent implements OnInit {
   constructor(
     private readonly injector: Injector,
     private dialogs: TuiDialogService,
-    private coursesService: CoursesService,
   ) {}
 
   ngOnInit() {

@@ -1,4 +1,7 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CoursesModule } from 'modules/courses/courses.module';
+import { StudentStatuses } from 'shared/types/user';
 import { StudentComponent } from './student.component';
 
 describe('StudentComponent', () => {
@@ -7,11 +10,14 @@ describe('StudentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StudentComponent],
+      imports: [CoursesModule, HttpClientModule],
+      providers: [HttpClient],
     }).compileComponents();
 
     fixture = TestBed.createComponent(StudentComponent);
     component = fixture.componentInstance;
+    component.courseId = '123';
+    component.student = { email: '', id: '', name: '', status: StudentStatuses.Accepted };
     fixture.detectChanges();
   });
 

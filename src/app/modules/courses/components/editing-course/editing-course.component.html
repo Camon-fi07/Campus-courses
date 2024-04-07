@@ -5,8 +5,8 @@
     <course-details-form [initValues]="initValues" (emitSubmit)="handleEditCourse($event)"></course-details-form>
   } @else if (userRole === CourseUserRoles.Teacher || userRole === CourseUserRoles.MainTeacher) {
     <require-and-annotation-edit
-      [requirement]="initValues.requirements"
-      [annotation]="initValues.annotations"
+      [requirements]="initValues.requirements"
+      [annotations]="initValues.annotations"
       (emitSubmit)="handleEditCourse($event)"></require-and-annotation-edit>
   }
 </div>
