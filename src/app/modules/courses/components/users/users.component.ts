@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
-import { TuiStatus } from '@taiga-ui/kit';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { CoursesService } from 'modules/courses/services/courses.service';
 import { AddingTeacherContextData } from 'modules/courses/types/AddingTeacherContextData';
-import { NotificationContextData } from 'modules/courses/types/NotificationContextData';
 import { Observable, take } from 'rxjs';
-import { StudentMarks, StudentShort, StudentStatuses, TeacherShort } from 'shared/types/user';
-import { getStudentStatusColor, translateStudentMark, translateStudentStatus } from 'shared/utils';
+import { StudentShort, TeacherShort } from 'shared/types/user';
 import { AddingTeacherComponent } from '../adding-teacher/adding-teacher.component';
 import { ContentType } from './users.types';
 
@@ -21,11 +19,7 @@ export class UsersComponent implements OnInit {
   @Input({ required: true }) id!: string;
   @Input({ required: true }) isUserCanEdit!: boolean;
   @Output() refetchDetails = new EventEmitter<void>();
-  private addingTeacherDialog!: Observable<NotificationContextData>;
-  translateStudentStatus = translateStudentStatus;
-  translateStudentMark = translateStudentMark;
-  getStudentStatusColor = getStudentStatusColor;
-  StudentStatuses = StudentStatuses;
+  private addingTeacherDialog!: Observable<AddingTeacherContextData>;
 
   tabVariants = [
     { key: ContentType.Teachers, text: 'Преподаватели' },
@@ -37,6 +31,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private readonly injector: Injector,
     private dialogs: TuiDialogService,
+    private coursesService: CoursesService,
   ) {}
 
   ngOnInit() {
@@ -48,20 +43,7 @@ export class UsersComponent implements OnInit {
 
   handleAddTeacher() {
     this.addingTeacherDialog.pipe(take(1)).subscribe({
-      next: () => {
-        this.refetchDetails.emit();
-      },
+      next: () => this.refetchDetails.emit(),
     });
-  }
-
-  getMarkBadgeStyle(mark: StudentMarks): TuiStatus {
-    switch (mark) {
-      case StudentMarks.Failed:
-        return 'error';
-      case StudentMarks.NotDefined:
-        return 'warning';
-      case StudentMarks.Passed:
-        return 'success';
-    }
   }
 }

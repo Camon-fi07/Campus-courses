@@ -28,9 +28,11 @@ import { QuillModule } from 'ngx-quill';
 import { AddingTeacherComponent } from './components/adding-teacher/adding-teacher.component';
 import { CourseShortInfoComponent } from './components/course-short-info/course-short-info.component';
 import { CreatingNotificationComponent } from './components/creating-notification/creating-notification.component';
+import { EditMarkComponent } from './components/edit-mark/edit-mark.component';
 import { EditStatusComponent } from './components/edit-status/edit-status.component';
 import { EditingCourseComponent } from './components/editing-course/editing-course.component';
 import { RequireAndAnnotationEditComponent } from './components/require-and-annotation-edit/require-and-annotation-edit.component';
+import { StudentComponent } from './components/student/student.component';
 import { UsersComponent } from './components/users/users.component';
 import { CoursesComponent } from './courses.component';
 import { coursesRoutes } from './courses.routes';
@@ -52,6 +54,8 @@ import { CoursesService } from './services/courses.service';
     RequireAndAnnotationEditComponent,
     UsersComponent,
     AddingTeacherComponent,
+    StudentComponent,
+    EditMarkComponent,
   ],
   imports: [
     TuiTextfieldControllerModule,

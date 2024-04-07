@@ -9,7 +9,9 @@ import {
   EditCampusCourseRequirementsAndAnnotationsModel,
   EditCourseDto,
   EditCourseStatusModel,
+  EditCourseStudentMarkModel,
 } from 'shared/types/courses';
+import { EditCourseStudentStatusModel } from 'shared/types/user';
 
 @Injectable()
 export class CoursesService {
@@ -49,5 +51,13 @@ export class CoursesService {
 
   addCourseTeacher(courseId: string, data: AddTeacherToCourseModel) {
     return this.http.post(API_PATHS.ADD_COURSES_TEACHER(courseId), data);
+  }
+
+  editCourseStudentStatus(courseId: string, studentId: string, data: EditCourseStudentStatusModel) {
+    return this.http.post(API_PATHS.EDIT_COURSES_STUDENT_STATUS(courseId, studentId), data);
+  }
+
+  editCourseStudentMark(courseId: string, studentId: string, data: EditCourseStudentMarkModel) {
+    return this.http.post(API_PATHS.EDIT_COURSES_STUDENT_MARK(courseId, studentId), data);
   }
 }

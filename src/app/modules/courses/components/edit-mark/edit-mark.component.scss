@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+tui-radio-list {
+  display: flex;
+  align-items: center;
+}
+
+tui-dialog {
+  width: auto !important;
+}

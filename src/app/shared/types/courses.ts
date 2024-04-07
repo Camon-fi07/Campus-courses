@@ -1,4 +1,4 @@
-import { StudentShort, TeacherShort } from './user';
+import { MarkType, StudentMarks, StudentShort, TeacherShort } from './user';
 
 export enum Semesters {
   Autumn = 'Autumn',
@@ -69,4 +69,9 @@ export interface EditCourseStatusModel {
 
 export interface AddTeacherToCourseModel {
   userId: string;
+}
+
+export interface EditCourseStudentMarkModel {
+  markType: MarkType;
+  mark: StudentMarks;
 }

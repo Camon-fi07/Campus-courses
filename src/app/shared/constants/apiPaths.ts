@@ -12,6 +12,9 @@ export const API_PATHS = {
   COURSES_NOTIFICATIONS: (id: string) => `courses/${id}/notifications`,
   COURSES_SIGNUP: (id: string) => `courses/${id}/sign-up`,
   ADD_COURSES_TEACHER: (id: string) => `courses/${id}/teachers`,
+  EDIT_COURSES_STUDENT_STATUS: (courseId: string, studentId: string) =>
+    `courses/${courseId}/student-status/${studentId}`,
+  EDIT_COURSES_STUDENT_MARK: (courseId: string, studentId: string) => `courses/${courseId}/marks/${studentId}`,
   TEACHING_COURSES: 'courses/teaching',
   ROLES: 'roles',
   GROUPS: 'groups',

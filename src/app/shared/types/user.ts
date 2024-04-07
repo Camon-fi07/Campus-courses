@@ -10,6 +10,11 @@ export enum StudentMarks {
   Failed = 'Failed',
 }
 
+export enum MarkType {
+  Midterm = 'Midterm',
+  Final = 'Final',
+}
+
 export interface UserLoginModel {
   email: string;
   password: string;
@@ -49,14 +54,18 @@ export interface StudentShort {
   name: string;
   email: string;
   status: StudentStatuses;
-  midtermResult: StudentMarks;
-  finalResult: StudentMarks;
+  midtermResult?: StudentMarks;
+  finalResult?: StudentMarks;
 }
 
 export interface TeacherShort {
   name: string;
   email: string;
   isMain: boolean;
+}
+
+export interface EditCourseStudentStatusModel {
+  status: StudentStatuses;
 }
 
 export type EditUserProfileModel = Omit<UserProfile, 'email'>;
