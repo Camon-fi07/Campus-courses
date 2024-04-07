@@ -1,47 +1,22 @@
 <div class="wrapper">
+  <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
+  <div class="title">
+    <span>Основные данные курса</span>
+    <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+      Редактировать
+    </button>
+  </div>
   @if (!isLoading) {
-    <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
-    <div class="title">
-      <span>Основные данные курса</span>
-      <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
-        Редактировать
-      </button>
-    </div>
-    <div class="main-data">
-      <div>
-        <p class="description">
-          <span>Cтатус курса</span>
-          <span [style]="{ color: getCourseStatusColor(courseDetails.status) }">
-            {{ translateCourseStatus(courseDetails.status) }}
-          </span>
-        </p>
-        @if (isUserCanEdit) {
-          <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
-        } @else if (courseDetails.status === CourseStatuses.OpenForAssigning && !isUserSignUp) {
-          <button size="m" tuiButton (click)="handleSignUpForCourse()">Записаться на курс</button>
-        }
-      </div>
-      <div class="description">
-        <span>Учебный год</span>
-        <span>{{ courseDetails.startYear }}</span>
-      </div>
-      <div class="description">
-        <span>Cеместр</span>
-        <span>{{ translateSemester(courseDetails.semester) }}</span>
-      </div>
-      <div class="description">
-        <span>Всего мест</span>
-        <span>{{ courseDetails.maximumStudentsCount }}</span>
-      </div>
-      <div class="description">
-        <span>Cтудентов зачислено</span>
-        <span>{{ courseDetails.studentsEnrolledCount }}</span>
-      </div>
-      <div class="description">
-        <span>Заявки на рассмотрение</span>
-        <span>{{ courseDetails.studentsInQueueCount }}</span>
-      </div>
-    </div>
+    <main-data
+      [courseId]="this.id"
+      [isUserCanEdit]="isUserCanEdit"
+      [status]="courseDetails.status"
+      [startYear]="courseDetails.startYear"
+      [semester]="courseDetails.semester"
+      [maximumStudentsCount]="courseDetails.maximumStudentsCount"
+      [studentsEnrolledCount]="courseDetails.studentsEnrolledCount"
+      [studentsInQueueCount]="courseDetails.studentsInQueueCount"
+      (refetchDetails)="fetchDetails()"></main-data>
     <course-short-info
       [annotations]="courseDetails.annotations"
       [requirements]="courseDetails.requirements"

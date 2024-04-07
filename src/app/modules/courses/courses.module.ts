@@ -31,6 +31,7 @@ import { CreatingNotificationComponent } from './components/creating-notificatio
 import { EditMarkComponent } from './components/edit-mark/edit-mark.component';
 import { EditStatusComponent } from './components/edit-status/edit-status.component';
 import { EditingCourseComponent } from './components/editing-course/editing-course.component';
+import { MainDataComponent } from './components/main-data/main-data.component';
 import { RequireAndAnnotationEditComponent } from './components/require-and-annotation-edit/require-and-annotation-edit.component';
 import { StudentComponent } from './components/student/student.component';
 import { UsersComponent } from './components/users/users.component';
@@ -56,6 +57,7 @@ import { CoursesService } from './services/courses.service';
     AddingTeacherComponent,
     StudentComponent,
     EditMarkComponent,
+    MainDataComponent,
   ],
   imports: [
     TuiTextfieldControllerModule,
