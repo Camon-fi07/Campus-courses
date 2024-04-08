@@ -1,0 +1,44 @@
+.student {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 20px;
+}
+
+.marks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.applicationPanel {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .student {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    gap: 10px;
+    border-bottom: 1px solid var(--tui-base-07);
+  }
+
+  .marks {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .applicationPanel {
+    justify-content: flex-start;
+  }
+}

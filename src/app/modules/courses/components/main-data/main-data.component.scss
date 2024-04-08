@@ -1,0 +1,40 @@
+.main-data {
+  display: grid;
+  box-shadow: var(--tui-shadow);
+  grid-template-columns: 1fr;
+  border: 1px solid var(--tui-base-07);
+
+  & > *:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & > * {
+    padding: 5px;
+    border-bottom: 1px solid var(--tui-base-07);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+
+  & > *:first-child {
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 420px) {
+  .main-data {
+    grid-template-columns: 1fr 1fr;
+
+    & > *:first-child {
+      grid-column: span 2;
+    }
+  }
+}

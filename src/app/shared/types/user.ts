@@ -1,3 +1,20 @@
+export enum StudentStatuses {
+  InQueue = 'InQueue',
+  Accepted = 'Accepted',
+  Declined = 'Declined',
+}
+
+export enum StudentMarks {
+  NotDefined = 'NotDefined',
+  Passed = 'Passed',
+  Failed = 'Failed',
+}
+
+export enum MarkType {
+  Midterm = 'Midterm',
+  Final = 'Final',
+}
+
 export interface UserLoginModel {
   email: string;
   password: string;
@@ -30,6 +47,25 @@ export interface UserProfile {
   fullName: string;
   email: string;
   birthDate: string;
+}
+
+export interface StudentShort {
+  id: string;
+  name: string;
+  email: string;
+  status: StudentStatuses;
+  midtermResult?: StudentMarks;
+  finalResult?: StudentMarks;
+}
+
+export interface TeacherShort {
+  name: string;
+  email: string;
+  isMain: boolean;
+}
+
+export interface EditCourseStudentStatusModel {
+  status: StudentStatuses;
 }
 
 export type EditUserProfileModel = Omit<UserProfile, 'email'>;

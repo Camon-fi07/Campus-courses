@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--tui-shadow);
+  border-radius: 8px;
+  padding: 10px;
+  gap: 10px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.content {
+  overflow: auto;
+  max-height: 450px;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  padding-inline-end: 20px;
+}
+
+.teacherAdding {
+  margin-block-end: 20px;
+}
+
+.teacherHead {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.secondary {
+  color: var(--tui-text-02);
+}

@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup" (submit)="handleSubmit()">
+  <label tuiLabel="Требования" for="requirements">
+    <quill-editor
+      formControlName="requirements"
+      placeholder="Требования"
+      [styles]="{ minHeight: '100px' }"></quill-editor>
+    <tui-error formControlName="requirements" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+  <label tuiLabel="Аннотации" for="annotations">
+    <quill-editor
+      formControlName="annotations"
+      placeholder="Аннотации"
+      [styles]="{ minHeight: '100px' }"></quill-editor>
+    <tui-error formControlName="annotations" [error]="[] | tuiFieldError | async"></tui-error>
+  </label>
+</form>

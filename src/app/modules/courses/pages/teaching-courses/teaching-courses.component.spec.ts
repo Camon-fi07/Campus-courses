@@ -1,19 +1,19 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuillModule } from 'ngx-quill';
-import { EditCourseComponent } from './edit-course.component';
+import { CoursesModule } from 'modules/courses/courses.module';
+import { TeachingCoursesComponent } from './teaching-courses.component';
 
-describe('EditCourseComponent', () => {
-  let component: EditCourseComponent;
-  let fixture: ComponentFixture<EditCourseComponent>;
+describe('TeachingCoursesComponent', () => {
+  let component: TeachingCoursesComponent;
+  let fixture: ComponentFixture<TeachingCoursesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditCourseComponent, HttpClientModule, QuillModule],
+      imports: [CoursesModule, HttpClientModule],
       providers: [HttpClient],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditCourseComponent);
+    fixture = TestBed.createComponent(TeachingCoursesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

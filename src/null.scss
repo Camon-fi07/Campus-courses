@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   border: 0;
+  font: var(--tui-font-text-m);
 }
 *,
 *:before,
@@ -9,4 +10,11 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+a,
+a:hover,
+a:active {
+  color: unset;
+  text-decoration: none;
 }

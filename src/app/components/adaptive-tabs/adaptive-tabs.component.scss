@@ -1,0 +1,18 @@
+.tabs {
+  display: none;
+  justify-content: space-around;
+}
+
+button[tuiOption] {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .tabs {
+    display: flex;
+  }
+
+  .select {
+    display: none;
+  }
+}

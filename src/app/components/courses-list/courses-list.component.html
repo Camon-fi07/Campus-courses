@@ -1,0 +1,16 @@
+<ul>
+  <li *ngFor="let course of courses">
+    <a class="card" [routerLink]="ROUTES.CONCRETE_COURSE(course.id)">
+      <div class="title">
+        <h3>{{ course.name }}</h3>
+        <span [style]="{ color: getCourseStatusColor(course.status) }">{{ translateCourseStatus(course.status) }}</span>
+      </div>
+      <div class="content">
+        <span>Учебный год - {{ course.startYear }}</span>
+        <span>Семестр - {{ translateSemester(course.semester) }}</span>
+        <span>Мест всего - {{ course.maximumStudentsCount }}</span>
+        <span>Мест свободно - {{ course.remainingSlotsCount }}</span>
+      </div>
+    </a>
+  </li>
+</ul>

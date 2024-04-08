@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
+  <div class="title">
+    <span>Основные данные курса</span>
+    <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+      Редактировать
+    </button>
+  </div>
+  @if (!isLoading) {
+    <main-data
+      [courseId]="this.id"
+      [isUserCanEdit]="isUserCanEdit"
+      [status]="courseDetails.status"
+      [startYear]="courseDetails.startYear"
+      [semester]="courseDetails.semester"
+      [maximumStudentsCount]="courseDetails.maximumStudentsCount"
+      [studentsEnrolledCount]="courseDetails.studentsEnrolledCount"
+      [studentsInQueueCount]="courseDetails.studentsInQueueCount"
+      (refetchDetails)="fetchDetails()"></main-data>
+    <course-short-info
+      [annotations]="courseDetails.annotations"
+      [requirements]="courseDetails.requirements"
+      [notifications]="courseDetails.notifications"
+      (refetchDetails)="fetchDetails()"
+      [isUserCanEdit]="isUserCanEdit"
+      [id]="courseDetails.id"></course-short-info>
+    <users
+      [id]="id"
+      [isUserCanEdit]="isUserCanEdit"
+      [teachers]="courseDetails.teachers"
+      [students]="courseDetails.students"
+      (refetchDetails)="fetchDetails()"></users>
+  } @else {
+    <tui-loader size="xl" class="loader"></tui-loader>
+  }
+</div>

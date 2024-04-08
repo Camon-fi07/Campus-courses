@@ -1,3 +1,5 @@
+import { MarkType, StudentMarks, StudentShort, TeacherShort } from './user';
+
 export enum Semesters {
   Autumn = 'Autumn',
   Spring = 'Spring',
@@ -20,6 +22,11 @@ export interface EditCourseDto {
   mainTeacherId: string;
 }
 
+export interface EditCampusCourseRequirementsAndAnnotationsModel {
+  requirements: string;
+  annotations: string;
+}
+
 export interface CourseModel {
   id: string;
   name: string;
@@ -28,4 +35,43 @@ export interface CourseModel {
   remainingSlotsCount: number;
   status: CourseStatuses;
   semester: Semesters;
+}
+
+export interface NotificationModel {
+  text: string;
+  isImportant: boolean;
+}
+
+export interface AddCampusCourseNotificationModel {
+  text: string;
+  isImportant: boolean;
+}
+
+export interface CourseDetails {
+  id: string;
+  name: string;
+  startYear: number;
+  maximumStudentsCount: number;
+  studentsEnrolledCount: number;
+  studentsInQueueCount: number;
+  requirements: string;
+  annotations: string;
+  status: CourseStatuses;
+  semester: Semesters;
+  students: StudentShort[];
+  teachers: TeacherShort[];
+  notifications: NotificationModel[];
+}
+
+export interface EditCourseStatusModel {
+  status: CourseStatuses;
+}
+
+export interface AddTeacherToCourseModel {
+  userId: string;
+}
+
+export interface EditCourseStudentMarkModel {
+  markType: MarkType;
+  mark: StudentMarks;
 }
