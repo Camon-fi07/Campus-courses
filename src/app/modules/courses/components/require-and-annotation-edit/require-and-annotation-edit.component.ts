@@ -24,8 +24,6 @@ export class RequireAndAnnotationEditComponent implements OnInit {
 
   handleSubmit() {
     this.formGroup.markAllAsTouched();
-    if (this.formGroup.valid) {
-      this.emitSubmit.emit(this.formGroup.value);
-    }
+    if (this.formGroup.valid) this.emitSubmit.emit(this.formGroup.value);
   }
 }
