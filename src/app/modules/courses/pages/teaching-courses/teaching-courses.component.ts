@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from 'modules/courses/services/courses.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { take } from 'rxjs';
-import { CourseModel } from 'shared/types/courses';
 
 @Component({
   selector: 'teaching-courses',
@@ -12,11 +11,10 @@ export class TeachingCoursesComponent implements OnInit {
   courses!: CourseModel[];
   isLoading = true;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private APICoursesService: APICoursesService) {}
 
   ngOnInit() {
-    this.coursesService
-      .getTeachingCourses()
+    this.APICoursesService.getTeachingCourses()
       .pipe(take(1))
       .subscribe({
         next: (res) => {

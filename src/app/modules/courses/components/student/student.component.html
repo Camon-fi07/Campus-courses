@@ -10,10 +10,10 @@
     <p class="secondary">{{ student.email }}</p>
   </div>
   @switch (student.status) {
-    @case (StudentStatuses.Accepted) {
+    @case ('Accepted') {
       <div class="marks">
         <div *ngIf="student.midtermResult">
-          <button size="xs" (click)="handleEditMark(MarkType.Midterm)" tuiButton appearance="flat">
+          <button size="xs" (click)="handleEditMark('Midterm')" tuiButton appearance="flat">
             Промежуточная аттестация
           </button>
           <tui-badge
@@ -21,27 +21,25 @@
             [value]="translateStudentMark(student.midtermResult)"></tui-badge>
         </div>
         <div *ngIf="student.finalResult">
-          <button size="xs" (click)="handleEditMark(MarkType.Final)" tuiButton appearance="flat">
-            Финальная аттестация
-          </button>
+          <button size="xs" (click)="handleEditMark('Final')" tuiButton appearance="flat">Финальная аттестация</button>
           <tui-badge
             [status]="getMarkBadgeStyle(student.finalResult)"
             [value]="translateStudentMark(student.finalResult)"></tui-badge>
         </div>
       </div>
     }
-    @case (StudentStatuses.InQueue) {
+    @case ('InQueue') {
       <div class="applicationPanel">
         <button
           [showLoader]="isApplicationPanelLoading"
-          (click)="handleChangeUserStatus(StudentStatuses.Accepted)"
+          (click)="handleChangeUserStatus('Accepted')"
           size="m"
           tuiButton>
           Принять
         </button>
         <button
           [showLoader]="isApplicationPanelLoading"
-          (click)="handleChangeUserStatus(StudentStatuses.Declined)"
+          (click)="handleChangeUserStatus('Declined')"
           size="m"
           appearance="error"
           tuiButton>

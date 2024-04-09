@@ -1,19 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { APIGroupsService } from 'core/API/requests/apigroups.service';
 import { BehaviorSubject, take, tap } from 'rxjs';
-import { API_PATHS } from 'shared/constants/apiPaths';
-import { CreateCampusGroupModel, EditCampusGroupModel, GroupDto } from 'shared/types/groups';
 
 @Injectable()
 export class GroupService {
   private _groups = new BehaviorSubject<GroupDto[] | null>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private APIGroupsService: APIGroupsService) {
     this.getGroupsList().subscribe();
   }
 
   getGroupsList() {
-    return this.http.get<GroupDto[]>(API_PATHS.GROUPS).pipe(
+    return this.APIGroupsService.getGroupsList().pipe(
+      take(1),
       tap((res) => {
         this._groups.next(res);
       }),
@@ -21,25 +20,25 @@ export class GroupService {
   }
 
   addGroup(data: CreateCampusGroupModel) {
-    return this.http.post(API_PATHS.GROUPS, data).pipe(
+    return this.APIGroupsService.addGroup(data).pipe(
       tap(() => {
-        this.getGroupsList().pipe(take(1)).subscribe();
+        this.getGroupsList().subscribe();
       }),
     );
   }
 
   editGroup(id: string, data: EditCampusGroupModel) {
-    return this.http.put(API_PATHS.CONCRETE_GROUP(id), data).pipe(
+    return this.APIGroupsService.editGroup(id, data).pipe(
       tap(() => {
-        this.getGroupsList().pipe(take(1)).subscribe();
+        this.getGroupsList().subscribe();
       }),
     );
   }
 
   deleteGroup(id: string) {
-    return this.http.delete(API_PATHS.CONCRETE_GROUP(id)).pipe(
+    return this.APIGroupsService.deleteGroup(id).pipe(
       tap(() => {
-        this.getGroupsList().pipe(take(1)).subscribe();
+        this.getGroupsList().subscribe();
       }),
     );
   }

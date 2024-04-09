@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiAlertService } from '@taiga-ui/core';
-import { ProfileService } from 'core/services/profile/profile.service';
-import { UserService } from 'core/services/user/user.service';
+import { APIUserService } from 'core/API/requests/apiuser.service';
+import { UserStateService } from 'core/services/userState.service';
 import { Subject, finalize, take, takeUntil } from 'rxjs';
-import { UserProfile } from 'shared/types/user';
 import { convertDateToTui, convertTuiDate } from 'shared/utils';
+import { getTuiToday } from 'shared/utils';
 
 @Component({
   selector: 'profile',
@@ -16,15 +16,15 @@ import { convertDateToTui, convertTuiDate } from 'shared/utils';
 export class ProfileComponent implements OnInit, OnDestroy {
   formGroup!: FormGroup;
   userProfile!: UserProfile | null;
-  private dateNow = new Date();
   private unsubscribe = new Subject<void>();
-  maxDate = new TuiDay(this.dateNow.getFullYear(), this.dateNow.getMonth(), this.dateNow.getDate());
+  tuiToday = getTuiToday();
+
   isLoading = false;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private profileService: ProfileService,
+    private userStateService: UserStateService,
+    private APIUserService: APIUserService,
     private alerts: TuiAlertService,
   ) {
     this.formGroup = fb.group({
@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userService.userProfile.pipe(takeUntil(this.unsubscribe)).subscribe({
+    this.userStateService.userProfile.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.isLoading = true;
         this.formGroup.controls['fullName'].setValue(res?.fullName);
@@ -54,11 +54,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.isLoading = true;
-      this.profileService
-        .editProfile({
-          ...this.formGroup.value,
-          birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
-        })
+      this.APIUserService.editProfile({
+        ...this.formGroup.value,
+        birthDate: convertTuiDate(this.formGroup.controls['birthDate'].value),
+      })
         .pipe(
           take(1),
           finalize(() => {

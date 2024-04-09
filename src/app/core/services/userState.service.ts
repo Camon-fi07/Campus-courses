@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserProfile, UserRoles } from 'shared/types/user';
-import { deleteCookieValue, getCookieValue } from 'shared/utils';
+import { deleteCookieValue, getCookieValue, setCookieValue } from 'shared/utils';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserStateService {
   private _isAuth = new BehaviorSubject(false);
   private _token?: string;
   private _userRoles = new BehaviorSubject<UserRoles | null>(null);
@@ -24,12 +23,13 @@ export class UserService {
     deleteCookieValue('token');
   }
 
-  get isAuth(): BehaviorSubject<boolean> {
-    return this._isAuth;
+  setToken(token: string) {
+    setCookieValue('token', token, new Date(Date.now() + 3600 * 1000), true);
+    this._isAuth.next(true);
   }
 
-  set isAuth(value: boolean) {
-    this._isAuth.next(value);
+  get isAuth(): BehaviorSubject<boolean> {
+    return this._isAuth;
   }
 
   get token(): string {

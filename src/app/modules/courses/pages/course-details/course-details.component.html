@@ -1,12 +1,12 @@
 <div class="wrapper">
-  <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
-  <div class="title">
-    <span>Основные данные курса</span>
-    <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
-      Редактировать
-    </button>
-  </div>
   @if (!isLoading) {
+    <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
+    <div class="title">
+      <span>Основные данные курса</span>
+      <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+        Редактировать
+      </button>
+    </div>
     <main-data
       [courseId]="this.id"
       [isUserCanEdit]="isUserCanEdit"

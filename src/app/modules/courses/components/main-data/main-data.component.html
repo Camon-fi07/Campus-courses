@@ -8,7 +8,7 @@
     </p>
     @if (isUserCanEdit) {
       <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
-    } @else if (status === CourseStatuses.OpenForAssigning && !isUserSignUp) {
+    } @else if (status === 'OpenForAssigning' && !isUserSignUp) {
       <button size="m" tuiButton (click)="handleSignUpForCourse()">Записаться на курс</button>
     }
   </div>

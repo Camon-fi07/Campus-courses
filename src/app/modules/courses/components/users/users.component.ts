@@ -3,7 +3,6 @@ import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { AddingTeacherContextData } from 'modules/courses/types/AddingTeacherContextData';
 import { Observable, take } from 'rxjs';
-import { StudentShort, TeacherShort } from 'shared/types/user';
 import { AddingTeacherComponent } from '../adding-teacher/adding-teacher.component';
 import { ContentType } from './users.types';
 

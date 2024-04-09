@@ -22,8 +22,6 @@ import {
 import { QuillModule } from 'ngx-quill';
 import { Observable, Subject, of, startWith, switchMap, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { EditCourseDto, Semesters } from 'shared/types/courses';
-import { UserShortDto } from 'shared/types/user';
 import { translateSemester } from 'shared/utils';
 @Component({
   selector: 'course-details-form',
@@ -60,7 +58,9 @@ export class CourseDetailsFormComponent implements OnInit {
 
   users!: Observable<UserShortDto[] | null>;
 
-  semesters = Object.values(Semesters).reduce(
+  semestersVariants: Semesters[] = ['Autumn', 'Spring'];
+
+  semesters = this.semestersVariants.reduce(
     (prevValue, curValue) => ({ ...prevValue, [curValue]: translateSemester(curValue) }),
     {},
   );
@@ -79,7 +79,7 @@ export class CourseDetailsFormComponent implements OnInit {
       name: new FormControl('', Validators.required),
       startYear: new FormControl<number>(2024, Validators.required),
       maximumStudentsCount: new FormControl<number>(10, Validators.required),
-      semester: new FormControl<Semesters>(Semesters.Autumn),
+      semester: new FormControl<Semesters>('Autumn'),
       requirements: new FormControl('', Validators.required),
       annotations: new FormControl('', Validators.required),
       mainTeacher: new FormControl<UserShortDto | null>(null, Validators.required),

@@ -40,7 +40,6 @@ import { coursesRoutes } from './courses.routes';
 import { CourseDetailsComponent } from './pages/course-details/course-details.component';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { TeachingCoursesComponent } from './pages/teaching-courses/teaching-courses.component';
-import { CoursesService } from './services/courses.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +86,7 @@ import { CoursesService } from './services/courses.service';
     TuiErrorModule,
     TuiFieldErrorPipeModule,
   ],
-  providers: [provideRouter(coursesRoutes), CoursesService],
+  providers: [provideRouter(coursesRoutes)],
   exports: [CoursesComponent],
 })
 export class CoursesModule {}

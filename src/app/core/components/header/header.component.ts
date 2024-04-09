@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TuiButtonModule, TuiSvgModule } from '@taiga-ui/core';
-import { ProfileService } from 'core/services/profile/profile.service';
-import { UserService } from 'core/services/user/user.service';
+import { APIUserService } from 'core/API/requests/apiuser.service';
+import { UserStateService } from 'core/services/userState.service';
 import { Subject, finalize, takeUntil } from 'rxjs';
 import { ROUTES } from 'shared/constants/routes';
-import { UserProfile, UserRoles } from 'shared/types/user';
 
 @Component({
   selector: 'app-header',
@@ -36,24 +35,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private userService: UserService,
-    private profileService: ProfileService,
+    private userStateService: UserStateService,
+    private APIUserService: APIUserService,
     private eRef: ElementRef,
     private router: Router,
   ) {}
 
   ngOnInit() {
-    this.userService.isAuth.pipe(takeUntil(this.unsubscribe)).subscribe({
+    this.userStateService.isAuth.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.isAuth = res;
       },
     });
-    this.userService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
+    this.userStateService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
+        console.log(res);
         this.userRoles = res;
       },
     });
-    this.userService.userProfile.pipe(takeUntil(this.unsubscribe)).subscribe({
+    this.userStateService.userProfile.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.userProfile = res;
       },
@@ -67,8 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   handleLogout() {
     this.isLogoutLoading = true;
-    this.profileService
-      .logout()
+    this.APIUserService.logout()
       .pipe(
         finalize(() => {
           this.isLogoutLoading = false;

@@ -1,11 +1,10 @@
 import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { UserService } from 'core/services/user/user.service';
+import { UserStateService } from 'core/services/userState.service';
 import { GroupService } from 'modules/group/services/group.service';
 import { ModalFormContextData, OPERATION_TYPE } from 'modules/group/types/operationType';
 import { Observable, Subject, finalize, take, takeUntil } from 'rxjs';
-import { GroupDto } from 'shared/types/groups';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 
 @Component({
@@ -21,14 +20,14 @@ export class GroupCardComponent implements OnInit, OnDestroy {
   private dialog!: Observable<ModalFormContextData<OPERATION_TYPE.EDIT_GROUP>>;
 
   constructor(
-    private userService: UserService,
+    private userStateService: UserStateService,
     private groupService: GroupService,
     private readonly dialogs: TuiDialogService,
     private readonly injector: Injector,
   ) {}
 
   ngOnInit(): void {
-    this.userService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
+    this.userStateService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.isAdmin = res?.isAdmin ?? false;
       },

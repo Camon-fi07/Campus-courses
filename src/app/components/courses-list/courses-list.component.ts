@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ROUTES } from 'shared/constants/routes';
-import { CourseModel } from 'shared/types/courses';
 import { translateCourseStatus, translateSemester, getCourseStatusColor } from 'shared/utils';
 
 @Component({

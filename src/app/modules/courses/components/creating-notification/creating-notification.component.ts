@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiAlertService, TuiDialogContext } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { CoursesService } from 'modules/courses/services/courses.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { NotificationContextData } from 'modules/courses/types/NotificationContextData';
 import { take } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class CreatingNotificationComponent {
     private fb: FormBuilder,
     @Inject(POLYMORPHEUS_CONTEXT)
     private readonly context: TuiDialogContext<void, NotificationContextData>,
-    private coursesService: CoursesService,
+    private APICoursesService: APICoursesService,
     private alerts: TuiAlertService,
   ) {
     this.formGroup = fb.group({
@@ -33,8 +33,7 @@ export class CreatingNotificationComponent {
     if (this.formGroup.valid) {
       this.isLoading = true;
       const { id } = this.context.data;
-      this.coursesService
-        .createNotification(id, this.formGroup.value)
+      this.APICoursesService.createNotification(id, this.formGroup.value)
         .pipe(take(1))
         .subscribe({
           next: () => {

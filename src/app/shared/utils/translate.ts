@@ -1,11 +1,8 @@
-import { CourseStatuses, Semesters } from 'shared/types/courses';
-import { StudentMarks, StudentStatuses } from 'shared/types/user';
-
 export const translateSemester = (semester: Semesters) => {
   switch (semester) {
-    case Semesters.Autumn:
+    case 'Autumn':
       return 'Осенний';
-    case Semesters.Spring:
+    case 'Spring':
       return 'Весенний';
     default:
       return '';
@@ -14,13 +11,13 @@ export const translateSemester = (semester: Semesters) => {
 
 export const translateCourseStatus = (status: CourseStatuses) => {
   switch (status) {
-    case CourseStatuses.Created:
+    case 'Created':
       return 'Создан';
-    case CourseStatuses.Finished:
+    case 'Finished':
       return 'Закрыт';
-    case CourseStatuses.Started:
+    case 'Started':
       return 'В процессе обучения';
-    case CourseStatuses.OpenForAssigning:
+    case 'OpenForAssigning':
       return 'Открыт для записи';
     default:
       return '';
@@ -29,22 +26,22 @@ export const translateCourseStatus = (status: CourseStatuses) => {
 
 export const translateStudentStatus = (status: StudentStatuses) => {
   switch (status) {
-    case StudentStatuses.Accepted:
+    case 'Accepted':
       return 'принят в группу';
-    case StudentStatuses.Declined:
+    case 'Declined':
       return 'отклонён';
-    case StudentStatuses.InQueue:
+    case 'InQueue':
       return 'в очереди';
   }
 };
 
 export const translateStudentMark = (mark: StudentMarks) => {
   switch (mark) {
-    case StudentMarks.Failed:
+    case 'Failed':
       return 'зафейлена';
-    case StudentMarks.NotDefined:
+    case 'NotDefined':
       return 'отметки нет';
-    case StudentMarks.Passed:
+    case 'Passed':
       return 'успешно пройдена';
   }
 };

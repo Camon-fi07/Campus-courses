@@ -3,15 +3,13 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { UserService } from 'core/services/user/user.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
+import { UserStateService } from 'core/services/userState.service';
 import { EditingCourseComponent } from 'modules/courses/components/editing-course/editing-course.component';
-import { CoursesService } from 'modules/courses/services/courses.service';
 import { CourseUserRoles } from 'modules/courses/types/CourseUserRoles';
 import { EditCourseContextData } from 'modules/courses/types/EditCourseContextData';
 import { Observable, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { CourseDetails } from 'shared/types/courses';
-import { UserShortDto } from 'shared/types/user';
 
 @Component({
   selector: 'course-details',
@@ -27,18 +25,17 @@ export class CourseDetailsComponent implements OnInit {
   private editCourseDialog!: Observable<EditCourseContextData>;
 
   constructor(
-    private coursesService: CoursesService,
+    private APICoursesService: APICoursesService,
     private activatedRoute: ActivatedRoute,
     private dialogs: TuiDialogService,
     private readonly injector: Injector,
-    private readonly userService: UserService,
+    private readonly userStateService: UserStateService,
     private readonly http: HttpClient,
   ) {}
 
   fetchDetails() {
     this.isLoading = true;
-    this.coursesService
-      .getCourseDetails(this.id)
+    this.APICoursesService.getCourseDetails(this.id)
       .pipe(take(1))
       .subscribe(async (res) => {
         this.courseDetails = res;
@@ -64,8 +61,8 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   getUserRole() {
-    const { isAdmin } = this.userService.userRoles.value!;
-    const { email } = this.userService.userProfile.value!;
+    const { isAdmin } = this.userStateService.userRoles.value!;
+    const { email } = this.userStateService.userProfile.value!;
 
     if (isAdmin) return CourseUserRoles.Admin;
 

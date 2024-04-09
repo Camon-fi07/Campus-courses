@@ -2,10 +2,9 @@ import { Component, EventEmitter, Injector, Input, Output } from '@angular/core'
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TuiStatus } from '@taiga-ui/kit';
 import { PolymorpheusComponent, PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { CoursesService } from 'modules/courses/services/courses.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { EditMarkContextData } from 'modules/courses/types/EditMarkContextData';
 import { finalize, take } from 'rxjs';
-import { MarkType, StudentMarks, StudentShort, StudentStatuses } from 'shared/types/user';
 import { getStudentStatusColor, translateStudentMark, translateStudentStatus } from 'shared/utils';
 import { EditMarkComponent } from '../edit-mark/edit-mark.component';
 
@@ -20,14 +19,12 @@ export class StudentComponent {
   @Output() refetchDetails = new EventEmitter<void>();
   private editMarkComponent!: PolymorpheusContent<TuiDialogContext>;
   isApplicationPanelLoading = false;
-  StudentStatuses = StudentStatuses;
   translateStudentStatus = translateStudentStatus;
   translateStudentMark = translateStudentMark;
   getStudentStatusColor = getStudentStatusColor;
-  MarkType = MarkType;
 
   constructor(
-    private coursesService: CoursesService,
+    private APICoursesService: APICoursesService,
     private readonly injector: Injector,
     private dialogs: TuiDialogService,
   ) {
@@ -36,19 +33,18 @@ export class StudentComponent {
 
   getMarkBadgeStyle(mark: StudentMarks): TuiStatus {
     switch (mark) {
-      case StudentMarks.Failed:
+      case 'Failed':
         return 'error';
-      case StudentMarks.NotDefined:
+      case 'NotDefined':
         return 'warning';
-      case StudentMarks.Passed:
+      case 'Passed':
         return 'success';
     }
   }
 
   handleChangeUserStatus(status: StudentStatuses) {
     this.isApplicationPanelLoading = true;
-    this.coursesService
-      .editCourseStudentStatus(this.courseId, this.student.id, { status })
+    this.APICoursesService.editCourseStudentStatus(this.courseId, this.student.id, { status })
       .pipe(
         take(1),
         finalize(() => {
@@ -61,7 +57,7 @@ export class StudentComponent {
   }
 
   handleEditMark(markType: MarkType) {
-    const oldMark = markType === MarkType.Final ? this.student.finalResult : this.student.midtermResult;
+    const oldMark = markType === 'Final' ? this.student.finalResult : this.student.midtermResult;
 
     this.dialogs
       .open<EditMarkContextData>(this.editMarkComponent, {

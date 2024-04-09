@@ -1,15 +1,12 @@
-import { CourseStatuses } from 'shared/types/courses';
-import { StudentStatuses } from 'shared/types/user';
-
 export const getCourseStatusColor = (status: CourseStatuses) => {
   switch (status) {
-    case CourseStatuses.Created:
+    case 'Created':
       return 'var(--tui-neutral-fill)';
-    case CourseStatuses.Finished:
+    case 'Finished':
       return 'var(--tui-negative)';
-    case CourseStatuses.OpenForAssigning:
+    case 'OpenForAssigning':
       return 'var(--tui-positive)';
-    case CourseStatuses.Started:
+    case 'Started':
       return 'var(--tui-link)';
     default:
       return 'unset';
@@ -18,11 +15,11 @@ export const getCourseStatusColor = (status: CourseStatuses) => {
 
 export const getStudentStatusColor = (status: StudentStatuses) => {
   switch (status) {
-    case StudentStatuses.Declined:
+    case 'Declined':
       return 'var(--tui-negative)';
-    case StudentStatuses.Accepted:
+    case 'Accepted':
       return 'var(--tui-positive)';
-    case StudentStatuses.InQueue:
+    case 'InQueue':
       return 'var(--tui-link)';
     default:
       return 'unset';

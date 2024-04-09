@@ -1,7 +1,7 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { UserService } from 'core/services/user/user.service';
+import { UserStateService } from 'core/services/userState.service';
 import { Subject, take, takeUntil } from 'rxjs';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { ModalFormContextData, OPERATION_TYPE } from './types/operationType';
@@ -20,13 +20,13 @@ export class GroupComponent implements OnInit, OnDestroy {
   );
 
   constructor(
-    private userService: UserService,
+    private userStateService: UserStateService,
     private readonly dialogs: TuiDialogService,
     private readonly injector: Injector,
   ) {}
 
   ngOnInit() {
-    this.userService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
+    this.userStateService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
         this.isAdmin = res?.isAdmin ?? false;
       },
