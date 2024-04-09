@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { CoursesService } from 'modules/courses/services/courses.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { CourseUserRoles } from 'modules/courses/types/CourseUserRoles';
 import { EditCourseStatusContextData } from 'modules/courses/types/EditCourseStatusContextData';
 import { Observable, take } from 'rxjs';
-import { CourseStatuses, Semesters } from 'shared/types/courses';
 import { getCourseStatusColor, translateCourseStatus, translateSemester } from 'shared/utils';
 import { EditStatusComponent } from '../edit-status/edit-status.component';
 
@@ -28,12 +27,11 @@ export class MainDataComponent implements OnInit {
   translateSemester = translateSemester;
   getCourseStatusColor = getCourseStatusColor;
   CourseUserRoles = CourseUserRoles;
-  CourseStatuses = CourseStatuses;
   isUserSignUp = false;
   private editCourseStatusDialog!: Observable<EditCourseStatusContextData>;
 
   constructor(
-    private coursesService: CoursesService,
+    private APICoursesService: APICoursesService,
     private dialogs: TuiDialogService,
     private readonly injector: Injector,
   ) {}
@@ -52,8 +50,7 @@ export class MainDataComponent implements OnInit {
   }
 
   checkIsUserSignUp() {
-    this.coursesService
-      .getMyCourses()
+    this.APICoursesService.getMyCourses()
       .pipe(take(1))
       .subscribe({
         next: (courses) => {
@@ -63,8 +60,7 @@ export class MainDataComponent implements OnInit {
   }
 
   handleSignUpForCourse() {
-    this.coursesService
-      .signUpForCourse(this.courseId)
+    this.APICoursesService.signUpForCourse(this.courseId)
       .pipe(take(1))
       .subscribe({
         next: () => this.refetchDetails.emit(),

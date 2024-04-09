@@ -2,7 +2,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { POLYMORPHEUS_CONTEXT, PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
 import { CoursesModule } from 'modules/courses/courses.module';
-import { MarkType } from 'shared/types/user';
 import { EditMarkComponent } from './edit-mark.component';
 
 describe('EditMarkComponent', () => {
@@ -16,7 +15,7 @@ describe('EditMarkComponent', () => {
         HttpClient,
         {
           provide: POLYMORPHEUS_CONTEXT,
-          useValue: { data: { studentName: '', courseId: '', studentId: 'string', markType: MarkType.Final } },
+          useValue: { data: { studentName: '', courseId: '', studentId: 'string', markType: 'Final' } },
         },
       ],
     }).compileComponents();

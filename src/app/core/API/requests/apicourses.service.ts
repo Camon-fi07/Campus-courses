@@ -1,20 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import {
-  AddCampusCourseNotificationModel,
-  AddTeacherToCourseModel,
-  CourseDetails,
-  CourseModel,
-  EditCampusCourseRequirementsAndAnnotationsModel,
-  EditCourseDto,
-  EditCourseStatusModel,
-  EditCourseStudentMarkModel,
-} from 'shared/types/courses';
-import { EditCourseStudentStatusModel } from 'shared/types/user';
 
-@Injectable()
-export class CoursesService {
+@Injectable({
+  providedIn: 'root',
+})
+export class APICoursesService {
   constructor(private http: HttpClient) {}
 
   getMyCourses() {

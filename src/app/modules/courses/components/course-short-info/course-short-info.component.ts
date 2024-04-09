@@ -4,7 +4,6 @@ import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { NotificationContextData } from 'modules/courses/types/NotificationContextData';
 import { Observable, take } from 'rxjs';
-import { NotificationModel } from 'shared/types/courses';
 import { CreatingNotificationComponent } from '../creating-notification/creating-notification.component';
 import { ContentType } from './course-short-info.types';
 

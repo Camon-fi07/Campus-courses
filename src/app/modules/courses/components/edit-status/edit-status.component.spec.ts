@@ -2,7 +2,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { POLYMORPHEUS_CONTEXT, PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
 import { CoursesModule } from 'modules/courses/courses.module';
-import { CourseStatuses } from 'shared/types/courses';
 import { EditStatusComponent } from './edit-status.component';
 
 describe('EditStatusComponent', () => {
@@ -16,7 +15,7 @@ describe('EditStatusComponent', () => {
         HttpClient,
         {
           provide: POLYMORPHEUS_CONTEXT,
-          useValue: { data: { id: '123', status: CourseStatuses.Created } },
+          useValue: { data: { id: '123', status: 'Created' } },
         },
       ],
     }).compileComponents();

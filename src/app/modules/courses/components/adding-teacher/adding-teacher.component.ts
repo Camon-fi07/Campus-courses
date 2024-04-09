@@ -4,10 +4,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { CoursesService } from 'modules/courses/services/courses.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { Observable, Subject, of, startWith, switchMap, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
-import { TeacherShort, UserShortDto } from 'shared/types/user';
 
 @Component({
   selector: 'adding-teacher',
@@ -28,7 +27,7 @@ export class AddingTeacherComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<void, { id: string }>,
-    private coursesService: CoursesService,
+    private APICoursesService: APICoursesService,
     private http: HttpClient,
   ) {
     this.formGroup = fb.group({ teacher: new FormControl<TeacherShort | null>(null) });
@@ -62,8 +61,7 @@ export class AddingTeacherComponent implements OnInit {
     if (this.formGroup.valid) {
       this.isLoading = true;
       const { id } = this.formGroup.value.teacher;
-      this.coursesService
-        .addCourseTeacher(this.context.data.id, { userId: id })
+      this.APICoursesService.addCourseTeacher(this.context.data.id, { userId: id })
         .pipe(take(1))
         .subscribe({
           next: () => this.context.completeWith(),

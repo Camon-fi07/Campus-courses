@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { TuiRootModule, TuiDialogModule, TuiAlertModule } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { HeaderComponent } from 'core/components/header/header.component';
+import { ProfileService } from 'core/services/profile.service';
 import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
 
 @Component({
@@ -22,4 +23,6 @@ import { EMAIL_ERROR, REQUIRED_ERROR } from 'shared/constants/errors';
     },
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private profileService: ProfileService) {}
+}

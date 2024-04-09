@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EditCampusCourseRequirementsAndAnnotationsModel } from 'shared/types/courses';
 
 @Component({
   selector: 'require-and-annotation-edit',

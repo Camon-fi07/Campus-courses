@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GroupService } from 'modules/group/services/group.service';
 import { Subject, takeUntil } from 'rxjs';
-import { GroupDto } from 'shared/types/groups';
 
 @Component({
   selector: 'groups-list',

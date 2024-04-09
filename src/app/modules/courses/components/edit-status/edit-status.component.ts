@@ -2,10 +2,9 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { CoursesService } from 'modules/courses/services/courses.service';
+import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { EditCourseStatusContextData } from 'modules/courses/types/EditCourseStatusContextData';
 import { take } from 'rxjs';
-import { CourseStatuses } from 'shared/types/courses';
 import { translateCourseStatus } from 'shared/utils';
 
 @Component({
@@ -19,12 +18,12 @@ export class EditStatusComponent implements OnInit {
   translateCourseStatus = translateCourseStatus;
   isLoading = false;
 
-  variants = Object.values(CourseStatuses);
+  variants: CourseStatuses[] = ['Finished', 'OpenForAssigning', 'Started'];
 
   constructor(
     private fb: FormBuilder,
     @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<void, EditCourseStatusContextData>,
-    private courseService: CoursesService,
+    private APICoursesService: APICoursesService,
   ) {}
 
   ngOnInit(): void {
@@ -33,8 +32,7 @@ export class EditStatusComponent implements OnInit {
 
   handleSubmit() {
     this.isLoading = true;
-    this.courseService
-      .editCourseStatus(this.context.data.id, this.formGroup.value)
+    this.APICoursesService.editCourseStatus(this.context.data.id, this.formGroup.value)
       .pipe(take(1))
       .subscribe({ next: () => this.context.completeWith() });
   }

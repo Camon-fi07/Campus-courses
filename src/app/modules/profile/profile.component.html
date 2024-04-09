@@ -15,7 +15,7 @@
         formControlName="birthDate"
         tuiTextfieldSize="m"
         [tuiTextfieldLabelOutside]="true"
-        [max]="maxDate">
+        [max]="tuiToday">
         <input tuiTextfield />
       </tui-input-date>
       <tui-error formControlName="birthDate" [error]="[] | tuiFieldError | async"></tui-error>

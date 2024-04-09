@@ -1,5 +1,3 @@
-import { MarkType, StudentMarks } from 'shared/types/user';
-
 export interface EditMarkContextData {
   studentName: string;
   courseId: string;
