@@ -16,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'groups',
     component: GroupPageComponent,
+    loadChildren: () => import('modules/group/group.module').then((m) => m.GroupModule),
     canActivate: [authGuard],
   },
   {

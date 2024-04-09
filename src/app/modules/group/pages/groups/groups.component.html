@@ -1,0 +1,11 @@
+<div class="group">
+  <h2 class="tui-text_h4">Группы кампусных курсов</h2>
+  <button (click)="handleCreateGroup()" class="adding" *ngIf="isAdmin" tuiButton size="m">Создать</button>
+  <tui-loader [showLoader]="isLoading" size="l">
+    <ul class="list">
+      <li *ngFor="let group of groups">
+        <group-card [group]="group" (refetchGroups)="fetchGroupsList()"></group-card>
+      </li>
+    </ul>
+  </tui-loader>
+</div>

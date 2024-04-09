@@ -1,8 +1,8 @@
-import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { APIGroupsService } from 'core/API/requests/apigroups.service';
 import { UserStateService } from 'core/services/userState.service';
-import { GroupService } from 'modules/group/services/group.service';
 import { ModalFormContextData, OPERATION_TYPE } from 'modules/group/types/operationType';
 import { Observable, Subject, finalize, take, takeUntil } from 'rxjs';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
@@ -14,6 +14,7 @@ import { ModalFormComponent } from '../modal-form/modal-form.component';
 })
 export class GroupCardComponent implements OnInit, OnDestroy {
   @Input() group!: GroupDto;
+  @Output() refetchGroups = new EventEmitter();
   isAdmin = false;
   isDeleteLoading = false;
   private unsubscribe = new Subject<void>();
@@ -21,9 +22,9 @@ export class GroupCardComponent implements OnInit, OnDestroy {
 
   constructor(
     private userStateService: UserStateService,
-    private groupService: GroupService,
     private readonly dialogs: TuiDialogService,
     private readonly injector: Injector,
+    private readonly APIGroupsService: APIGroupsService,
   ) {}
 
   ngOnInit(): void {
@@ -48,18 +49,17 @@ export class GroupCardComponent implements OnInit, OnDestroy {
 
   handleDelete() {
     this.isDeleteLoading = true;
-    this.groupService
-      .deleteGroup(this.group.id)
+    this.APIGroupsService.deleteGroup(this.group.id)
       .pipe(
         finalize(() => {
           this.isDeleteLoading = false;
         }),
         take(1),
       )
-      .subscribe();
+      .subscribe({ next: () => this.refetchGroups.emit() });
   }
 
   handleEdit() {
-    this.dialog.pipe(take(1)).subscribe();
+    this.dialog.pipe(take(1)).subscribe({ next: () => this.refetchGroups.emit() });
   }
 }
