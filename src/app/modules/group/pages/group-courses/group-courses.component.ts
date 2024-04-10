@@ -71,6 +71,7 @@ export class GroupCoursesComponent implements OnInit, OnDestroy {
       next: () => {
         this.fetchCourses();
         this.creatingFormDialog?.unsubscribe();
+        this.creatingFormDialog = undefined;
       },
     });
   }
