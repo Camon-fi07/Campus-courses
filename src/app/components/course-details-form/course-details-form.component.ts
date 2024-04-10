@@ -23,6 +23,7 @@ import { QuillModule } from 'ngx-quill';
 import { Observable, Subject, of, startWith, switchMap, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
 import { translateSemester } from 'shared/utils';
+import { CourseDetailsFormData } from './course-details.types';
 @Component({
   selector: 'course-details-form',
   standalone: true,
@@ -54,7 +55,7 @@ export class CourseDetailsFormComponent implements OnInit {
   readonly search = new Subject<string | null>();
   originUsers: UserShortDto[] = [];
   @Input() initValues?: EditCourseDto;
-  @Output() emitSubmit = new EventEmitter<EditCourseDto>();
+  @Output() emitSubmit = new EventEmitter<CourseDetailsFormData>();
 
   users!: Observable<UserShortDto[] | null>;
 

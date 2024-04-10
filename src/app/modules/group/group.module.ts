@@ -11,14 +11,17 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
+import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
+import { CoursesListComponent } from 'components/courses-list/courses-list.component';
 import { GroupCardComponent } from './components/group-card/group-card.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { GroupComponent } from './group.component';
 import { groupRoutes } from './group.routes';
+import { GroupCoursesComponent } from './pages/group-courses/group-courses.component';
 import { GroupsComponent } from './pages/groups/groups.component';
 
 @NgModule({
-  declarations: [GroupComponent, GroupCardComponent, ModalFormComponent, GroupsComponent],
+  declarations: [GroupComponent, GroupCardComponent, ModalFormComponent, GroupsComponent, GroupCoursesComponent],
   imports: [
     CommonModule,
     TuiButtonModule,
@@ -32,6 +35,8 @@ import { GroupsComponent } from './pages/groups/groups.component';
     TuiTextfieldControllerModule,
     TuiLoaderModule,
     RouterOutlet,
+    CoursesListComponent,
+    CourseDetailsFormComponent,
   ],
   exports: [GroupComponent],
   providers: [provideRouter(groupRoutes)],

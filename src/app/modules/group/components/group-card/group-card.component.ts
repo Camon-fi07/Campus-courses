@@ -5,6 +5,7 @@ import { APIGroupsService } from 'core/API/requests/apigroups.service';
 import { UserStateService } from 'core/services/userState.service';
 import { ModalFormContextData, OPERATION_TYPE } from 'modules/group/types/operationType';
 import { Observable, Subject, finalize, take, takeUntil } from 'rxjs';
+import { ROUTES } from 'shared/constants/routes';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 
 @Component({
@@ -19,6 +20,7 @@ export class GroupCardComponent implements OnInit, OnDestroy {
   isDeleteLoading = false;
   private unsubscribe = new Subject<void>();
   private dialog!: Observable<ModalFormContextData<OPERATION_TYPE.EDIT_GROUP>>;
+  ROUTES = ROUTES;
 
   constructor(
     private userStateService: UserStateService,

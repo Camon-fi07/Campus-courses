@@ -1,0 +1,11 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .adding {
+    width: fit-content;
+  }
+}

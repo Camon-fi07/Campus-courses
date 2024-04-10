@@ -12,6 +12,16 @@ interface EditCourseDto {
   mainTeacherId: string;
 }
 
+interface CreateCourseDto {
+  name: string;
+  startYear: number;
+  maximumStudentsCount: number;
+  semester: Semesters;
+  requirements: string;
+  annotations: string;
+  mainTeacherId: string;
+}
+
 interface EditCampusCourseRequirementsAndAnnotationsModel {
   requirements: string;
   annotations: string;

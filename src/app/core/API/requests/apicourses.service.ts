@@ -51,4 +51,8 @@ export class APICoursesService {
   editCourseStudentMark(courseId: string, studentId: string, data: EditCourseStudentMarkModel) {
     return this.http.post(API_PATHS.EDIT_COURSES_STUDENT_MARK(courseId, studentId), data);
   }
+
+  createCourse(groupId: string, data: CreateCourseDto) {
+    return this.http.post(API_PATHS.CONCRETE_GROUP(groupId), data);
+  }
 }

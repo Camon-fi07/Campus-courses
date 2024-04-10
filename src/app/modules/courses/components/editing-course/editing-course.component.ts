@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
+import { CourseDetailsFormData } from 'components/course-details-form/course-details.types';
 import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { CourseUserRoles } from 'modules/courses/types/CourseUserRoles';
 import { EditCourseContextData } from 'modules/courses/types/EditCourseContextData';
@@ -28,9 +29,9 @@ export class EditingCourseComponent {
     this.userRole = userRole;
   }
 
-  handleEditCourse(data: EditCourseDto | EditCampusCourseRequirementsAndAnnotationsModel) {
+  handleEditCourse(data: CourseDetailsFormData | EditCampusCourseRequirementsAndAnnotationsModel) {
     if (this.userRole === CourseUserRoles.Admin) {
-      this.APICoursesService.editCourse(this.courseId, data as EditCourseDto)
+      this.APICoursesService.editCourse(this.courseId, data as CourseDetailsFormData)
         .pipe(take(1))
         .subscribe({
           next: () => this.context.completeWith(),
