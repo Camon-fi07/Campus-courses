@@ -25,7 +25,7 @@ export class APICoursesService {
   }
 
   editCourse(courseId: string, data: EditCourseDto) {
-    return this.http.put(API_PATHS.EDIT_COURSE(courseId), data);
+    return this.http.put(API_PATHS.CONCRETE_COURSE(courseId), data);
   }
 
   editCourseStatus(courseId: string, data: EditCourseStatusModel) {
@@ -54,5 +54,9 @@ export class APICoursesService {
 
   createCourse(groupId: string, data: CreateCourseDto) {
     return this.http.post(API_PATHS.CONCRETE_GROUP(groupId), data);
+  }
+
+  deleteCourse(courseId: string) {
+    return this.http.delete(API_PATHS.CONCRETE_COURSE(courseId));
   }
 }

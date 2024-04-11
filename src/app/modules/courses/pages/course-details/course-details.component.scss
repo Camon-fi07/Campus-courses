@@ -9,8 +9,15 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: -10px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .loader {
   height: 100%;
+}
+
+.panel {
+  display: flex;
+  gap: 10px;
 }

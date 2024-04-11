@@ -22,6 +22,7 @@ import {
   TuiDataListWrapperModule,
 } from '@taiga-ui/kit';
 import { AdaptiveTabsComponent } from 'components/adaptive-tabs/adaptive-tabs.component';
+import { ConfirmationDeleteComponent } from 'components/confirmation-delete/confirmation-delete.component';
 import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
 import { QuillModule } from 'ngx-quill';
@@ -85,6 +86,7 @@ import { TeachingCoursesComponent } from './pages/teaching-courses/teaching-cour
     TuiDataListWrapperModule,
     TuiErrorModule,
     TuiFieldErrorPipeModule,
+    ConfirmationDeleteComponent,
   ],
   providers: [provideRouter(coursesRoutes)],
   exports: [CoursesComponent],
