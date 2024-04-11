@@ -11,6 +11,7 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
+import { ConfirmationDeleteComponent } from 'components/confirmation-delete/confirmation-delete.component';
 import { CourseDetailsFormComponent } from 'components/course-details-form/course-details-form.component';
 import { CoursesListComponent } from 'components/courses-list/courses-list.component';
 import { GroupCardComponent } from './components/group-card/group-card.component';
@@ -37,6 +38,7 @@ import { GroupsComponent } from './pages/groups/groups.component';
     RouterOutlet,
     CoursesListComponent,
     CourseDetailsFormComponent,
+    ConfirmationDeleteComponent,
   ],
   exports: [GroupComponent],
   providers: [provideRouter(groupRoutes)],

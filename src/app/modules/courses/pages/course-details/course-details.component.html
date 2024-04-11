@@ -47,6 +47,6 @@
 
 <ng-template #deleteConfirmation>
   <confirmation-delete
-    (handleCancelClick)="deleteCourseSubscription?.unsubscribe()"
-    (handleConfirmClick)="handleDeleteCourse()"></confirmation-delete>
+    (cancelEmit)="deleteCourseSubscription?.unsubscribe()"
+    (confirmEmit)="handleDeleteCourse()"></confirmation-delete>
 </ng-template>

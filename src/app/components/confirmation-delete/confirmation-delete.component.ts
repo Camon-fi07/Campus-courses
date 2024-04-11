@@ -9,8 +9,8 @@ import { TuiButtonModule } from '@taiga-ui/core';
   styleUrl: './confirmation-delete.component.scss',
 })
 export class ConfirmationDeleteComponent {
-  @Output() cancelEmit = new EventEmitter<void>();
-  @Output() confirmEmit = new EventEmitter<void>();
+  @Output() cancelEmit = new EventEmitter();
+  @Output() confirmEmit = new EventEmitter();
   isLoading = false;
 
   handleConfirm() {
