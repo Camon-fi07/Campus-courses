@@ -2,7 +2,9 @@
   <li *ngFor="let course of courses">
     <a class="card" [routerLink]="ROUTES.CONCRETE_COURSE(course.id)">
       <div class="title">
-        <h3>{{ course.name }}</h3>
+        <h3>
+          {{ course.name }}
+        </h3>
         <span [style]="{ color: getCourseStatusColor(course.status) }">{{ translateCourseStatus(course.status) }}</span>
       </div>
       <div class="content">

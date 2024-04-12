@@ -1,7 +1,7 @@
 <div class="wrapper">
   @if (!isLoading) {
-    <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
-    <div class="title">
+    <h2 class="tui-text_h3 title">{{ courseDetails.name }}</h2>
+    <div class="head">
       <span>Основные данные курса</span>
       <div class="panel">
         <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">

@@ -11,6 +11,16 @@
   flex-direction: column;
   justify-content: space-between;
   font: var(--tui-font-text-l);
+
+  & > :first-child {
+    line-clamp: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .content {
