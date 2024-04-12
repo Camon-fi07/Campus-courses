@@ -24,6 +24,8 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
   -webkit-box-orient: vertical;
   margin-inline-end: auto;
 }
