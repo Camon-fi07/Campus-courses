@@ -1,3 +1,5 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -7,13 +9,13 @@
 .panel {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
 }
 
-@media (max-width: 768px) {
+@media #{$tui-tablet-min} {
   .panel {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
   }
 }

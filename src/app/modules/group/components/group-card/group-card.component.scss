@@ -1,3 +1,5 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .card {
   display: flex;
   align-items: center;
@@ -30,7 +32,7 @@
   margin-inline-end: auto;
 }
 
-@media (min-width: 768px) {
+@media #{$tui-tablet-min} {
   .card {
     flex-direction: row;
   }

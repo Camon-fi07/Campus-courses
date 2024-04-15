@@ -1,3 +1,5 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .tabs {
   display: none;
   justify-content: space-around;
@@ -7,7 +9,7 @@ button[tuiOption] {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media #{$tui-tablet-min} {
   .tabs {
     display: flex;
   }

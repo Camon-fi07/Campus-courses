@@ -1,13 +1,17 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .student {
   display: grid;
-  grid-template-columns: 30% 1fr;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+  border-bottom: 1px solid var(--tui-base-07);
 }
 
 .marks {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
   gap: 10px;
 
   & > * {
@@ -19,26 +23,25 @@
 
 .applicationPanel {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
-@media (max-width: 768px) {
+@media #{$tui-tablet-min} {
   .student {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, auto);
-    gap: 10px;
-    border-bottom: 1px solid var(--tui-base-07);
+    grid-template-columns: 30% 1fr;
+    gap: 20px;
   }
 
   .marks {
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
   }
 
   .applicationPanel {
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }

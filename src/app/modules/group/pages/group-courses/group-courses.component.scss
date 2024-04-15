@@ -1,10 +1,12 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .group {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-@media (min-width: 768px) {
+@media #{$tui-tablet-min} {
   .adding {
     width: fit-content;
   }
