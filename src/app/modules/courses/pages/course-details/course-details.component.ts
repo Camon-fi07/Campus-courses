@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Injector, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent, PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { APICoursesService } from 'core/API/requests/apicourses.service';
 import { UserStateService } from 'core/services/userState.service';
 import { EditingCourseComponent } from 'modules/courses/components/editing-course/editing-course.component';
 import { CourseUserRoles } from 'modules/courses/types/CourseUserRoles';
 import { EditCourseContextData } from 'modules/courses/types/EditCourseContextData';
-import { Observable, take } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { API_PATHS } from 'shared/constants/apiPaths';
+import { ROUTES } from 'shared/constants/routes';
 
 @Component({
   selector: 'course-details',
@@ -23,6 +24,7 @@ export class CourseDetailsComponent implements OnInit {
   courseUserRole: CourseUserRoles | null = null;
   isUserCanEdit = false;
   private editCourseDialog!: Observable<EditCourseContextData>;
+  deleteCourseSubscription?: Subscription;
 
   constructor(
     private APICoursesService: APICoursesService,
@@ -31,6 +33,7 @@ export class CourseDetailsComponent implements OnInit {
     private readonly injector: Injector,
     private readonly userStateService: UserStateService,
     private readonly http: HttpClient,
+    private readonly router: Router,
   ) {}
 
   fetchDetails() {
@@ -114,5 +117,20 @@ export class CourseDetailsComponent implements OnInit {
     this.editCourseDialog.pipe(take(1)).subscribe({
       next: () => this.fetchDetails(),
     });
+  }
+
+  handleOpenDeleteConfirmation(content: PolymorpheusContent<TuiDialogContext>) {
+    this.deleteCourseSubscription = this.dialogs.open(content).pipe(take(1)).subscribe();
+  }
+
+  handleDeleteCourse() {
+    this.APICoursesService.deleteCourse(this.id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.deleteCourseSubscription?.unsubscribe();
+          this.router.navigate([ROUTES.GROUPS]);
+        },
+      });
   }
 }

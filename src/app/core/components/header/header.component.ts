@@ -49,7 +49,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     this.userStateService.userRoles.pipe(takeUntil(this.unsubscribe)).subscribe({
       next: (res) => {
-        console.log(res);
         this.userRoles = res;
       },
     });
@@ -76,6 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.toggleIsOpen();
+          this.userStateService.deleteUser();
           this.router.navigate([ROUTES.LOGIN]);
         },
       });

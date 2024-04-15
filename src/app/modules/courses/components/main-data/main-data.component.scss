@@ -1,3 +1,5 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .main-data {
   display: grid;
   box-shadow: var(--tui-shadow);
@@ -29,7 +31,7 @@
   }
 }
 
-@media (min-width: 420px) {
+@media #{$tui-mobile-min} {
   .main-data {
     grid-template-columns: 1fr 1fr;
 

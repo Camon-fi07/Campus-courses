@@ -1,11 +1,21 @@
 <div class="wrapper">
   @if (!isLoading) {
-    <h2 class="tui-text_h3">{{ courseDetails.name }}</h2>
-    <div class="title">
+    <h2 class="tui-text_h3 title">{{ courseDetails.name }}</h2>
+    <div class="head">
       <span>Основные данные курса</span>
-      <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
-        Редактировать
-      </button>
+      <div class="panel">
+        <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+          Редактировать
+        </button>
+        <button
+          *ngIf="isUserCanEdit"
+          tuiButton
+          size="m"
+          appearance="error"
+          (click)="handleOpenDeleteConfirmation(deleteConfirmation)">
+          Удалить
+        </button>
+      </div>
     </div>
     <main-data
       [courseId]="this.id"
@@ -34,3 +44,9 @@
     <tui-loader size="xl" class="loader"></tui-loader>
   }
 </div>
+
+<ng-template #deleteConfirmation>
+  <confirmation-delete
+    (cancelEmit)="deleteCourseSubscription?.unsubscribe()"
+    (confirmEmit)="handleDeleteCourse()"></confirmation-delete>
+</ng-template>

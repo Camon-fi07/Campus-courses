@@ -1,3 +1,5 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
 .form {
   display: flex;
   flex-direction: column;
@@ -9,7 +11,7 @@ tui-error {
   font: var(--tui-font-text-m);
 }
 
-@media (min-width: 768px) {
+@media #{$tui-tablet-min} {
   label {
     display: grid;
     grid-template-columns: 75px 1fr;

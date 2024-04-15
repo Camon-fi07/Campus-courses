@@ -1,10 +1,11 @@
-import { Component, Injector, Input, OnDestroy, OnInit } from '@angular/core';
-import { TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { Component, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent, PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { APIGroupsService } from 'core/API/requests/apigroups.service';
 import { UserStateService } from 'core/services/userState.service';
-import { GroupService } from 'modules/group/services/group.service';
 import { ModalFormContextData, OPERATION_TYPE } from 'modules/group/types/operationType';
-import { Observable, Subject, finalize, take, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, take, takeUntil } from 'rxjs';
+import { ROUTES } from 'shared/constants/routes';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 
 @Component({
@@ -14,16 +15,18 @@ import { ModalFormComponent } from '../modal-form/modal-form.component';
 })
 export class GroupCardComponent implements OnInit, OnDestroy {
   @Input() group!: GroupDto;
+  @Output() refetchGroups = new EventEmitter();
   isAdmin = false;
-  isDeleteLoading = false;
   private unsubscribe = new Subject<void>();
   private dialog!: Observable<ModalFormContextData<OPERATION_TYPE.EDIT_GROUP>>;
+  ROUTES = ROUTES;
+  deleteGroupSubscription?: Subscription;
 
   constructor(
     private userStateService: UserStateService,
-    private groupService: GroupService,
     private readonly dialogs: TuiDialogService,
     private readonly injector: Injector,
+    private readonly APIGroupsService: APIGroupsService,
   ) {}
 
   ngOnInit(): void {
@@ -46,20 +49,23 @@ export class GroupCardComponent implements OnInit, OnDestroy {
     this.unsubscribe.complete();
   }
 
-  handleDelete() {
-    this.isDeleteLoading = true;
-    this.groupService
-      .deleteGroup(this.group.id)
-      .pipe(
-        finalize(() => {
-          this.isDeleteLoading = false;
-        }),
-        take(1),
-      )
-      .subscribe();
+  handleEdit() {
+    this.dialog.pipe(take(1)).subscribe({ next: () => this.refetchGroups.emit() });
   }
 
-  handleEdit() {
-    this.dialog.pipe(take(1)).subscribe();
+  handleOpenDeleteConfirmation(content: PolymorpheusContent<TuiDialogContext>) {
+    this.deleteGroupSubscription = this.dialogs.open(content).pipe(take(1)).subscribe();
+  }
+
+  handleDeleteGroup() {
+    console.log('what');
+    this.APIGroupsService.deleteGroup(this.group.id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.refetchGroups.emit();
+          this.deleteGroupSubscription?.unsubscribe();
+        },
+      });
   }
 }

@@ -23,4 +23,8 @@ export class APIGroupsService {
   deleteGroup(id: string) {
     return this.http.delete(API_PATHS.CONCRETE_GROUP(id));
   }
+
+  getGroupCourses(id: string) {
+    return this.http.get<CourseModel[]>(API_PATHS.CONCRETE_GROUP(id));
+  }
 }

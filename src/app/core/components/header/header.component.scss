@@ -1,3 +1,4 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
 @mixin burgerMenu {
   .burgerMenu {
     display: block;
@@ -110,13 +111,13 @@ nav {
   display: none;
 }
 
-@media (max-width: 1000px) {
+@media #{$tui-tablet} {
   .authNav {
     @include burgerMenu;
   }
 }
 
-@media (max-width: 768px) {
+@media #{$tui-mobile} {
   @include burgerMenu;
 
   .title * {

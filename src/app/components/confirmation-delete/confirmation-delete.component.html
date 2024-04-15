@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <h2 class="tui-text_h4">Вы уверены, что хотите удалить?</h2>
+  <div class="panel">
+    <button appearance="outline" tuiButton (click)="cancelEmit.emit()">Отмена</button>
+    <button [showLoader]="isLoading" tuiButton (click)="handleConfirm()">Да</button>
+  </div>
+</div>

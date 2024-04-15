@@ -4,13 +4,30 @@
   gap: 20px;
 }
 
-.title {
+.head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: -10px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.title {
+  line-clamp: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
 }
 
 .loader {
   height: 100%;
+}
+
+.panel {
+  display: flex;
+  gap: 10px;
 }
