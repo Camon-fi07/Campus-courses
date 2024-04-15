@@ -75,6 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.toggleIsOpen();
+          this.userStateService.deleteUser();
           this.router.navigate([ROUTES.LOGIN]);
         },
       });
