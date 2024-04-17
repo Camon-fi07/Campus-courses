@@ -20,6 +20,11 @@ export class CourseShortInfoComponent implements OnInit {
   @Input({ required: true }) isUserCanEdit!: boolean;
   @Output() refetchDetails = new EventEmitter<void>();
   safeAnnotation?: SafeHtml;
+  tabVariants = [
+    { key: ContentType.Requirements, text: 'Требования к курсу' },
+    { key: ContentType.Annotations, text: 'Аннотация' },
+    { key: ContentType.Notifications, text: 'Уведомления' },
+  ];
   safeRequirements?: SafeHtml;
   private dialog!: Observable<NotificationContextData>;
 
@@ -36,15 +41,11 @@ export class CourseShortInfoComponent implements OnInit {
       new PolymorpheusComponent(CreatingNotificationComponent, this.injector),
       { data: { id: this.id } },
     );
+
+    this.tabVariants[2].text = `${this.tabVariants[2].text} (${this.notifications.length})`;
   }
 
   ContentType = ContentType;
-
-  tabVariants = [
-    { key: ContentType.Requirements, text: 'Требования к курсу' },
-    { key: ContentType.Annotations, text: 'Аннотация' },
-    { key: ContentType.Notifications, text: 'Уведомления' },
-  ];
   valueIndex = 0;
 
   handleCreateNotification() {

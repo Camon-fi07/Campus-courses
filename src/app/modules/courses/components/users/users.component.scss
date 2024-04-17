@@ -11,6 +11,7 @@
 
 .content {
   overflow: auto;
+  min-height: 50px;
   max-height: 450px;
   word-break: break-all;
   overflow-wrap: break-word;
