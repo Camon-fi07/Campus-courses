@@ -1,0 +1,9 @@
+<div class="group">
+  <h2 class="tui-text_h4">{{ id }}</h2>
+  <button (click)="handleCreateCourse(createCourse)" class="adding" *ngIf="isAdmin" tuiButton size="m">Создать</button>
+  <tui-loader [showLoader]="isLoading"><courses-list [courses]="courses"></courses-list></tui-loader>
+</div>
+
+<ng-template #createCourse let-observer>
+  <course-details-form (emitSubmit)="handleSubmitCreatingCourse($event)"></course-details-form>
+</ng-template>

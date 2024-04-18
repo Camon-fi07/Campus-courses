@@ -1,0 +1,47 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+.student {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+  border-bottom: 1px solid var(--tui-base-07);
+}
+
+.marks {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.applicationPanel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+@media #{$tui-tablet-min} {
+  .student {
+    grid-template-columns: 30% 1fr;
+    gap: 20px;
+  }
+
+  .marks {
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .applicationPanel {
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,29 @@
+<header [class]="{ authNav: isAuth }">
+  <a class="title" [routerLink]="ROUTES.HOME">
+    <img src="assets/icons/angular.svg" alt="" />
+    <h2>Кампусные курсы</h2>
+  </a>
+  <button (click)="toggleIsOpen()" class="burgerMenu" appearance="flat" size="xs" tuiButton>
+    <tui-svg src="tuiIconMenuLarge"></tui-svg>
+  </button>
+  <nav [class]="{ openNav: isOpen }">
+    <div class="courses" *ngIf="isAuth">
+      <a (click)="toggleIsOpen()" [routerLink]="ROUTES.GROUPS">Группы курсов</a>
+      <a (click)="toggleIsOpen()" [routerLink]="ROUTES.MY_COURSES" *ngIf="userRoles?.isStudent">Мои курсы</a>
+      <a (click)="toggleIsOpen()" [routerLink]="ROUTES.TEACHING_COURSES" *ngIf="userRoles?.isTeacher">
+        Преподаваемые курсы
+      </a>
+    </div>
+    <div class="userInfo">
+      @if (isAuth) {
+        <a (click)="toggleIsOpen()" [routerLink]="ROUTES.PROFILE">{{ userProfile?.email }}</a>
+        <button [showLoader]="isLogoutLoading" (click)="handleLogout()" appearance="whiteblock" size="m" tuiButton>
+          Выход
+        </button>
+      } @else {
+        <a (click)="toggleIsOpen()" [routerLink]="ROUTES.REGISTRATION">Регистрация</a>
+        <a (click)="toggleIsOpen()" [routerLink]="ROUTES.LOGIN">Вход</a>
+      }
+    </div>
+  </nav>
+</header>

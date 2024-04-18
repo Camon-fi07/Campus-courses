@@ -1,0 +1,19 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media #{$tui-tablet-min} {
+  .adding {
+    width: fit-content;
+  }
+}

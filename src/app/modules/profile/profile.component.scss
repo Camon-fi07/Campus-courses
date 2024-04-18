@@ -1,0 +1,21 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  max-width: 1200px;
+}
+
+tui-error {
+  font: var(--tui-font-text-m);
+}
+
+@media #{$tui-tablet-min} {
+  label {
+    display: grid;
+    grid-template-columns: 75px 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+}

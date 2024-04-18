@@ -1,0 +1,51 @@
+<div class="student">
+  <div>
+    <h2>{{ student.name }}</h2>
+    <p>
+      Статус -
+      <span [style]="{ color: getStudentStatusColor(student.status) }">
+        {{ translateStudentStatus(student.status) }}
+      </span>
+    </p>
+    <p class="secondary">{{ student.email }}</p>
+  </div>
+  @switch (student.status) {
+    @case ('Accepted') {
+      <div class="marks">
+        <div *ngIf="student.midtermResult">
+          <button size="xs" (click)="handleEditMark('Midterm')" tuiButton appearance="flat">
+            Промежуточная аттестация
+          </button>
+          <tui-badge
+            [status]="getMarkBadgeStyle(student.midtermResult)"
+            [value]="translateStudentMark(student.midtermResult)"></tui-badge>
+        </div>
+        <div *ngIf="student.finalResult">
+          <button size="xs" (click)="handleEditMark('Final')" tuiButton appearance="flat">Финальная аттестация</button>
+          <tui-badge
+            [status]="getMarkBadgeStyle(student.finalResult)"
+            [value]="translateStudentMark(student.finalResult)"></tui-badge>
+        </div>
+      </div>
+    }
+    @case ('InQueue') {
+      <div class="applicationPanel">
+        <button
+          [showLoader]="isApplicationPanelLoading"
+          (click)="handleChangeUserStatus('Accepted')"
+          size="m"
+          tuiButton>
+          Принять
+        </button>
+        <button
+          [showLoader]="isApplicationPanelLoading"
+          (click)="handleChangeUserStatus('Declined')"
+          size="m"
+          appearance="error"
+          tuiButton>
+          Отклонить заявку
+        </button>
+      </div>
+    }
+  }
+</div>

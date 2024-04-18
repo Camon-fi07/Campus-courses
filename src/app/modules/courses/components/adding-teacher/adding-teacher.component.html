@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <h2 class="tui-text_h4">Изменение статуса курса</h2>
+  <hr />
+  <form [formGroup]="formGroup" (submit)="handleSubmit()">
+    <div>
+      <tui-combo-box
+        formControlName="teacher"
+        (searchChange)="handleSearchUserInput($event)"
+        [stringify]="convertUser"
+        [tuiTextfieldLabelOutside]="true">
+        <input tuiTextfield />
+        <tui-data-list-wrapper
+          *tuiDataList
+          [itemContent]="convertAsyncUser"
+          [items]="users | async"></tui-data-list-wrapper>
+      </tui-combo-box>
+      <tui-error formControlName="teacher" [error]="[] | tuiFieldError | async"></tui-error>
+    </div>
+    <button [showLoader]="isLoading" tuiButton>Добавить</button>
+  </form>
+</div>

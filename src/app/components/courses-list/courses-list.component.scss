@@ -1,0 +1,39 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+.card {
+  border: 1px solid var(--tui-base-07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font: var(--tui-font-text-l);
+
+  & > :first-child {
+    line-clamp: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.content {
+  font: var(--tui-font-text-m);
+  display: flex;
+  flex-direction: column;
+}
+
+@media #{$tui-mobile-min} {
+  .title {
+    flex-direction: row;
+    gap: 10px;
+  }
+}

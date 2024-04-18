@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.title {
+  text-align: center;
+}
+
+.buttonText {
+  font-weight: bold;
+}
+
+tui-error {
+  font: var(--tui-font-text-m);
+}

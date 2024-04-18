@@ -1,0 +1,17 @@
+<div class="card">
+  <a class="title" [routerLink]="ROUTES.GROUP_COURSES(group.id)">
+    <h2 class="tui-text_h6">{{ group.name }}</h2>
+  </a>
+  <div class="panel" *ngIf="isAdmin">
+    <button (click)="handleEdit()" appearance="edit" size="m" tuiButton>Редактировать</button>
+    <button (click)="handleOpenDeleteConfirmation(deleteConfirmation)" appearance="error" size="m" tuiButton>
+      Удалить
+    </button>
+  </div>
+</div>
+
+<ng-template #deleteConfirmation>
+  <confirmation-delete
+    (cancelEmit)="deleteGroupSubscription?.unsubscribe()"
+    (confirmEmit)="handleDeleteGroup()"></confirmation-delete>
+</ng-template>

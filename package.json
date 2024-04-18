@@ -7,17 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --relative"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,html}": [
-      "eslint --fix"
-    ]
+    "lint": "ng lint",
+    "prepare": "husky",
+    "prettier-format": "prettier src --write"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +26,8 @@
     "@taiga-ui/icons": "^3.68.0",
     "@taiga-ui/kit": "^3.68.0",
     "@taiga-ui/styles": "^3.68.0",
+    "@tinkoff/ng-polymorpheus": "^4.3.0",
+    "ngx-quill": "^25.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -60,6 +54,7 @@
     "jest-preset-angular": "^14.0.3",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
     "typescript": "~5.2.2"
   }
 }

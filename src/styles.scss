@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import './null.scss';
+
+[tuiWrapper] {
+  &[data-appearance='edit'] {
+    background: var(--tui-warning-fill);
+  }
+
+  &[data-appearance='error'] {
+    background: var(--tui-error-fill);
+    color: var(--tui-text-01-night);
+  }
+}

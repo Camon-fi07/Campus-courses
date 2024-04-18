@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  max-width: 1200px;
+}
+
+tui-error {
+  font: var(--tui-font-text-m);
+}

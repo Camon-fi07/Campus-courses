@@ -1,0 +1,12 @@
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 20px;
+
+  & > * {
+    flex-grow: 1;
+    max-width: 800px;
+  }
+}

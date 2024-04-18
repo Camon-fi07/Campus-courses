@@ -1,0 +1,52 @@
+<div class="wrapper">
+  @if (!isLoading) {
+    <h2 class="tui-text_h3 title">{{ courseDetails.name }}</h2>
+    <div class="head">
+      <span>Основные данные курса</span>
+      <div class="panel">
+        <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+          Редактировать
+        </button>
+        <button
+          *ngIf="isUserCanEdit"
+          tuiButton
+          size="m"
+          appearance="error"
+          (click)="handleOpenDeleteConfirmation(deleteConfirmation)">
+          Удалить
+        </button>
+      </div>
+    </div>
+    <main-data
+      [courseId]="this.id"
+      [isUserCanEdit]="isUserCanEdit"
+      [status]="courseDetails.status"
+      [startYear]="courseDetails.startYear"
+      [semester]="courseDetails.semester"
+      [maximumStudentsCount]="courseDetails.maximumStudentsCount"
+      [studentsEnrolledCount]="courseDetails.studentsEnrolledCount"
+      [studentsInQueueCount]="courseDetails.studentsInQueueCount"
+      (refetchDetails)="fetchDetails()"></main-data>
+    <course-short-info
+      [annotations]="courseDetails.annotations"
+      [requirements]="courseDetails.requirements"
+      [notifications]="courseDetails.notifications"
+      (refetchDetails)="fetchDetails()"
+      [isUserCanEdit]="isUserCanEdit"
+      [id]="courseDetails.id"></course-short-info>
+    <users
+      [id]="id"
+      [isUserCanEdit]="isUserCanEdit"
+      [teachers]="courseDetails.teachers"
+      [students]="courseDetails.students"
+      (refetchDetails)="fetchDetails()"></users>
+  } @else {
+    <tui-loader size="xl" class="loader"></tui-loader>
+  }
+</div>
+
+<ng-template #deleteConfirmation>
+  <confirmation-delete
+    (cancelEmit)="deleteCourseSubscription?.unsubscribe()"
+    (confirmEmit)="handleDeleteCourse()"></confirmation-delete>
+</ng-template>

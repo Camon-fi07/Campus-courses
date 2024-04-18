@@ -1,0 +1,28 @@
+<section class="wrapper">
+  <adaptive-tabs [tabsVariants]="tabVariants" [(valueIndex)]="valueIndex"></adaptive-tabs>
+
+  <div class="content">
+    @switch (tabVariants[valueIndex].key) {
+      @case (ContentType.Annotations) {
+        <div [innerHTML]="safeAnnotation"></div>
+      }
+      @case (ContentType.Requirements) {
+        <div [innerHTML]="safeRequirements"></div>
+      }
+      @case (ContentType.Notifications) {
+        <button *ngIf="isUserCanEdit" (click)="handleCreateNotification()" size="m" tuiButton>
+          Создать уведомление
+        </button>
+        <ul>
+          @for (notification of notifications; track $index) {
+            <li class="notification">
+              <tui-svg class="icon" *ngIf="notification.isImportant" src="tuiIconAlertCircle"></tui-svg>
+              <span>{{ notification.text }}</span>
+            </li>
+            <hr />
+          }
+        </ul>
+      }
+    }
+  </div>
+</section>

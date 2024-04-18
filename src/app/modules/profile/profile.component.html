@@ -1,0 +1,25 @@
+<div>
+  <form [formGroup]="formGroup" class="form" (ngSubmit)="handleSubmit()">
+    <h3 class="tui-form__header tui-form__header_margin-top_none">Профиль</h3>
+    <label tuiLabel="ФИО">
+      <tui-input formControlName="fullName" [tuiTextfieldLabelOutside]="true" tuiTextfieldSize="m">
+        <input tuiTextfield />
+      </tui-input>
+      <tui-error formControlName="fullName" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+    <label for="email" tuiLabel="Email">
+      {{ userProfile?.email }}
+    </label>
+    <label tuiLabel="Дата рождения">
+      <tui-input-date
+        formControlName="birthDate"
+        tuiTextfieldSize="m"
+        [tuiTextfieldLabelOutside]="true"
+        [max]="tuiToday">
+        <input tuiTextfield />
+      </tui-input-date>
+      <tui-error formControlName="birthDate" [error]="[] | tuiFieldError | async"></tui-error>
+    </label>
+    <button size="m" [showLoader]="isLoading" tuiButton>Изменить</button>
+  </form>
+</div>

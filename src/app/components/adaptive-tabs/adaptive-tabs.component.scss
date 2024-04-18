@@ -1,0 +1,20 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+
+.tabs {
+  display: none;
+  justify-content: space-around;
+}
+
+button[tuiOption] {
+  width: 100%;
+}
+
+@media #{$tui-tablet-min} {
+  .tabs {
+    display: flex;
+  }
+
+  .select {
+    display: none;
+  }
+}

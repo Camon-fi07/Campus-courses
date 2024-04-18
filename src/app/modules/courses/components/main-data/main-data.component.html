@@ -1,0 +1,35 @@
+<div class="main-data">
+  <div>
+    <p class="description">
+      <span>Cтатус курса</span>
+      <span [style]="{ color: getCourseStatusColor(status) }">
+        {{ translateCourseStatus(status) }}
+      </span>
+    </p>
+    @if (isUserCanEdit) {
+      <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
+    } @else if (status === 'OpenForAssigning' && !isUserSignUp) {
+      <button size="m" tuiButton (click)="handleSignUpForCourse()">Записаться на курс</button>
+    }
+  </div>
+  <div class="description">
+    <span>Учебный год</span>
+    <span>{{ startYear }}</span>
+  </div>
+  <div class="description">
+    <span>Cеместр</span>
+    <span>{{ translateSemester(semester) }}</span>
+  </div>
+  <div class="description">
+    <span>Всего мест</span>
+    <span>{{ maximumStudentsCount }}</span>
+  </div>
+  <div class="description">
+    <span>Cтудентов зачислено</span>
+    <span>{{ studentsEnrolledCount }}</span>
+  </div>
+  <div class="description">
+    <span>Заявки на рассмотрение</span>
+    <span>{{ studentsInQueueCount }}</span>
+  </div>
+</div>
