@@ -84,19 +84,22 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   getMainTeacherId() {
-    return new Promise((resolve) => {
-      this.http
-        .get<UserShortDto[]>(API_PATHS.USERS)
-        .pipe(take(1))
-        .subscribe({
-          next: (users) => {
-            const { teachers } = this.courseDetails;
-            const mainTeacher = teachers.find((teacher) => teacher.isMain);
-            const mainTeacherId = users.find((user) => user.fullName === mainTeacher?.name)?.id;
-            resolve(mainTeacherId || '');
-          },
-        });
-    });
+    if (this.isUserCanAddTeacher) {
+      return new Promise((resolve) => {
+        this.http
+          .get<UserShortDto[]>(API_PATHS.USERS)
+          .pipe(take(1))
+          .subscribe({
+            next: (users) => {
+              const { teachers } = this.courseDetails;
+              const mainTeacher = teachers.find((teacher) => teacher.isMain);
+              const mainTeacherId = users.find((user) => user.fullName === mainTeacher?.name)?.id;
+              resolve(mainTeacherId || '');
+            },
+          });
+      });
+    }
+    return '';
   }
 
   async convertCourseDetails() {
