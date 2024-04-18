@@ -23,6 +23,7 @@ export class CourseDetailsComponent implements OnInit {
   id!: string;
   courseUserRole: CourseUserRoles | null = null;
   isUserCanEdit = false;
+  isUserCanAddTeacher = false;
   private editCourseDialog!: Observable<EditCourseContextData>;
   deleteCourseSubscription?: Subscription;
 
@@ -44,6 +45,9 @@ export class CourseDetailsComponent implements OnInit {
         this.courseDetails = res;
         this.courseUserRole = this.getUserRole();
         this.isUserCanEdit = !!this.courseUserRole && this.courseUserRole !== CourseUserRoles.Student;
+        this.isUserCanAddTeacher =
+          !!this.courseUserRole &&
+          (this.courseUserRole === CourseUserRoles.Admin || this.courseUserRole === CourseUserRoles.MainTeacher);
         if (this.isUserCanEdit) {
           this.editCourseDialog = this.dialogs.open<EditCourseContextData>(
             new PolymorpheusComponent(EditingCourseComponent, this.injector),

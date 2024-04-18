@@ -58,7 +58,6 @@ export class GroupCardComponent implements OnInit, OnDestroy {
   }
 
   handleDeleteGroup() {
-    console.log('what');
     this.APIGroupsService.deleteGroup(this.group.id)
       .pipe(take(1))
       .subscribe({

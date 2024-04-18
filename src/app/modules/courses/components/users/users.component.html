@@ -3,7 +3,7 @@
   <div class="content">
     @switch (tabVariants[valueIndex].key) {
       @case (ContentType.Teachers) {
-        <button class="teacherAdding" tuiButton *ngIf="isUserCanEdit" (click)="handleAddTeacher()">
+        <button class="teacherAdding" tuiButton *ngIf="isUserCanAddTeacher" (click)="handleAddTeacher()">
           Добавить преподавателя
         </button>
         <ul>

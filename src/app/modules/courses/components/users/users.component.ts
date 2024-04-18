@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   @Input({ required: true }) teachers!: TeacherShort[];
   @Input({ required: true }) students!: StudentShort[];
   @Input({ required: true }) id!: string;
-  @Input({ required: true }) isUserCanEdit!: boolean;
+  @Input({ required: true }) isUserCanAddTeacher!: boolean;
   @Output() refetchDetails = new EventEmitter<void>();
   private addingTeacherDialog!: Observable<AddingTeacherContextData>;
 
