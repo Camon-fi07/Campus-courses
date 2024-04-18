@@ -1,5 +1,11 @@
 @import '@taiga-ui/core/styles/taiga-ui-local.scss';
 
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .card {
   border: 1px solid var(--tui-base-07);
   display: flex;

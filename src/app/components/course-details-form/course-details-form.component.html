@@ -36,15 +36,14 @@
     <quill-editor
       formControlName="requirements"
       placeholder="Требования"
-      [styles]="{ minHeight: '100px' }"></quill-editor>
+      [styles]="{ minHeight: '100px', wordWrap: 'break-word', wordBreak: 'break-all' }"></quill-editor>
     <tui-error formControlName="requirements" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
   <label tuiLabel="Аннотации" for="annotations">
     <quill-editor
       formControlName="annotations"
       placeholder="Аннотации"
-      class="test"
-      [styles]="{ minHeight: '100px' }"></quill-editor>
+      [styles]="{ minHeight: '100px', wordWrap: 'break-word', wordBreak: 'break-all' }"></quill-editor>
     <tui-error formControlName="annotations" [error]="[] | tuiFieldError | async"></tui-error>
   </label>
   <label for="mainTeacher" tuiLabel="Основной преподаватель курса">
