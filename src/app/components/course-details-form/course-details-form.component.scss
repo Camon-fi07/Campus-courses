@@ -7,3 +7,12 @@ form {
 label {
   gap: 5px;
 }
+
+.editor {
+  min-height: 100px !important;
+
+  & * {
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+  }
+}
