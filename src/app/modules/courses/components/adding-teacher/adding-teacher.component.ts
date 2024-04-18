@@ -48,9 +48,7 @@ export class AddingTeacherComponent implements OnInit {
   }
 
   filterUsers(searchQuery: string | null) {
-    return this.originUsers.filter(
-      (user, index) => user.fullName.toLowerCase().includes(searchQuery?.toLowerCase() || '') && index < 50,
-    );
+    return this.originUsers.filter((user) => user.fullName.toLowerCase().includes(searchQuery?.toLowerCase() || ''));
   }
 
   getUsers() {
