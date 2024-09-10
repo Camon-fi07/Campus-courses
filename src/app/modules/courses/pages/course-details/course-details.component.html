@@ -4,10 +4,17 @@
     <div class="head">
       <span>Основные данные курса</span>
       <div class="panel">
-        <button *ngIf="isUserCanEdit" tuiButton size="m" appearance="edit" (click)="handleEditCourse()">
+        <button
+          data-test="edit-button"
+          *ngIf="isUserCanEdit"
+          tuiButton
+          size="m"
+          appearance="edit"
+          (click)="handleEditCourse()">
           Редактировать
         </button>
         <button
+          data-test="delete-button"
           *ngIf="isUserCanEdit"
           tuiButton
           size="m"

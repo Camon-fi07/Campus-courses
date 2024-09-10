@@ -2,7 +2,7 @@
   <a class="title" [routerLink]="ROUTES.GROUP_COURSES(group.id)">
     <h2 class="tui-text_h6">{{ group.name }}</h2>
   </a>
-  <div class="panel" *ngIf="isAdmin">
+  <div data-test="admin-panel" class="panel" *ngIf="isAdmin">
     <button (click)="handleEdit()" appearance="edit" size="m" tuiButton>Редактировать</button>
     <button (click)="handleOpenDeleteConfirmation(deleteConfirmation)" appearance="error" size="m" tuiButton>
       Удалить

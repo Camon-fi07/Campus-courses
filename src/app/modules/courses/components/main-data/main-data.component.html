@@ -7,9 +7,11 @@
       </span>
     </p>
     @if (isUserCanEdit) {
-      <button size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">Изменить</button>
+      <button data-test="edit-course" size="m" tuiButton appearance="edit" (click)="handleEditStatusCourse()">
+        Изменить
+      </button>
     } @else if (status === 'OpenForAssigning' && !isUserSignUp) {
-      <button size="m" tuiButton (click)="handleSignUpForCourse()">Записаться на курс</button>
+      <button data-test="sign-up" size="m" tuiButton (click)="handleSignUpForCourse()">Записаться на курс</button>
     }
   </div>
   <div class="description">

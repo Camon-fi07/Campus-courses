@@ -3,11 +3,16 @@
   <div class="content">
     @switch (tabVariants[valueIndex].key) {
       @case (ContentType.Teachers) {
-        <button class="teacherAdding" tuiButton *ngIf="isUserCanAddTeacher" (click)="handleAddTeacher()">
+        <button
+          data-test="teacher-adding"
+          class="teacherAdding"
+          tuiButton
+          *ngIf="isUserCanAddTeacher"
+          (click)="handleAddTeacher()">
           Добавить преподавателя
         </button>
         <ul>
-          <li *ngFor="let teacher of teachers">
+          <li data-test="teachers-list" *ngFor="let teacher of teachers">
             <div class="teacherHead">
               <h2>{{ teacher.name }}</h2>
               <tui-badge *ngIf="teacher.isMain" status="success" value="основной" size="m"></tui-badge>
@@ -18,7 +23,7 @@
       }
       @case (ContentType.Students) {
         <ul>
-          <li *ngFor="let student of students">
+          <li data-test="students-list" *ngFor="let student of students">
             <student [courseId]="id" [student]="student" (refetchDetails)="refetchDetails.emit()"></student>
           </li>
         </ul>

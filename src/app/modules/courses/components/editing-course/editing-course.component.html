@@ -2,9 +2,13 @@
   <h2 class="tui-text_h4">Редактирование курса</h2>
   <hr />
   @if (userRole === CourseUserRoles.Admin) {
-    <course-details-form [initValues]="initValues" (emitSubmit)="handleEditCourse($event)"></course-details-form>
+    <course-details-form
+      data-test="edit-course-details"
+      [initValues]="initValues"
+      (emitSubmit)="handleEditCourse($event)"></course-details-form>
   } @else if (userRole === CourseUserRoles.Teacher || userRole === CourseUserRoles.MainTeacher) {
     <require-and-annotation-edit
+      data-test="edit-course-require-and-annotation"
       [requirements]="initValues.requirements"
       [annotations]="initValues.annotations"
       (emitSubmit)="handleEditCourse($event)"></require-and-annotation-edit>

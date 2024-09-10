@@ -1,4 +1,7 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { GroupModule } from 'modules/group/group.module';
 import { GroupCoursesComponent } from './group-courses.component';
 
 describe('GroupCoursesComponent', () => {
@@ -7,7 +10,8 @@ describe('GroupCoursesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroupCoursesComponent],
+      imports: [GroupModule, HttpClientModule],
+      providers: [HttpClient],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GroupCoursesComponent);
@@ -17,5 +21,19 @@ describe('GroupCoursesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display edit button if user is admin', () => {
+    component.isAdmin = true;
+    fixture.detectChanges();
+    const adminPanel = fixture.debugElement.query(By.css('[data-test="edit-button"]'));
+    expect(adminPanel).toBeTruthy();
+  });
+
+  it('should not display edit button if user is not admin', () => {
+    component.isAdmin = false;
+    fixture.detectChanges();
+    const adminPanel = fixture.debugElement.query(By.css('[data-test="edit-button"]'));
+    expect(!adminPanel).toBeTruthy();
   });
 });

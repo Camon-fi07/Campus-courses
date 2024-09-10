@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesModule } from 'modules/courses/courses.module';
+import { MockComponent } from 'ng-mocks';
+import { QuillEditorComponent } from 'ngx-quill';
 import { RequireAndAnnotationEditComponent } from './require-and-annotation-edit.component';
 
 describe('RequireAndAnnotationEditComponent', () => {
@@ -9,10 +11,12 @@ describe('RequireAndAnnotationEditComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CoursesModule],
+      declarations: [MockComponent(QuillEditorComponent)],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RequireAndAnnotationEditComponent);
     component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
   });
 

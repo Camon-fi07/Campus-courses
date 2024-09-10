@@ -1,5 +1,5 @@
 <ul class="list">
-  <li *ngFor="let course of courses">
+  <li data-test="course-item" *ngFor="let course of courses">
     <a class="card" [routerLink]="ROUTES.CONCRETE_COURSE(course.id)">
       <div class="title">
         <h3>
