@@ -1,4 +1,4 @@
-# Campush courses 🤓📚
+# Campus courses 🤓📚
 
 ## This site allows you to manage all your courses
 
